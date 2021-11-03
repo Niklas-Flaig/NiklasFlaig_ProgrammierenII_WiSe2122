@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="./styles/style.css">
+  </head>
+  <body>
+    <!-- chat/group selection -->
+    <div id="chatSelectSurface" class="surface">
+      <!-- will be filled when opened -->
+    </div>
+
+
+    <!-- single person Chat -->
+    <!-- will get filled with old messages, username etc. when a chat gets selected -->
+    <div id="inChatSurface" class="surface">
+      <div id="chatHistory">
+        <!-- will be filled when opened -->
+      </div>
+      <div id="chatInput">
+        <input type="text" id="textMessage_TextInput" placeholder="Enter message...">
+        <button id="sendMessage_Button">send</button>
+      </div>
+    </div>
+
+    <!-- settings -->
+    <div id="settingsSurface" class="surface" style="display: none;">
+    </div>
+
+
+    
+    <!--  -->
+
+    <script src="javaScripts/testData.js"></script>
+    <script src="javaScripts/messages.js"></script>
+  </body>
+</html>

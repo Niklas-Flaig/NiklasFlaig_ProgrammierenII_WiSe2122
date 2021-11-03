@@ -1,0 +1,58 @@
+* {
+  background-color: #262626;
+  color: #E8E8E8;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+.surface {
+  border: solid 1px #E8E8E8;
+  padding: 24px;
+}
+
+
+#chatSelectSurface {
+ height: 100%;
+ width: 14,44%;
+}
+#chatSelectSurface .chatTo {
+  border: solid 1px #E8E8E8;
+  display: block;
+}
+h4.userName {
+  margin-bottom: 0px;
+}
+#inChatSurface {
+  width: 62%;
+  height: 100%;
+}
+
+
+
+#chatHistory .sendtBy_You {
+  display: flex;
+  justify-content: right;
+}
+#chatHistory .sendtBy_You span {
+  background-color: #363636;
+}
+#chatHistory .sendtBy_NotYou {
+  display: flex;
+  justify-content: left;
+}
+#chatHistory .sendtBy_NotYou span {
+  background-color: #363636;
+}
+
+
+
+.textMessage {
+  color: #E8E8E8;
+  padding: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border-radius: 5px;
+}

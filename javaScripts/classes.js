@@ -186,18 +186,31 @@ class PToPChat extends Chat {
 
 // other classes
 class Profile {
-  constructor(userID, myName, password, status, contacts, chats, profilePicFileName) {
+  constructor(userID, myName, password) {
     this.userID = userID;
     this.myName = myName;
     this.password = password;
-    this.status = status;
-    this.contacts = contacts;
-    this.chats = chats;
-    this.profilePicFileName = profilePicFileName;
+    this.status = "";
+    this.contacts = [];
+    this.chats = [];
+    this.profilePicFileName = "";
   }
   getContactSavedName(givenID) {
     // gets the savedName of the first contact with the "givenID"
     return this.contacts.find(contact => contact.getUserId === givenID).getSavedName();
+  }
+
+  setStatus(newStatus) {
+    this.status = newStatus;
+  }
+  addContact(newContact) {
+    this.contacts.push(newContact);
+  }
+  addChat(newChat) {
+    this.chats.push(newChat);
+  }
+  setProfilePicFileName(newProfilePicFileName) {
+    this.profilePicFileName = newProfilePicFileName;
   }
 }
 

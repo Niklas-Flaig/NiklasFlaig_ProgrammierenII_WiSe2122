@@ -2,11 +2,11 @@
 
 // Message classes
 class Message {
-  constructor(senderID, time, messageID, text) {
+  constructor(senderID, text) { //! time und messageID automatisch generieren
     this.senderID = senderID;
-    this.time = time;
-    this.messageID = messageID;
     this.text = text;
+    this.time;
+    this.messageID;
   }
 
   getText() {
@@ -23,8 +23,8 @@ class Message {
 }
 
 class TextMessage extends Message {
-  constructor(senderID, time, messageID, text) {
-    super(senderID, time, messageID, text);
+  constructor(senderID, text) {
+    super(senderID, text);
   }
 
   writeHtml() {
@@ -45,8 +45,8 @@ class TextMessage extends Message {
 }
 
 class FileMessage extends Message {
-  constructor(senderID, time, messageID, text, fileName) {
-    super(senderID, time, messageID, text);
+  constructor(senderID, text, fileName) {
+    super(senderID, text);
     this.fileName = fileName;
   }
 
@@ -70,8 +70,8 @@ class FileMessage extends Message {
 }
 
 class ImageMessage extends FileMessage {
-  constructor(senderID, time, messageID, text, fileName) {
-    super(senderID, time, messageID, text, fileName);
+  constructor(senderID, text, fileName) {
+    super(senderID, text, fileName);
   }
 
   writeHtml() {

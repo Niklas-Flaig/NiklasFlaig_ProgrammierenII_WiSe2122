@@ -1,3 +1,6 @@
+/* In this file all the classes used in the Project will be defined */
+
+// Message classes
 class Message {
   constructor(senderID, time, messageID, text) {
     this.senderID = senderID;
@@ -91,6 +94,7 @@ class ImageMessage extends FileMessage {
 }
 
 
+// chat classes
 class Chat {
   constructor(chatID, users, history) {
     this.chatID = chatID;
@@ -176,6 +180,8 @@ class PToPChat extends Chat {
   }
 }
 
+
+// other classes
 class Profile {
   constructor(userID, myName, password, status, contacts, chats, profilePicFileName) {
     this.userID = userID;

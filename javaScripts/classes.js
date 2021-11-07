@@ -96,10 +96,10 @@ class ImageMessage extends FileMessage {
 
 // chat classes
 class Chat {
-  constructor(chatID, users, history) {
+  constructor(chatID, users) {
     this.chatID = chatID;
     this.users = users;
-    this.history = history;
+    this.history = [];
   }
 
   addToHistory(message) {
@@ -130,10 +130,10 @@ class Chat {
 }
 
 class GroupChat extends Chat {
-  constructor(chatID, users, history, groupName, groupPicPath) {
+  constructor(chatID, users, history, groupName) {
     super(chatID, users, history);
     this.groupName = groupName;
-    this.groupPicPath = groupPicPath;
+    this.groupPicPath;
   }
   
   leaveGroup(userID) {
@@ -161,12 +161,15 @@ class GroupChat extends Chat {
   setGroupName(name) {
     this.groupName = name;
   }
+  setGroupPicPath(newPath) {
+    this.groupPicPath = newPath;
+  }
 
 }
 
 class PToPChat extends Chat {
-  constructor(chatID, users, history) {
-    super(chatID, users, history);
+  constructor(chatID, users) {
+    super(chatID, users);
   }
   writeLastMessageHtml() {
     return `

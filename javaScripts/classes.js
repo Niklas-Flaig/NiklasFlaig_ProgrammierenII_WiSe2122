@@ -223,11 +223,11 @@ class Contact {
   getSavedName() {
     return this.savedName;
   }
-  setSavedName(newName) {
-    this.savedName = newName;
-  }
-
   getUserId() {
     return this.userID;
+  }
+  
+  setSavedName(newName) {
+    this.savedName = newName;
   }
 }

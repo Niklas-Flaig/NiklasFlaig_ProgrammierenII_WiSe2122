@@ -192,7 +192,7 @@ class Profile {
     this.password = password;
     this.status = "";
     this.contacts = [];
-    this.chats = [];
+    this.chatIDs = [];
     this.profilePicFileName = "";
   }
   getContactSavedName(givenID) {
@@ -206,8 +206,8 @@ class Profile {
   addContact(newContact) {
     this.contacts.push(newContact);
   }
-  addChat(newChat) {
-    this.chats.push(newChat);
+  addChat(newChatID) {
+    this.chatIDs.push(newChatID);
   }
   setProfilePicFileName(newProfilePicFileName) {
     this.profilePicFileName = newProfilePicFileName;

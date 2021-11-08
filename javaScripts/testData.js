@@ -26,7 +26,7 @@ profiles[2].addContact(new Contact(02, "Peter O."));
 chats = [
   new PToPChat(01, [01, 02]),
   new PToPChat(02, [01, 03]),
-  new GroupChat(03, [01, 02, 03]),
+  new GroupChat(03, [01, 02, 03], "PizzaGroup"),
 ]
 
 chats[0].addToHistory(new TextMessage(01, "Pizza?"));

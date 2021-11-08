@@ -17,7 +17,7 @@ function renderChatSelection() {
   // adds an el to every created button
   currentProfile.chatIDs.forEach(currentChatID => {
     console.log(currentChatID);
-    document.querySelector(`#${currentChatID}`).addEventListener("click", function () {
+    document.querySelector(`#chatID_${currentChatID}`).addEventListener("click", function () {
       // print the history into the html
       document.querySelector(`#chatHistory`).innerHTML = chats.find(chat => chat.chatID === currentChatID).writeChatSelectHtml();
     })

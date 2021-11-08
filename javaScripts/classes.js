@@ -14,10 +14,10 @@ class Message {
     return this.text;
   }
   getSenderName() {
-    if(this.senderID === loggedInProfileID.userID) {
+    if(this.senderID === currentProfile.userID) {
       return "You: ";
     } else {
-      return loggedInProfileID.getContactSavedName(senderID) + ": ";
+      return currentProfile.getContactSavedName(this.senderID) + ": ";
     };
   }
 }

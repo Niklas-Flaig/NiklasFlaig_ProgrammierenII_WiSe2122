@@ -14,10 +14,10 @@ class Message {
     return this.text;
   }
   getSenderName() {
-    if(this.senderID === profile.userID) {
+    if(this.senderID === loggedInProfileID.userID) {
       return "You: ";
     } else {
-      return profile.getContactSavedName(senderID) + ": ";
+      return loggedInProfileID.getContactSavedName(senderID) + ": ";
     };
   }
 }
@@ -30,7 +30,7 @@ class TextMessage extends Message {
   writeHtml() {
     let sendtBy = "";
     
-    if(senderID === profile.userID) {
+    if(senderID === loggedInProfileID.userID) {
       sendtBy = "You";
     } else {
       sendtBy = "NotYou";
@@ -53,7 +53,7 @@ class FileMessage extends Message {
   writeHtml() {
     let sendtBy = "";
     
-    if(senderID === profile.userID) {
+    if(senderID === loggedInProfileID.userID) {
       sendtBy = "You";
     } else {
       sendtBy = "NotYou";
@@ -77,7 +77,7 @@ class ImageMessage extends FileMessage {
   writeHtml() {
     let sendtBy = "";
     
-    if(senderID === profile.userID) {
+    if(senderID === loggedInProfileID.userID) {
       sendtBy = "You";
     } else {
       sendtBy = "NotYou";

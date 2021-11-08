@@ -197,7 +197,7 @@ class Profile {
   }
   getContactSavedName(givenID) {
     // gets the savedName of the first contact with the "givenID"
-    return this.contacts.find(contact => contact.getUserId === givenID).getSavedName();
+    return this.contacts.find(contact => contact.getUserId() === givenID).getSavedName();
   }
 
   setStatus(newStatus) {

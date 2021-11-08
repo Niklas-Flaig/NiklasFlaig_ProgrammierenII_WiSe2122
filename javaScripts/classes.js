@@ -130,8 +130,8 @@ class Chat {
 }
 
 class GroupChat extends Chat {
-  constructor(chatID, users, history, groupName) {
-    super(chatID, users, history);
+  constructor(chatID, users, groupName) {
+    super(chatID, users);
     this.groupName = groupName;
     this.groupPicPath;
   }
@@ -155,7 +155,7 @@ class GroupChat extends Chat {
   }
   
   getChatName() {
-    return this.groupName
+    return this.groupName;
   }
 
   setGroupName(name) {

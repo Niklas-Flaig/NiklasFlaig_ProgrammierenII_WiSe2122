@@ -19,7 +19,7 @@ function renderChatSelection() {
     console.log(currentChatID);
     document.querySelector(`#chatID_${currentChatID}`).addEventListener("click", function () {
       // print the history into the html
-      document.querySelector(`#chatHistory`).innerHTML = chats.find(chat => chat.chatID === currentChatID).writeChatSelectHtml();
+      document.querySelector(`#chatHistory`).innerHTML = chats.find(chat => chat.chatID === currentChatID).writeHistoryHtml();
     })
   });
 }

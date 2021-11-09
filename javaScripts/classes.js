@@ -20,6 +20,9 @@ class Message {
       return currentProfile.getContactSavedName(this.senderID) + ": ";
     };
   }
+  writeHtml() {
+    console.error("This Message shouldn't be seen. Don't use the Message class, or define this mehtod in the used child Class")
+  }
 }
 
 class TextMessage extends Message {

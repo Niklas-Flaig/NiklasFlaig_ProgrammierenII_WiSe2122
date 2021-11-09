@@ -30,7 +30,7 @@ class TextMessage extends Message {
   writeHtml() {
     let sendtBy = "";
     
-    if(senderID === loggedInProfileID.userID) {
+    if(this.senderID === loggedInProfileID) {
       sendtBy = "You";
     } else {
       sendtBy = "NotYou";

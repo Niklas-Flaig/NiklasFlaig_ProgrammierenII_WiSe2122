@@ -49,3 +49,13 @@ function renderChatSelection() {
     })
   });
 }
+
+
+new Vue({
+  el: "#chat",
+  data: {
+
+  },
+  methods: {
+  }
+})

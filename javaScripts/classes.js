@@ -123,9 +123,8 @@ class Chat {
         <h4 class="chatName"> 
           ${this.getChatName()}
         </h4>
-        ${this.writeLastMessageHtml()}
         <div class="lastMessage" class="sendtBy_You">
-          inhalt
+          ${this.writeLastMessageHtml()}
         </div>
       </button>
     `;

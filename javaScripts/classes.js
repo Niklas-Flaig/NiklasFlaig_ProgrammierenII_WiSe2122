@@ -117,7 +117,7 @@ class Chat {
     return ``
     //! still stuff todo
   }
-  writeChatSelectHtml() {
+  /*writeChatSelectHtml() {
     return `
       <button id="chatID_${this.chatID}" class="chatTo">
         <h4 class="chatName"> 
@@ -128,7 +128,7 @@ class Chat {
         </div>
       </button>
     `;
-  }
+  }*/
 }
 
 class GroupChat extends Chat {

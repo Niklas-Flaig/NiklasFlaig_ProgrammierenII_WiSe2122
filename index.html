@@ -9,7 +9,14 @@
   <body id="chat">
     <!-- chat/group selection -->
     <div id="chatSelectSurface" class="surface">
-      <!-- will be filled when opened -->
+      <button id="chatID_{{ chat.chatID }}" class="chatTo" v-for="chat in thisChats" v-on:click="renderHistory(chat.chatID)">
+        <h4 class="chatName"> 
+          ${this.getChatName()}
+        </h4>
+        <div class="lastMessage" class="sendtBy_You">
+          ${this.writeLastMessageHtml()}
+        </div>
+      </button>
     </div>
 
 

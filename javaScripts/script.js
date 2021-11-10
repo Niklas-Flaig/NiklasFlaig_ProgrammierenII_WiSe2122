@@ -54,8 +54,12 @@ function renderChatSelection() {
 new Vue({
   el: "#chat",
   data: {
+    chatHistory: "",
 
   },
   methods: {
+    renderHistory: function (thisChatID) {
+      chatHistory = chats.find(chat => chat.chatID === thisChatID).writeHistoryHtml();
+    },
   }
 })

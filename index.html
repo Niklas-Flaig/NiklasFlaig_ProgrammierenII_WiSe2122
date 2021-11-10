@@ -6,42 +6,44 @@
     <link rel="stylesheet" href="./styles/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   </head>
-  <body id="chat">
-    <!-- chat/group selection -->
-    <div id="chatSelectSurface" class="surface">
-      <button id="chatID_{{ chat.chatID }}" class="chatTo" v-for="chat in thisChats" v-on:click="renderHistory(chat.chatID)">
-        <h4 class="chatName"> 
-          ${this.getChatName()}
-        </h4>
-        <div class="lastMessage" class="sendtBy_You">
-          ${this.writeLastMessageHtml()}
+  <body>
+    <div id="chat">
+      <!-- chat/group selection -->
+      <div id="chatSelectSurface" class="surface">
+        <button id="chatID_{{ chat.chatID }}" class="chatTo" v-for="chat in thisChats" v-on:click="renderHistory(chat.chatID)">
+          <h4 class="chatName"> 
+            ${this.getChatName()}
+          </h4>
+          <div class="lastMessage" class="sendtBy_You">
+            ${this.writeLastMessageHtml()}
+          </div>
+        </button>
+      </div>
+
+
+      <!-- single person Chat -->
+      <!-- will get filled with old messages, username etc. when a chat gets selected -->
+      <div id="inChatSurface" class="surface">
+        <div id="chatHistory">
+          <!-- will be filled when opened -->
         </div>
-      </button>
-    </div>
-
-
-    <!-- single person Chat -->
-    <!-- will get filled with old messages, username etc. when a chat gets selected -->
-    <div id="inChatSurface" class="surface">
-      <div id="chatHistory">
-        <!-- will be filled when opened -->
+        <div id="chatInput">
+          <input type="text" id="textMessage_TextInput" placeholder="Enter message...">
+          <button id="sendMessage_Button">send</button>
+        </div>
       </div>
-      <div id="chatInput">
-        <input type="text" id="textMessage_TextInput" placeholder="Enter message...">
-        <button id="sendMessage_Button">send</button>
+
+      <!-- settings -->
+      <div id="settingsSurface" class="surface" style="display: none;">
       </div>
+
+
+      
+      <!--  -->
+
+      <script src="javaScripts/classes.js"></script>
+      <script src="javaScripts/testData.js"></script>
+      <script src="javaScripts/script.js"></script>
     </div>
-
-    <!-- settings -->
-    <div id="settingsSurface" class="surface" style="display: none;">
-    </div>
-
-
-    
-    <!--  -->
-
-    <script src="javaScripts/classes.js"></script>
-    <script src="javaScripts/testData.js"></script>
-    <script src="javaScripts/script.js"></script>
   </body>
 </html>

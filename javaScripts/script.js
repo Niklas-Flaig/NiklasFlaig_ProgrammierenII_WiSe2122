@@ -40,8 +40,7 @@ new Vue({
   },
   methods: {
     renderHistory: function (thisChatID) {
-      this.chatHistory = this.thisChats.find(chat => chat.chatID === thisChatID).writeHistoryHtml();
-      console.log(this.chatHistory);
+      chatHistory = chats.find(chat => chat.chatID === thisChatID).writeHistoryHtml();
     },
   }
 })

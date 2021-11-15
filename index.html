@@ -10,7 +10,7 @@
     <div id="chat">
       <!-- chat/group selection -->
       <div id="chatSelectSurface" class="surface">
-        <button :id="chat.chatID" class="chatTo" v-for="chat in thisChats" v-on:click="renderHistory(chat.chatID)">
+        <button :id="chat.chatID" class="chatTo" v-for="chat in thisChats" v-on:click="switchHistory(chat.chatID)">
           <h4 class="chatName"> 
             ${this.getChatName()}
           </h4>
@@ -26,7 +26,7 @@
       <div id="inChatSurface" class="surface">
         <div id="chatHistory">
           <div v-for="message in chatHistory" class="message.getSender">
-            <h4 class="sender">{{ message.getSender }}</h4>
+            <h4 class="sender">{{ message.getSender() }}</h4>
             <span class="content">{{ message.getContent() }}</span>
           </div>
         </div>

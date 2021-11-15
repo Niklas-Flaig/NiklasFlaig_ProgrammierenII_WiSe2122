@@ -99,6 +99,9 @@ class Chat {
       </button>
     `;
   }*/
+  getHistory() {
+    return this.history;
+  }
 }
 
 class GroupChat extends Chat {

@@ -24,11 +24,9 @@
       <!-- single person Chat -->
       <!-- will get filled with old messages, username etc. when a chat gets selected -->
       <div id="inChatSurface" class="surface">
-        <div id="chatHistory">
-          <div v-for="message in chatHistory" class="message.getSender">
-            <h4 class="sender">{{ message.getSender() }}</h4>
-            <span class="content">{{ message.getContent() }}</span>
-          </div>
+        <div id="chatHistory" v-for="message in chatHistory" class="message.getSender">
+          <h4 class="sender">{{ message.getSender() }}</h4>
+          <span class="content">{{ message.getContent() }}</span>
         </div>
         <div id="chatInput">
           <input type="text" id="textMessage_TextInput" placeholder="Enter message...">

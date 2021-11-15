@@ -20,6 +20,16 @@ class Message {
       return currentProfile.getContactSavedName(this.senderID) + ": ";
     };
   }
+  getSender() {
+    let sendtBy = "";
+    
+    if(this.senderID === loggedInProfileID) {
+      sendtBy = "sendtBy_You";
+    } else {
+      sendtBy = "sendtBy_NotYou";
+    };
+  }
+  
   writeHtml() {
     console.error("This Message shouldn't be seen. Don't use the Message class, or define this mehtod in the used child Class")
   }
@@ -30,20 +40,8 @@ class TextMessage extends Message {
     super(senderID, text);
   }
 
-  writeHtml() {
-    let sendtBy = "";
-    
-    if(this.senderID === loggedInProfileID) {
-      sendtBy = "You";
-    } else {
-      sendtBy = "NotYou";
-    };
-    
-    return `
-    <div id="message_${this.messageID}" class="sendtBy_${sendtBy}">
-      <span class="textMessage">${this.text}</span>
-    </div>
-    `;
+  getContent() {
+    return this.text;
   }
 }
 
@@ -53,22 +51,8 @@ class FileMessage extends Message {
     this.fileName = fileName;
   }
 
-  writeHtml() {
-    let sendtBy = "";
-    
-    if(senderID === loggedInProfileID.userID) {
-      sendtBy = "You";
-    } else {
-      sendtBy = "NotYou";
-    };
-
-    //! still stuff todo
-    return `
-    <div id="message_${this.messageID}" class="sendtBy_${sendtBy}">
-      <div><a href="${"/* download Path */" + this.fileName}">${this.fileName}</a></div>
-      <span class="textMessage">${this.text}</span>
-    </div>
-    `;
+  getContent() {
+    //TODO ...
   }
 }
 
@@ -77,22 +61,8 @@ class ImageMessage extends FileMessage {
     super(senderID, text, fileName);
   }
 
-  writeHtml() {
-    let sendtBy = "";
-    
-    if(senderID === loggedInProfileID.userID) {
-      sendtBy = "You";
-    } else {
-      sendtBy = "NotYou";
-    };
-    
-    //! still stuff todo
-    return `
-    <div id="message_${this.messageID}" class="sendtBy_${sendtBy}">
-      <div><img href="${"/* image Path */" + this.fileName}></img></div>
-      <span class="textMessage">${this.text}</span>
-    </div>
-    `;
+  getContent() {
+    //TODO ...
   }
 }
 

@@ -28,6 +28,8 @@ class Message {
     } else {
       sendtBy = "sendtBy_NotYou";
     };
+
+    return sendtBy;
   }
   
   writeHtml() {

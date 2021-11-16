@@ -43,6 +43,7 @@ new Vue({
   methods: {
     switchHistory: function (thisChatID) {
       this.chatHistory = this.thisChats.find(chat => chat.chatID === thisChatID).getHistory();
+      this.currentChatID = thisChatID;
     },
     addMessageToHistory: function (currentHistory) {
 

@@ -34,6 +34,8 @@ console.log(currentProfile);
 new Vue({
   el: "#chat",
   data: {
+    currentChatID: 0,
+
     chatHistory: "",
     // just the chats that affect this user
     thisChats: chats.filter(chat => chat.chatID === currentProfile.chatIDs.find(tempChatID => tempChatID === chat.chatID)),

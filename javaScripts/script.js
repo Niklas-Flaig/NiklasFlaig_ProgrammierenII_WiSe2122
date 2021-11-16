@@ -35,6 +35,7 @@ new Vue({
   el: "#chat",
   data: {
     currentChatID: 0,
+    newMessageText: "",
 
     chatHistory: "",
     // just the chats that affect this user
@@ -45,8 +46,8 @@ new Vue({
       this.chatHistory = this.thisChats.find(chat => chat.chatID === thisChatID).getHistory();
       this.currentChatID = thisChatID;
     },
-    addMessageToHistory: function (currentHistory) {
-
+    addMessageToHistory: function (newMessageText) {
+      this.thisChats.find(chat => chat.chatID === currentChatID).push(new TextMessage(loggedInProfileID, newMessageText));
     }
   }
 })

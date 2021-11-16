@@ -41,7 +41,7 @@ new Vue({
     thisChats: chats.filter(chat => chat.chatID === currentProfile.chatIDs.find(tempChatID => tempChatID === chat.chatID)),
   },
   methods: {
-    switchHistory: function (thisChatID) {
+    switchChat: function (thisChatID) {
       this.chatHistory = this.thisChats.find(chat => chat.chatID === thisChatID).getHistory();
       this.currentChatID = thisChatID;
     },

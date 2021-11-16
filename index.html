@@ -10,7 +10,7 @@
     <div id="chat">
       <!-- chat/group selection -->
       <div id="chatSelectSurface" class="surface">
-        <button :id="chat.chatID" class="chatTo" v-for="chat in thisChats" v-on:click="switchHistory(chat.chatID)">
+        <button :id="chat.chatID" class="chatTo" v-for="chat in thisChats" v-on:click="switchChat(chat.chatID)">
           <h4 class="chatName"> 
             ${this.getChatName()}
           </h4>

@@ -53,6 +53,10 @@ class FileMessage extends Message {
     this.fileName = fileName;
   }
 
+  getText() {
+    return this.fileName;
+  }
+
   getContent() {
     //TODO ...
   }
@@ -63,6 +67,10 @@ class ImageMessage extends FileMessage {
     super(senderID, text, fileName);
   }
 
+  getText() {
+    return this.fileName;
+  }
+  
   getContent() {
     //TODO ...
   }

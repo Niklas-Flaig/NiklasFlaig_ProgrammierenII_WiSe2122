@@ -26,7 +26,7 @@
       <div id="inChatSurface" class="surface">
         <div id="chatHistory">
           <div v-for="message in chatHistory" v-bind:class=message.getSender()>
-            <h4 class="sender">{{ message.getSenderName() }}</h4>
+            <span class="sender">{{ message.getSenderName() }}</span>
             <span class="content">{{ message.getContent() }}</span>
           </div>
         </div>

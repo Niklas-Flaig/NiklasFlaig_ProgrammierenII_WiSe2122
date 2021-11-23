@@ -84,18 +84,6 @@ class Chat {
   addToHistory(message) {
     this.history.push(message);
   }
-  /*writeChatSelectHtml() {
-    return `
-      <button id="chatID_${this.chatID}" class="chatTo">
-        <h4 class="chatName"> 
-          ${this.getChatName()}
-        </h4>
-        <div class="lastMessage" class="sendtBy_You">
-          ${this.writeLastMessageHtml()}
-        </div>
-      </button>
-    `;
-  }*/
   getHistory() {
     return this.history;
   }

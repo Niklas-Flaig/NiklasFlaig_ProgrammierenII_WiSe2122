@@ -124,16 +124,6 @@ class GroupChat extends Chat {
     // adds this userID to the "users" array
     this.users.push(userID);
   }
-  
-  writeLastMessageHtml() {
-    return `
-      <div class="lastMessage">
-        <span class="senderName">${this.history[history.length-1].getSenderName()}</span>
-        <span class="message">${this.history[history.length-1].getText()}</span>
-      </div>
-    `
-  }
-  
   getChatName() {
     return this.groupName;
   }
@@ -150,13 +140,6 @@ class GroupChat extends Chat {
 class PToPChat extends Chat {
   constructor(chatID, users) {
     super(chatID, users);
-  }
-  writeLastMessageHtml() {
-    return `
-      <div class="lastMessage">
-        <span class="message">${this.history[history.length-1].getText()}</span>
-      </div>
-    `
   }
   getChatName() {
     return this.history[history.length-1].getSenderName();

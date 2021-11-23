@@ -104,6 +104,9 @@ class Chat {
   getHistory() {
     return this.history;
   }
+  getLastMessageText() {
+    return this.history.at(-1).text;
+  }
 }
 
 class GroupChat extends Chat {

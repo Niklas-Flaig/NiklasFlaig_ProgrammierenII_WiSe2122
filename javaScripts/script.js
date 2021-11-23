@@ -46,8 +46,8 @@ new Vue({
       this.chatHistory = this.thisChats.find(chat => chat.chatID === thisChatID).getHistory();
       this.currentChatID = thisChatID;
     },
-    addMessageToHistory: function (newMessageText) {
-      this.thisChats.find(chat => chat.chatID === this.currentChatID).addToHistory(new TextMessage(loggedInProfileID, newMessageText));
+    addMessageToHistory: function (text) {
+      this.thisChats.find(chat => chat.chatID === this.currentChatID).addToHistory(new TextMessage(loggedInProfileID, text));
     }
   }
 })

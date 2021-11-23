@@ -1,9 +1,6 @@
 // a refference on the current UserProfile
 const currentProfile = profiles.find(profile => profile.userID === loggedInProfileID);
 
-// the chatId, of th ecurrently opened chat
-let selectedChatID = 0;
-
 console.log(currentProfile);
 
 

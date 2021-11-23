@@ -80,11 +80,6 @@ class Chat {
   addToHistory(message) {
     this.history.push(message);
   }
-  writeHistoryHtml() {
-    let html = "";
-    this.history.forEach(message => html += message.writeHtml())
-    return html;
-  }
   writeHeaderHtml() {
     return ``
     //! still stuff todo

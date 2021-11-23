@@ -100,7 +100,7 @@ class Chat {
     return this.history;
   }
   getLastMessageText() {
-    return this.history.at(-1).text;
+    return this.history.at(-1).getText();
   }
 }
 

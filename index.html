@@ -29,8 +29,8 @@
           <span class="content">{{ message.getContent() }}</span>
         </div>
         <div id="chatInput">
-          <input type="text" id="textMessage_TextInput" placeholder="Enter message...">
-          <button id="sendMessage_Button" v-on:click="addMessageToHistory()">send</button>
+          <input type="text" id="textMessage_TextInput" v-model="newMessageText" placeholder="Enter message...">
+          <button id="sendMessage_Button" v-on:click="addMessageToHistory(newMessageText)">send</button>
         </div>
       </div>
 

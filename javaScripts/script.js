@@ -23,6 +23,7 @@ new Vue({
     },
     addMessageToHistory: function () {
       this.thisChats.find(chat => chat.chatID === this.currentChatID).addToHistory(new TextMessage(loggedInProfileID, this.newMessageText));
+      this.newMessageText = "";
     }
   }
 })

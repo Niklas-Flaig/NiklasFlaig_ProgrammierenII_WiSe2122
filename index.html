@@ -12,10 +12,10 @@
       <div id="chatSelectSurface" class="surface">
         <button :id="chat.chatID" class="chatTo" v-for="chat in thisChats" v-on:click="switchChat(chat.chatID)">
           <h4 class="chatName"> 
-            ${this.getChatName()}
+            {{ chat.getChatName() }}
           </h4>
           <div class="lastMessage" class="sendtBy_You">
-            ${this.writeLastMessageHtml()}
+            {{ chat.writeLastMessageHtml() }}
           </div>
         </button>
       </div>

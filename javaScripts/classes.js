@@ -84,10 +84,6 @@ class Chat {
   addToHistory(message) {
     this.history.push(message);
   }
-  writeHeaderHtml() {
-    return ``
-    //! still stuff todo
-  }
   /*writeChatSelectHtml() {
     return `
       <button id="chatID_${this.chatID}" class="chatTo">

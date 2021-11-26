@@ -52,6 +52,10 @@
     <script>
       // Connction to the WebSocket-Server:
       let socket = io("http://127.0.0.1:80");
+
+      socket.on("test", (message) => {
+        console.log(message);
+      })
     </script>
   </body>
 </html>

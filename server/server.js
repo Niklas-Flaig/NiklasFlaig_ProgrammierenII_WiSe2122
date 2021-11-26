@@ -26,5 +26,6 @@ function handler (req, res) {
 
 // listens for a new connection
 io.on('connection', function (socket) {
-  
+  // new testEmit
+  socket.emit("test","hallo");
 });

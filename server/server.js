@@ -28,10 +28,10 @@ function handler (req, res) {
 io.on('connection', function (socket) {
   // new testEmit
   socket.emit("test","hallo");
+
+  // listen for a request of all chats a user participates in
+  socket.on("requestingChats", function (userID) {
+    // get and emit the requested chats in JSON-Format
+    socket.emit("requestedChats", JSON.stringify(getRequestedChatsForUser(userID)));
+  });
 });
-
-function getChatsForUser (userID) {
-
-  // emit the requested chats
-  socket.emit("requestedChats", JSON.stringify(chatsForUser));
-}

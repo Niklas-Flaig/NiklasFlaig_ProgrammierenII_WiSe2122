@@ -1,17 +1,17 @@
-
-// will return all Chats, in wich this User participates
-function getRequestedChatsForUser (userIDFromRequest) {
-  let chatsForUser = [];
-  
-  // filters the chats with the users ID (userIDFromRequest) as a member
-  chatsForUser = dataStructure_Chats.filter(chat => chat.users.find(userIDInThisChat => userIDInThisChat === userIDFromRequest) === userIDFromRequest)
-  console.log(chatsForUser);
-  
-  // returns the requested chats in form of an array
-  return chatsForUser;
-}
-
-
+// makes the functions available in form of a module (https://stackoverflow.com/questions/5797852/in-node-js-how-do-i-include-functions-from-my-other-files)
+module.exports = {
+  // will return all Chats, in wich this User participates
+  getRequestedChatsForUser: function (userIDFromRequest) {
+    let chatsForUser = [];
+    
+    // filters the chats with the users ID (userIDFromRequest) as a member
+    chatsForUser = dataStructure_Chats.filter(chat => chat.users.find(userIDInThisChat => userIDInThisChat === userIDFromRequest) === userIDFromRequest)
+    console.log(chatsForUser);
+    
+    // returns the requested chats in form of an array
+    return chatsForUser;
+  },
+};
 
 
 // temporarily test-data will be stored in this file, until I learn about a better way

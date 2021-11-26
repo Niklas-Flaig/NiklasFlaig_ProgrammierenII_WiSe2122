@@ -17,7 +17,7 @@ function getRequestedChatsForUser (userIDFromRequest) {
 // temporarily test-data will be stored in this file, until I learn about a better way
 // the data structure to save all data, used in the Project
 let profiles = [];
-let chats = [];
+let dataStructure_Chats = [];
 
 // filling the structure with testData
 
@@ -26,7 +26,7 @@ profiles = [
   new Profile(01, "Niklas Flaig", 1234),
   new Profile(02, "Peter Obama", 4321),
   new Profile(03, "Katherine", 0000),
-]
+];
 
 // add contacts to profiles
 //? sinnvoller den Contact in der methode zu kreieren?
@@ -40,24 +40,24 @@ profiles[2].addContact(new Contact(01, "Niklas"));
 profiles[2].addContact(new Contact(02, "Peter O."));
 
 // create new chats
-chats = [
+dataStructure_Chats = [
   new PToPChat(01, [01, 02]),
   new PToPChat(02, [01, 03]),
   new GroupChat(03, [01, 02, 03], "PizzaGroup"),
 ]
 
-chats[0].addToHistory(new TextMessage(01, "Pizza?"));
-chats[0].addToHistory(new TextMessage(02, "Ok"));
-chats[0].addToHistory(new TextMessage(01, "C u 10!"));
+dataStructure_Chats[0].addToHistory(new TextMessage(01, "Pizza?"));
+dataStructure_Chats[0].addToHistory(new TextMessage(02, "Ok"));
+dataStructure_Chats[0].addToHistory(new TextMessage(01, "C u 10!"));
 
 
-chats[1].addToHistory(new TextMessage(03, "Hello?"));
-chats[1].addToHistory(new TextMessage(01, "New Phone hu dis?"));
+dataStructure_Chats[1].addToHistory(new TextMessage(03, "Hello?"));
+dataStructure_Chats[1].addToHistory(new TextMessage(01, "New Phone hu dis?"));
 
 
-chats[2].addToHistory(new TextMessage(03, "Hi!"));
-chats[2].addToHistory(new TextMessage(01, "Nice Group!"));
-chats[2].addToHistory(new TextMessage(02, "Why spam?"));
+dataStructure_Chats[2].addToHistory(new TextMessage(03, "Hi!"));
+dataStructure_Chats[2].addToHistory(new TextMessage(01, "Nice Group!"));
+dataStructure_Chats[2].addToHistory(new TextMessage(02, "Why spam?"));
 
 
 // add chats to Profiles 

@@ -62,10 +62,10 @@
       socket.emit("requestingChats", 01);
 
       // will listen to the requestedChats for a specific UserID
-      //! will listen to all requestedChats for all users!
-      socket.on("requestedChats", (chats) => {
+      //TODO 01 will be replaced, when there is a Variable that stores the current users userID
+      socket.on(`requestedChatsForUser${01}`, (chats) => {
         console.log(chats);
-      })
+      });
     </script>
   </body>
 </html>

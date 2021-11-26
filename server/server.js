@@ -29,3 +29,9 @@ io.on('connection', function (socket) {
   // new testEmit
   socket.emit("test","hallo");
 });
+
+function getChatsForUser (userID) {
+
+  // emit the requested chats
+  socket.emit("requestedChats", JSON.stringify(chatsForUser));
+}

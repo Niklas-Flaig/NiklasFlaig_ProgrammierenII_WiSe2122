@@ -5,6 +5,8 @@ var app = require('http').createServer(handler);
 var io = require('socket.io')(app);
 // To access the file system
 var fs = require('fs');
+// to interact with the required data
+var dataManagement = require("./dataManagement");
 
 // Make the http-server listen on port 80
 app.listen(80);

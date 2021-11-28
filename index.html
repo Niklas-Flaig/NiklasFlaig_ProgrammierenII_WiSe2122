@@ -55,19 +55,19 @@
 
       // will emit a request for the profile of the current client
       function requestOwnProfile() {
-        socket.emit("clientRequestingOwnProfile", 01);
+        socket.emit("clientRequestingOwnProfile", clientUserID);
       }
       // and listen for the incoming response
-      socket.on(`serverReturningClientsProfile${01}`, (profile) => {
+      socket.on(`serverReturningClientsProfile${clientUserID}`, (profile) => {
         clientProfile = profile;
       });
 
       // will send a request for all the chats the current user participates in
       function requestChats() {
-        socket.emit("requestingChats", 01);
+        socket.emit("requestingChats", clientUserID);
       }
       // will listen to the requestedChats for a specific UserID
-      socket.on(`requestedChatsForUser${01}`, (chats) => {
+      socket.on(`requestedChatsForUser${clientUserID}`, (chats) => {
         clientChats = chats;
       });
 

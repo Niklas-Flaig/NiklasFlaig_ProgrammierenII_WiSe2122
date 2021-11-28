@@ -59,7 +59,7 @@
       }
       // and listen for the incoming response
       socket.on(`serverReturningClientsProfile${01}`, (profile) => {
-        console.log(profile);
+        return profile;
       });
 
       // will send a request for all the chats the current user participates in
@@ -68,7 +68,7 @@
       }
       // will listen to the requestedChats for a specific UserID
       socket.on(`requestedChatsForUser${01}`, (chats) => {
-        console.log(chats);
+        return chats;
       });
 
 

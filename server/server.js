@@ -31,6 +31,6 @@ io.on('connection', function (socket) {
   // listen for a request of all chats a user participates in
   socket.on("requestingChats", function (userID) {
     // get and emit the requested chats in JSON-Format
-    socket.emit(`requestedChatsForUser${01}`, JSON.stringify(dataManagement.getRequestedChatsForUser(userID)));
+    socket.emit(`requestedChatsForUser${userID}`, JSON.stringify(dataManagement.getRequestedChatsForUser(userID)));
   });
 });

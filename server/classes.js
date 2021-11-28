@@ -18,7 +18,7 @@ class Message {
       return "You: ";
     } else {
       return currentProfile.getContactSavedName(this.senderID) + ": ";
-    };
+    }
   }
   getSender() {
     let sendtBy = "";
@@ -27,7 +27,7 @@ class Message {
       sendtBy = "sendtBy_You";
     } else {
       sendtBy = "sendtBy_NotYou";
-    };
+    }
 
     return sendtBy;
   }
@@ -101,7 +101,7 @@ class GroupChat extends Chat {
   
   leaveGroup(userID) {
     // deletes userID from the "users" array
-    this.users.splice(this.users.findIndex(userID), 1)
+    this.users.splice(this.users.findIndex(userID), 1);
   }
   joinGroup(userID) {
     // adds this userID to the "users" array

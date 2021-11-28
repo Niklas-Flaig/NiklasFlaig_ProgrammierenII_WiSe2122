@@ -9,7 +9,7 @@ profiles = [
   new Profile(01, "Niklas Flaig", 1234),
   new Profile(02, "Peter Obama", 4321),
   new Profile(03, "Katherine", 0000),
-]
+];
 
 // add contacts to profiles
 //? sinnvoller den Contact in der methode zu kreieren?
@@ -27,7 +27,7 @@ chats = [
   new PToPChat(01, [01, 02]),
   new PToPChat(02, [01, 03]),
   new GroupChat(03, [01, 02, 03], "PizzaGroup"),
-]
+];
 
 chats[0].addToHistory(new TextMessage(01, "Pizza?"));
 chats[0].addToHistory(new TextMessage(02, "Ok"));

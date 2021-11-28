@@ -5,7 +5,7 @@ module.exports = {
     let chatsForUser = [];
     
     // filters the chats with the users ID (userIDFromRequest) as a member
-    chatsForUser = dataStructure_Chats.filter(chat => chat.users.find(userIDInThisChat => userIDInThisChat === userIDFromRequest) === userIDFromRequest)
+    chatsForUser = dataStructure_Chats.filter(chat => chat.users.find(userIDInThisChat => userIDInThisChat === userIDFromRequest) === userIDFromRequest);
     console.log(chatsForUser);
     
     // returns the requested chats in form of an array
@@ -35,16 +35,16 @@ class Message {
       return "You: ";
     } else {
       return currentProfile.getContactSavedName(this.senderID) + ": ";
-    };
+    }
   }
   getSender() {
     let sendtBy = "";
     
-    if(this.senderID === loggedInProfileID) {
+    if (this.senderID === loggedInProfileID) {
       sendtBy = "sendtBy_You";
     } else {
       sendtBy = "sendtBy_NotYou";
-    };
+    }
 
     return sendtBy;
   }
@@ -118,7 +118,7 @@ class GroupChat extends Chat {
   
   leaveGroup(userID) {
     // deletes userID from the "users" array
-    this.users.splice(this.users.findIndex(userID), 1)
+    this.users.splice(this.users.findIndex(userID), 1);
   }
   joinGroup(userID) {
     // adds this userID to the "users" array
@@ -228,7 +228,7 @@ dataStructure_Chats = [
   new PToPChat(01, [01, 02]),
   new PToPChat(02, [01, 03]),
   new GroupChat(03, [01, 02, 03], "PizzaGroup"),
-]
+];
 
 dataStructure_Chats[0].addToHistory(new TextMessage(01, "Pizza?"));
 dataStructure_Chats[0].addToHistory(new TextMessage(02, "Ok"));

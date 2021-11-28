@@ -26,4 +26,4 @@ new Vue({
       this.newMessageText = "";
     }
   }
-})
+});

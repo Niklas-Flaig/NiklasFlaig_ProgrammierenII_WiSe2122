@@ -11,6 +11,10 @@ module.exports = {
     // returns the requested chats in form of an array
     return chatsForUser;
   },
+  // will return the profile with the given userID
+  getProfile: function (profilesUserID) {
+    return dataStructure_Profiles.find(profile => profile.getUserID() === profilesUserID);
+  },
 };
 
 

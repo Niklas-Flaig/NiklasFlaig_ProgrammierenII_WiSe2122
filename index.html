@@ -59,7 +59,7 @@
       }
       // and listen for the incoming response
       socket.on(`serverReturningClientsProfile${01}`, (profile) => {
-        return profile;
+        clientProfile = profile;
       });
 
       // will send a request for all the chats the current user participates in
@@ -68,7 +68,7 @@
       }
       // will listen to the requestedChats for a specific UserID
       socket.on(`requestedChatsForUser${01}`, (chats) => {
-        return chats;
+        clientChats = chats;
       });
 
 
@@ -81,9 +81,8 @@
       
       // setup the data
       clientUserID = 01;
-      clientProfile = requestOwnProfile(clientUserID);
-      clientChats = requestChats(clientUserID);
-      
+      requestOwnProfile();
+      requestChats();
 
       new Vue({
         el: "#chat",

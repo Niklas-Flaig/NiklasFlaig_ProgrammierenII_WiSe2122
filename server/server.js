@@ -38,6 +38,6 @@ io.on('connection', function (socket) {
   // listen for a request of all chats a user participates in
   socket.on("requestingChats", function (userID) {
     // get and emit the requested chats
-    socket.emit(`requestedChatsForUser${userID}`, dataManagement.getRequestedChatsForUser(userID));
+    socket.emit(`requestedChatsForUser${userID}`, dataManagement.getChatsWithUser(userID));
   });
 });

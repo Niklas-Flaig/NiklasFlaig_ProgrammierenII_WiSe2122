@@ -200,13 +200,13 @@ class Contact {
 
 // temporarily test-data will be stored in this file, until I learn about a better way
 // the data structure to save all data, used in the Project
-let profiles = [];
+let dataStructure_Profiles = [];
 let dataStructure_Chats = [];
 
 // filling the structure with testData
 
 // create new Profiles
-profiles = [
+dataStructure_Profiles = [
   new Profile(01, "Niklas Flaig", 1234),
   new Profile(02, "Peter Obama", 4321),
   new Profile(03, "Katherine", 0000),
@@ -214,14 +214,14 @@ profiles = [
 
 // add contacts to profiles
 //? sinnvoller den Contact in der methode zu kreieren?
-profiles[0].addContact(new Contact(02, "Pete"));
-profiles[0].addContact(new Contact(03, "Kat"));
+dataStructure_Profiles[0].addContact(new Contact(02, "Pete"));
+dataStructure_Profiles[0].addContact(new Contact(03, "Kat"));
 
-profiles[1].addContact(new Contact(01, "Nikl"));
-profiles[1].addContact(new Contact(03, "Kat"));
+dataStructure_Profiles[1].addContact(new Contact(01, "Nikl"));
+dataStructure_Profiles[1].addContact(new Contact(03, "Kat"));
 
-profiles[2].addContact(new Contact(01, "Niklas"));
-profiles[2].addContact(new Contact(02, "Peter O."));
+dataStructure_Profiles[2].addContact(new Contact(01, "Niklas"));
+dataStructure_Profiles[2].addContact(new Contact(02, "Peter O."));
 
 // create new chats
 dataStructure_Chats = [
@@ -246,14 +246,14 @@ dataStructure_Chats[2].addToHistory(new TextMessage(02, "Why spam?"));
 
 // add chats to Profiles 
 // mainly so we don't have to search the chats with the userID in it
-profiles[0].addChat(01);
-profiles[0].addChat(02);
-profiles[0].addChat(03);
+dataStructure_Profiles[0].addChat(01);
+dataStructure_Profiles[0].addChat(02);
+dataStructure_Profiles[0].addChat(03);
 
-profiles[1].addChat(01);
-profiles[1].addChat(03);
+dataStructure_Profiles[1].addChat(01);
+dataStructure_Profiles[1].addChat(03);
 
-profiles[2].addChat(02);
-profiles[2].addChat(03);
+dataStructure_Profiles[2].addChat(02);
+dataStructure_Profiles[2].addChat(03);
 
 let loggedInProfileID = 01;

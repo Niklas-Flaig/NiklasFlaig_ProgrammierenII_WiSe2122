@@ -73,11 +73,8 @@
         clientChats = chats;
       });
 
-      
 
-      //? belongs into the Vue?
-      let clientProfile;
-      let clientChats;
+      
       
       // setup the data
       requestOwnProfile();
@@ -86,12 +83,17 @@
       new Vue({
         el: "#chat",
         data: {
+          // the own Profile of the client
+          clientProfile: {},
+          // the chats this user participates in
+          clientChats: [],
+
+
+          
           currentChatID: 0,
           newMessageText: "",
 
           chatHistory: "",
-          // just the chats that affect this user
-          thisChats: chats.filter(chat => chat.chatID === currentProfile.chatIDs.find(tempChatID => tempChatID === chat.chatID)),
         },
         methods: {
           switchChat: function (thisChatID) {

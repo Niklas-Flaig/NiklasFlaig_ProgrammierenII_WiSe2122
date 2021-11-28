@@ -61,7 +61,8 @@
       }
       // and listen for the incoming response
       socket.on(`serverReturningClientsProfile${clientUserID}`, (profile) => {
-        clientProfile = profile;
+        //? encapsulation?
+        chatApp.clientProfile = profile;
       });
 
       // will send a request for all the chats the current user participates in
@@ -70,7 +71,7 @@
       }
       // will listen to the requestedChats for a specific UserID
       socket.on(`requestedChatsForUser${clientUserID}`, (chats) => {
-        clientChats = chats;
+        chatApp.clientChats = chats;
       });
 
 

@@ -1,15 +1,9 @@
 // makes the functions available in form of a module (https://stackoverflow.com/questions/5797852/in-node-js-how-do-i-include-functions-from-my-other-files)
 module.exports = {
-  // will return all Chats, in wich this User participates
-  getRequestedChatsForUser: function (userIDFromRequest) {
-    let chatsForUser = [];
-    
-    // filters the chats with the users ID (userIDFromRequest) as a member
-    chatsForUser = dataStructure_Chats.filter(chat => chat.users.find(userIDInThisChat => userIDInThisChat === userIDFromRequest) === userIDFromRequest);
-    console.log(chatsForUser);
-    
-    // returns the requested chats in form of an array
-    return chatsForUser;
+  // will return all Chats, in wich a User participates
+  getChatsWithUser: function (participantsUserID) {
+    // filters the chats with the users ID (participantsUserID) as a participant
+    return dataStructure_Chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
   },
   // will return the profile with the given userID
   getProfile: function (profilesUserID) {

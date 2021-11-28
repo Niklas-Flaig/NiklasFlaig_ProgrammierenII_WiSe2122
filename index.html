@@ -74,6 +74,17 @@
 
     </script>
     <script>
+      //? belongs into the Vue?
+      let clientUserID;
+      let clientProfile;
+      let clientChats;
+      
+      // setup the data
+      clientUserID = 01;
+      clientProfile = requestOwnProfile(clientUserID);
+      clientChats = requestChats(clientUserID);
+      
+
       new Vue({
         el: "#chat",
         data: {

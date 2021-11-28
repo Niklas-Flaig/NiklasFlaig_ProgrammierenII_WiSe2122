@@ -28,9 +28,6 @@ function handler (req, res) {
 
 // listens for a new connection
 io.on('connection', function (socket) {
-  // new testEmit
-  socket.emit("test","hallo");
-
   // listen for a request of all chats a user participates in
   socket.on("requestingChats", function (userID) {
     // get and emit the requested chats in JSON-Format

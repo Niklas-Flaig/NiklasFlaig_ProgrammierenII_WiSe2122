@@ -54,7 +54,9 @@
       let socket = io("http://127.0.0.1:80");
 
       // will emit a request for the profile of the current client
-      socket.emit("clientRequestingOwnProfile", 01);
+      function requestOwnProfile() {
+        socket.emit("clientRequestingOwnProfile", 01);
+      }
       // and listen for the incoming response
       socket.on(`serverReturningClientsProfile${01}`, (profile) => {
         console.log(profile);

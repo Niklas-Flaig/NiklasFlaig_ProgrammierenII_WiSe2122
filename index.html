@@ -52,6 +52,8 @@
     <script>
       // Connction to the WebSocket-Server:
       let socket = io("http://127.0.0.1:80");
+      // temporary hold of the clients userID
+      let clientUserID = 01;
 
       // will emit a request for the profile of the current client
       function requestOwnProfile() {
@@ -71,16 +73,13 @@
         clientChats = chats;
       });
 
+      
 
-    </script>
-    <script>
       //? belongs into the Vue?
-      let clientUserID;
       let clientProfile;
       let clientChats;
       
       // setup the data
-      clientUserID = 01;
       requestOwnProfile();
       requestChats();
 

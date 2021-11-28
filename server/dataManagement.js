@@ -111,6 +111,9 @@ class Chat {
   getLastMessageText() {
     return this.history.at(-1).getText();
   }
+  getUsers() {
+    return this.users;
+  }
 }
 
 class GroupChat extends Chat {

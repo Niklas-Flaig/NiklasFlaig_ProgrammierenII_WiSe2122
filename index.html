@@ -10,7 +10,7 @@
     <div id="chat">
       <!-- chat/group selection -->
       <div id="chatSelectSurface" class="surface">
-        <button :id="chat.chatID" class="chatTo" v-for="chat in thisChats" v-on:click="switchChat(chat.chatID)">
+        <button :id="chat.chatID" class="chatTo" v-for="chat in clientChats" v-on:click="switchChat(chat.chatID)">
           <h4 class="chatName"> 
             {{ chat.getChatName() }}
           </h4>
@@ -97,11 +97,11 @@
         },
         methods: {
           switchChat: function (thisChatID) {
-            this.chatHistory = this.thisChats.find(chat => chat.chatID === thisChatID).getHistory();
+            this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();
             this.currentChatID = thisChatID;
           },
           addMessageToHistory: function () {
-            this.thisChats.find(chat => chat.chatID === this.currentChatID).addToHistory(new TextMessage(loggedInProfileID, this.newMessageText));
+            this.clientChats.find(chat => chat.chatID === this.currentChatID).addToHistory(new TextMessage(loggedInProfileID, this.newMessageText));
             this.newMessageText = "";
           }
         }

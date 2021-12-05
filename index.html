@@ -55,33 +55,36 @@
       // temporary hold of the clients userID
       let clientUserID = 01;
 
-      // will emit a request for the profile of the current client
-      function requestOwnProfile() {
-        socket.emit("clientRequestingOwnProfile", clientUserID);
-      }
       // and listen for the incoming response
       socket.on(`serverReturningClientsProfile${clientUserID}`, (profile) => {
         //? encapsulation?
         chatApp.clientProfile = profile;
       });
 
-      // will send a request for all the chats the current user participates in
-      function requestChats() {
-        socket.emit("requestingChats", clientUserID);
-      }
       // will listen to the requestedChats for a specific UserID
       socket.on(`requestedChatsForUser${clientUserID}`, (chats) => {
         chatApp.clientChats = chats;
       });
 
 
+      // request functions
+
+      // will emit a request for the profile of the current client
+      function requestOwnProfile() {
+        socket.emit("clientRequestingOwnProfile", clientUserID);
+      }
+      // will send a request for all the chats the current user participates in
+      function requestChats() {
+        socket.emit("requestingChats", clientUserID);
+      }
+      
       
       
       // setup the data
       requestOwnProfile();
       requestChats();
 
-      let chatApp = new Vue({
+      letchatApp = new Vue({
         el: "#chat",
         data: {
           // the own Profile of the client

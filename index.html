@@ -45,9 +45,18 @@
       <!--  -->
 
     </div>
-    <script src="javaScripts/classes.js"></script>
-    <script src="javaScripts/testData.js"></script>
-    <script src="javaScripts/script.js"></script>
+    <script>
+      // classes
+      class Chat {
+        constructor(chatID, users, history, chatName, image) {
+          this.chatID = chatID;
+          this.users = users;
+          this.history = history;
+          this.chatName = chatName;
+          this.image = image;
+        }
+      }
+    </script>
     <script src="https://cdn.socket.io/4.3.0/socket.io.js"></script>
     <script>
       // Connction to the WebSocket-Server:
@@ -62,7 +71,6 @@
           clientProfile: {},
           // the chats this user participates in
           clientChats: [],
-
 
           
           currentChatID: 0,

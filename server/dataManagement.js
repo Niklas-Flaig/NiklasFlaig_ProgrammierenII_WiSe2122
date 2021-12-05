@@ -3,7 +3,20 @@ module.exports = {
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (participantsUserID) {
     // filters the chats with the users ID (participantsUserID) as a participant
-    return dataStructure_Chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
+    let relevantChats = dataStructure_Chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
+    
+    // create array of Objects that can be used on client side to create new Chat instances
+    let output = [];
+
+    relevantChats.forEach(chat => {
+      output.push({
+        chatID: chat.getChatID(),
+        users: chat.getUsers(),
+        history: chat.getHistory(),
+        chatName: chat.getChatName(),
+        image: chat.getImage(),
+      });
+    });
   },
   // will return the profile with the given userID
   getProfile: function (profilesUserID) {
@@ -94,20 +107,22 @@ class Chat {
     this.chatID = chatID;
     this.users = users;
     this.history = [];
+    this.ChatName = "";
+    this.image;
   }
 
   addToHistory(message) {
     this.history.push(message);
   }
-  getHistory() {
-    return this.history;
-  }
-  getLastMessageText() {
-    return this.history.at(-1).getText();
-  }
-  getUsers() {
-    return this.users;
-  }
+  // getters
+  getChatID() {return this.chatID;}
+  getUsers() {return this.users;}
+  getHistory() {return this.history;}
+  getChatName() {return this.ChatName;}
+  getImage() {return this.image;}
+  // getLastMessageText() {
+  //   return this.history.at(-1).getText();
+  // }
 }
 
 class GroupChat extends Chat {

@@ -32,12 +32,12 @@ io.on('connection', function (socket) {
   // listen for a request of a clients own userProfile
   socket.on("clientRequestingOwnProfile", (clientsUserID) => {
     // get and emit the requested profile
-    socket.emit(`serverReturningClientsProfile${clientsUserID}`, dataManagement.getProfile(clientsUserID));
+    socket.emit(`serverReturningClientsProfile`, dataManagement.getProfile(clientsUserID));
   });
   
   // listen for a request of all chats a user participates in
   socket.on("requestingChats", (userID) => {
     // get and emit the requested chats
-    socket.emit(`requestedChatsForUser${userID}`, dataManagement.getChatsWithUser(userID));
+    socket.emit(`requestedChatsForUser`, dataManagement.getChatsWithUser(userID));
   });
 });

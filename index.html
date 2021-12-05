@@ -56,13 +56,13 @@
       let clientUserID = 01;
 
       // and listen for the incoming response
-      socket.on(`serverReturningClientsProfile${clientUserID}`, (profile) => {
+      socket.on(`serverReturningClientsProfile`, (profile) => {
         //? encapsulation?
         chatApp.clientProfile = profile;
       });
 
       // will listen to the requestedChats for a specific UserID
-      socket.on(`requestedChatsForUser${clientUserID}`, (chats) => {
+      socket.on(`requestedChatsForUser`, (chats) => {
         chatApp.clientChats = chats;
       });
 
@@ -84,7 +84,7 @@
       requestOwnProfile();
       requestChats();
 
-      letchatApp = new Vue({
+      let chatApp = new Vue({
         el: "#chat",
         data: {
           // the own Profile of the client

@@ -9,13 +9,25 @@ module.exports = {
     let output = [];
 
     relevantChats.forEach(chat => {
-      output.push({
+      let chatObject = {
         chatID: chat.getChatID(),
         users: chat.getUsers(),
         history: chat.getHistory(),
         chatName: chat.getChatName(),
         image: chat.getImage(),
-      });
+      };
+      // repair the chatName and image: just take the name and Pic of the first User thats not the requester
+      if (chatObject.chatName === null) {
+        // take the other users name, saved to the profile of the requesters Profile
+        chatObject.chatName = dataStructure_Profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(chatObject.users.find(userID => userID !== participantsUserID));
+      }
+
+      if (chatObject.image === null) {
+        // take the profile pic of the first user, in this chat who isn't the requester
+        chatObject.image = dataStructure_Profiles.find(profile => profile.getUserID() !== participantsUserID).getProfilePic();
+      }
+
+      output.push(chatObject);
     });
   },
   // will return the profile with the given userID
@@ -107,7 +119,7 @@ class Chat {
     this.chatID = chatID;
     this.users = users;
     this.history = [];
-    this.ChatName = "";
+    this.chatName = "";
     this.image;
   }
 
@@ -118,7 +130,7 @@ class Chat {
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
   getHistory() {return this.history;}
-  getChatName() {return this.ChatName;}
+  getChatName() {return this.chatName;}
   getImage() {return this.image;}
   // getLastMessageText() {
   //   return this.history.at(-1).getText();
@@ -140,9 +152,9 @@ class GroupChat extends Chat {
     // adds this userID to the "users" array
     this.users.push(userID);
   }
-  getChatName() {
-    return this.groupName;
-  }
+  // getters
+  getChatName() {return null;}
+  getImage() {return null;}
 
   setGroupName(name) {
     this.groupName = name;
@@ -156,9 +168,6 @@ class GroupChat extends Chat {
 class PToPChat extends Chat {
   constructor(chatID, users) {
     super(chatID, users);
-  }
-  getChatName() {
-    return this.history[history.length-1].getSenderName();
   }
 }
 

@@ -96,9 +96,17 @@
         chatApp.clientProfile = profile;
       });
 
-      // will listen to the requestedChats for a specific UserID
-      socket.on(`requestedChatsForUser`, (chats) => {
-        chatApp.clientChats = chats;
+      // will write the incoming Chats into the clientChats array in the VUE
+      socket.on(`requestedChatsForUser`, (incomingChats) => {
+        incomingChats.forEach(chat => {
+          chatApp.clientChats.push(new Chat(
+            chat.chatID,
+            chat.users,
+            chat.history,
+            chat.chatName,
+            chat.image
+          ));
+        });
       });
 
 

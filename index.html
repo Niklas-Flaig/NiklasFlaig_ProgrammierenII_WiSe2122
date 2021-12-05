@@ -52,41 +52,12 @@
     <script>
       // Connction to the WebSocket-Server:
       let socket = io("http://127.0.0.1:80");
-      // temporary hold of the clients userID
-      let clientUserID = 01;
-
-      // and listen for the incoming response
-      socket.on(`serverReturningClientsProfile`, (profile) => {
-        //? encapsulation?
-        chatApp.clientProfile = profile;
-      });
-
-      // will listen to the requestedChats for a specific UserID
-      socket.on(`requestedChatsForUser`, (chats) => {
-        chatApp.clientChats = chats;
-      });
-
-
-      // request functions
-
-      // will emit a request for the profile of the current client
-      function requestOwnProfile() {
-        socket.emit("clientRequestingOwnProfile", clientUserID);
-      }
-      // will send a request for all the chats the current user participates in
-      function requestChats() {
-        socket.emit("requestingChats", clientUserID);
-      }
-      
-      
-      
-      // setup the data
-      requestOwnProfile();
-      requestChats();
 
       let chatApp = new Vue({
         el: "#chat",
         data: {
+          // the clients userID
+          clientUserID: 01,
           // the own Profile of the client
           clientProfile: {},
           // the chats this user participates in
@@ -110,6 +81,37 @@
           }
         }
       });
+
+      // and listen for the incoming response
+      socket.on(`serverReturningClientsProfile`, (profile) => {
+        //? encapsulation?
+        chatApp.clientProfile = profile;
+      });
+
+      // will listen to the requestedChats for a specific UserID
+      socket.on(`requestedChatsForUser`, (chats) => {
+        chatApp.clientChats = chats;
+      });
+
+
+      // request functions
+
+      // will emit a request for the profile of the current client
+      function requestOwnProfile() {
+        socket.emit("clientRequestingOwnProfile", chatApp.clientUserID);
+      }
+      // will send a request for all the chats the current user participates in
+      function requestChats() {
+        socket.emit("requestingChats", chatApp.clientUserID);
+      }
+      
+      
+      
+      // setup the data
+      requestOwnProfile();
+      requestChats();
+
+      
     </script>
   </body>
 </html>

@@ -6,9 +6,7 @@ module.exports = {
     let relevantChats = dataStructure_Chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
     
     // create array of Objects that can be used on client side to create new Chat instances
-    let output = [];
-
-    relevantChats.forEach(chat => {
+    return relevantChats.map(chat => {
       let chatObject = {
         chatID: chat.getChatID(),
         users: chat.getUsers(),
@@ -27,10 +25,8 @@ module.exports = {
         chatObject.image = dataStructure_Profiles.find(profile => profile.getUserID() !== participantsUserID).getProfilePic();
       }
 
-      output.push(chatObject);
+      return chatObject;
     });
-
-    return output;
   },
   // will return the profile with the given userID
   getProfile: function (profilesUserID) {

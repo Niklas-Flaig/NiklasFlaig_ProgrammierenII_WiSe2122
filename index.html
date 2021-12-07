@@ -149,7 +149,7 @@
           chat.history.map(message => { // create a new object of a Message-class child-class
             // determine what type of message this is
             switch (message.messageType) {
-              case "text":
+              case "textMessage":
                 return new TextMessage(
                   message.senderID,
                   message.content

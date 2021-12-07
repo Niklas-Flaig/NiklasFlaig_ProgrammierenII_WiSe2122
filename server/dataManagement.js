@@ -74,6 +74,7 @@ class Message {
 class TextMessage extends Message {
   constructor(senderID, text) {
     super(senderID, text);
+    this.messageType = "textMessage";
   }
 
   getContent() {
@@ -85,6 +86,7 @@ class FileMessage extends Message {
   constructor(senderID, text, fileName) {
     super(senderID, text);
     this.fileName = fileName;
+    this.messageType = "fileMessage";
   }
 
   getText() {
@@ -99,6 +101,7 @@ class FileMessage extends Message {
 class ImageMessage extends FileMessage {
   constructor(senderID, text, fileName) {
     super(senderID, text, fileName);
+    this.messageType = "imageMessage";
   }
 
   getText() {

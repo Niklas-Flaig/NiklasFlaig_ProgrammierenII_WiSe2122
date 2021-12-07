@@ -184,9 +184,9 @@ class PToPChat extends Chat {
 
 // other classes
 class Profile {
-  constructor(userID, myName, password) {
+  constructor(userID, userName, password) {
     this.userID = userID;
-    this.myName = myName;
+    this.userName = userName;
     this.password = password;
     this.status = "";
     this.contacts = [];
@@ -197,9 +197,10 @@ class Profile {
     // gets the savedName of the first contact with the "givenID"
     return this.contacts.find(contact => contact.getUserId() === givenID).getSavedName();
   }
-  getUserID() {
-    return this.userID;
-  }
+  getUserID() {return this.userID;}
+  getUserName() {return this.userName;}
+  getStatus() {return this.status;}
+  getContacts() {return this.contacts;}
   getProfilePic() {return this.profilePicFileName;} //TODO find a way to implement a picture in here...
 
   setStatus(newStatus) {

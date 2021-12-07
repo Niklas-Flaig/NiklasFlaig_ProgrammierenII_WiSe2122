@@ -94,7 +94,7 @@
         getContent() {return this.content;}
       }
 
-      class TextMessage {
+      class TextMessage extends Message {
         constructor(senderID, content) {
           super(senderID);
           this.content = content;

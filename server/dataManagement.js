@@ -30,7 +30,16 @@ module.exports = {
   },
   // will return the profile with the given userID
   getProfile: function (profilesUserID) {
-    return dataStructure_Profiles.find(profile => profile.getUserID() === profilesUserID);
+    let usersProfile = dataStructure_Profiles.find(profile => profile.getUserID() === profilesUserID);
+
+    // the object, getting returned here, keeps just the Data, that is usefull for the client
+    return {
+      userID: usersProfile.getUserID(),
+      userName: usersProfile.getUserName(),
+      status: usersProfile.getStatus(),
+      contacts: usersProfile.getContacts(),
+      //TODO profilePic:,
+    };
   },
 };
 

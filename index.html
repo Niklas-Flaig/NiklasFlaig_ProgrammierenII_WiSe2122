@@ -77,7 +77,8 @@
           if (senderID === chatApp.clientProfile.userID) {
             return "You: ";
           } else {
-            return chatApp.clientProfile.getContactSavedName(this.senderID) + ": ";
+            // return chatApp.clientProfile.getContactSavedName(this.senderID) + ": ";
+            return chatApp.clientProfile.contacts.find(contact => contact.userID === senderID).savedName + ": "; // without encapsulation!!
           }
         }
         constructSenderClass(senderID) {

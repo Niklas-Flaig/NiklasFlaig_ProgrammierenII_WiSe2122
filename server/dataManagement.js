@@ -29,6 +29,8 @@ module.exports = {
 
       output.push(chatObject);
     });
+
+    return output;
   },
   // will return the profile with the given userID
   getProfile: function (profilesUserID) {

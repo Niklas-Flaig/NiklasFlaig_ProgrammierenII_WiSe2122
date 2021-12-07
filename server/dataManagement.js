@@ -190,6 +190,7 @@ class Profile {
   getUserID() {
     return this.userID;
   }
+  getProfilePic() {return this.profilePicFileName;} //TODO find a way to implement a picture in here...
 
   setStatus(newStatus) {
     this.status = newStatus;

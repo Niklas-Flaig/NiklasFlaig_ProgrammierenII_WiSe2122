@@ -10,7 +10,7 @@ module.exports = {
       let chatObject = {
         chatID: chat.getChatID(),
         users: chat.getUsers(),
-        history: chat.getHistory(),
+        history: chat.getHistory(),//TODO think about encapsulation!!!
         chatName: chat.getChatName(),
         image: chat.getImage(),
       };

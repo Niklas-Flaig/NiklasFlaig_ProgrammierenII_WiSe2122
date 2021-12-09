@@ -51,35 +51,27 @@ module.exports = {
 
 // Message classes
 class Message {
-  constructor(senderID, text) { //! time und messageID automatisch generieren
+  constructor(senderID, content) {
     this.senderID = senderID;
-    this.text = text;
-    this.time;
-    this.messageID;
+    this.content = content;
+    this.time = this.constructTime();
+    this.messageType = "";
+  }
+  constructTime() {
+    let time = new Date();
+    return {
+      year: time.getFullYear,
+      month: time.getMonth,
+      day: time.getDay,
+      hour: time.getHours,
+      minute: time.getMinutes
+    };
   }
 
-  getText() {
-    //! what if image/data???
-    return this.text;
-  }
-  getSenderName() {
-    if(this.senderID === currentProfile.userID) {
-      return "You: ";
-    } else {
-      return currentProfile.getContactSavedName(this.senderID) + ": ";
-    }
-  }
-  getSender() {
-    let sendtBy = "";
-    
-    if (this.senderID === loggedInProfileID) {
-      sendtBy = "sendtBy_You";
-    } else {
-      sendtBy = "sendtBy_NotYou";
-    }
-
-    return sendtBy;
-  }
+  getSenderID() {return this.senderID;}
+  getContent() {return this.content;}
+  getTime() {return this.time;}
+  getMessageType() {return this.messageType;}
 }
 
 class TextMessage extends Message {

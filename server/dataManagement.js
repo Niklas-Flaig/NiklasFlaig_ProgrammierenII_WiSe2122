@@ -79,10 +79,6 @@ class TextMessage extends Message {
     super(senderID, text);
     this.messageType = "textMessage";
   }
-
-  getContent() {
-    return this.text;
-  }
 }
 
 class FileMessage extends Message {

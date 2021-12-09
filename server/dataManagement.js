@@ -142,7 +142,16 @@ class Chat {
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
   getImage() {return this.image;}
-  getHistory() {return this.history;}
+  getHistory() {
+    return this.history.map(message => {
+      return {
+        sender: message.getSender(),
+        content: message.getContent(),
+        time: message.getTime(),
+        messageType: message.messageType()
+      };
+    });
+  }
 }
 
 class GroupChat extends Chat {

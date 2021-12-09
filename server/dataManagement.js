@@ -26,16 +26,7 @@ module.exports = {
           chatObject.chatName = dataStructure_Profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(otherUsersID);
           break;
       }
-      // repair the chatName and image: just take the name and Pic of the first User thats not the requester
-      if (chatObject.chatName === null) {
-        chatObject.chatName = dataStructure_Profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(chatObject.users.find(userID => userID !== participantsUserID));
-      }
-
-      if (chatObject.image === null) {
-        // take the profile pic of the first user, in this chat who isn't the requester
-        chatObject.image = dataStructure_Profiles.find(profile => profile.getUserID() !== participantsUserID).getProfilePic();
-      }
-
+      
       return chatObject;
     });
   },

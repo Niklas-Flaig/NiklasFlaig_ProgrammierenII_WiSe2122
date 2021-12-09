@@ -141,12 +141,8 @@ class Chat {
   // getters
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
-  getHistory() {return this.history;}
-  getChatName() {return this.chatName;}
   getImage() {return this.image;}
-  // getLastMessageText() {
-  //   return this.history.at(-1).getText();
-  // }
+  getHistory() {return this.history;}
 }
 
 class GroupChat extends Chat {

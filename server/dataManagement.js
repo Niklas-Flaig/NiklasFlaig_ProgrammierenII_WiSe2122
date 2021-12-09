@@ -137,10 +137,10 @@ class Chat {
   getHistory() {
     return this.history.map(message => {
       return {
-        sender: message.getSender(),
+        senderID: message.getSenderID(),
         content: message.getContent(),
         time: message.getTime(),
-        messageType: message.messageType()
+        messageType: message.getMessageType()
       };
     });
   }

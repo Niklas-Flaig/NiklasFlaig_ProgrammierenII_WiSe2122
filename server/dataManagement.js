@@ -7,16 +7,27 @@ module.exports = {
     
     // create array of Objects that can be used on client side to create new Chat instances
     return relevantChats.map(chat => {
+      // type-independent values
       let chatObject = {
         chatID: chat.getChatID(),
-        users: chat.getUsers(),
+        users: chat.getUsers(), //? needed?
         history: chat.getHistory(),//TODO think about encapsulation!!!
-        chatName: chat.getChatName(),
         image: chat.getImage(),
       };
+      
+      // type-dependent values
+      switch (chat.chatType) {
+        case "groupChat":
+          chatObject.chatName = chat.getGroupName();
+          break;
+        case "pToPchat":
+          // take the other users name, saved to the profile of the requesters Profile
+          let otherUsersID = chat.getUsers().find(userID => userID !== participantsUserID);
+          chatObject.chatName = dataStructure_Profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(otherUsersID);
+          break;
+      }
       // repair the chatName and image: just take the name and Pic of the first User thats not the requester
       if (chatObject.chatName === null) {
-        // take the other users name, saved to the profile of the requesters Profile
         chatObject.chatName = dataStructure_Profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(chatObject.users.find(userID => userID !== participantsUserID));
       }
 
@@ -129,8 +140,8 @@ class Chat {
     this.chatID = chatID;
     this.users = users;
     this.history = [];
-    this.chatName = "";
     this.image;
+    this.chatType = "chat";
   }
 
   addToHistory(message) {
@@ -152,6 +163,7 @@ class GroupChat extends Chat {
     super(chatID, users);
     this.groupName = groupName;
     this.groupPicPath;
+    this.chatType = "groupChat";
   }
   
   leaveGroup(userID) {
@@ -163,7 +175,7 @@ class GroupChat extends Chat {
     this.users.push(userID);
   }
   // getters
-  getChatName() {return null;}
+  getGroupName() {return this.groupName;}
   getImage() {return null;}
 
   setGroupName(name) {
@@ -178,6 +190,7 @@ class GroupChat extends Chat {
 class PToPChat extends Chat {
   constructor(chatID, users) {
     super(chatID, users);
+    this.chatType = "pToPchat";
   }
 }
 

@@ -18,7 +18,8 @@ socket.on(`requestedChatsForUser`, (incomingChats) => {
         case "textMessage":
           return new TextMessage(
             message.senderID,
-            message.content
+            message.content,
+            // message.time
           );
       }
     }),

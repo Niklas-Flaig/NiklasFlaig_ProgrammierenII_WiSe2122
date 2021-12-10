@@ -64,4 +64,11 @@ io.on('connection', function (socket) {
     // get and emit the requested chats
     socket.emit(`requestedChatsForUser`, dataManagement.getChatsWithUser(userID));
   });
+
+  //listen for a new Message and add it to the specific chats history
+  socket.on("clientSendingNewMessage", (chatID, messageContent) => {
+    // determine the sender via the socketID
+    // create a new Message and add it to the related chat
+    // send an update to all 
+  });
 });

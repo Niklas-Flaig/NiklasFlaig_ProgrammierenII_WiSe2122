@@ -19,7 +19,7 @@ let chatApp = new Vue({
       this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();
       this.currentChatID = thisChatID;
     },
-    sendMessage: () => {
+    sendMessage: function () { // why not () => {}
       socket.emit("clientSendingNewMessage", {
         chatID: this.currentChatID,
         content: this.newMessageText,

@@ -76,7 +76,7 @@ io.on('connection', function (socket) {
   socket.on("clientSendingNewMessage", (message) => {
     // 1. determine the sender via the socketID
     // still usefull, because the client cant fake the userID
-    message.clientID = connectedClients.find(client => client.socketID === socket.id).clientsUserID;
+    message.clientID = connectedClients.find(client => client.socketID === socket.id).userID;
 
     // 2. create a new Message and add it to the related chat
     dataManagement.addMessageToChat(message);

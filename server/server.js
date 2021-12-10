@@ -3,7 +3,6 @@
 var app = require('http').createServer(handler);
 // Create a socket.io instance and bind it to the http-server
 var io = require('socket.io')(app);
-const { sign } = require('crypto');
 // To access the file system
 var fs = require('fs');
 // to interact with the required data

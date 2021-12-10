@@ -73,7 +73,7 @@ io.on('connection', function (socket) {
   });
 
   //listen for a new Message and add it to the specific chats history
-  socket.on("clientSendingNewMessage", (chatID, messageContent) => {
+  socket.on("clientSendingNewMessage", (chatID, messageContent, messageType) => {
     // 1. determine the sender via the socketID
     let clientID = connectedClients.find(client => client.socketID === socket.id).clientsUserID;
 
@@ -87,7 +87,8 @@ io.on('connection', function (socket) {
       io.to(thisMembersSocketID).emit("serverSendingNewMessage", chatID, {
         // create the message Object, that will be used on client side (maybe create on clientside in future)
         senderID: clientID,
-        content: messageContent
+        content: messageContent,
+        messageType: messageType
       });
     });
   });

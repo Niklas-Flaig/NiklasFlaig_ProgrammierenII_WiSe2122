@@ -55,6 +55,10 @@ module.exports = {
     // 2. add this new Message to the chat with the given chatID
     dataStructure_Chats.find(chat => chat.getChatID() === message.chatID).addMessageToHistory(newMessage);
   },
+  // will return an array of all users in the Chat with the specific chatID
+  getUsersInChat: (chatID) => {
+    return dataStructure_Chats.find(chat => chat.getChatID() === chatID).getUsers();
+  }
 };
 
 

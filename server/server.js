@@ -73,23 +73,19 @@ io.on('connection', function (socket) {
   });
 
   //listen for a new Message and add it to the specific chats history
-  socket.on("clientSendingNewMessage", (chatID, messageContent, messageType) => {
+  socket.on("clientSendingNewMessage", (message) => {
     // 1. determine the sender via the socketID
-    let clientID = connectedClients.find(client => client.socketID === socket.id).clientsUserID;
+    // still usefull, because the client cant fake the userID
+    message.clientID = connectedClients.find(client => client.socketID === socket.id).clientsUserID;
 
     // 2. create a new Message and add it to the related chat
-    dataManagement.addMessageToChat(chatID, messageContent, clientID, messageType);
+    dataManagement.addMessageToChat(message);
 
     // 3. send an update to all online chatMembers
-    dataManagement.getUsersInChat(chatID).forEach(chatMemberID => {
+    dataManagement.getUsersInChat(message.chatID).forEach(chatMemberID => {
       // if the clients userID is found among the connectedClients, emit this, to add this new message to his history
       const thisMembersSocketID = connectedClients.find(client => client.userID === chatMemberID);
-      io.to(thisMembersSocketID).emit("serverSendingNewMessage", chatID, {
-        // create the message Object, that will be used on client side (maybe create on clientside in future)
-        senderID: clientID,
-        content: messageContent,
-        messageType: messageType
-      });
+      io.to(thisMembersSocketID).emit("serverSendingNewMessage", message);
     });
   });
 });

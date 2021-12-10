@@ -20,11 +20,16 @@ let chatApp = new Vue({
       this.currentChatID = thisChatID;
     },
     sendMessage: () => {
-      socket.emit("clientSendingNewMessage", this.currentChatID, this.newMessageText);
+      socket.emit("clientSendingNewMessage", {
+        chatID: this.currentChatID,
+        content: this.newMessageText,
+        messageType: "textMessage"
+      });
       chatApp.newMessageText = "";
     },
-    addMessageToChat: (targetChatID, message) => {
-      this.clientChats.find(chat => chat.getChatID() === targetChatID).addMessage(message);
+    addMessageToChat: (message) => {
+      // addMessage to the chat wich chatID matches the message.chatID
+      this.clientChats.find(chat => chat.getChatID() === message.chatID).addMessage(message);
     }
   }
 });

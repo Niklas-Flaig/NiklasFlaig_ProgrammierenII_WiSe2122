@@ -44,16 +44,16 @@ module.exports = {
     };
   },
   // will create a new Message and add it to a specific chat
-  addMessageToChat: (chatID, messageContent, senderID, messageType) => {
+  addMessageToChat: (message) => {
     // 1. create a new Message
     let newMessage;
-    switch (messageType) {
+    switch (message.messageType) {
       case "textMessage":
-        newMessage = new TextMessage(senderID, messageContent);
+        newMessage = new TextMessage(message.senderID, message.content);
         break;
     }
     // 2. add this new Message to the chat with the given chatID
-    dataStructure_Chats.find(chat => chat.getChatID() === chatID).addMessageToHistory(newMessage);
+    dataStructure_Chats.find(chat => chat.getChatID() === message.chatID).addMessageToHistory(newMessage);
   },
 };
 

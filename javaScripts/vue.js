@@ -20,7 +20,7 @@ let chatApp = new Vue({
       this.currentChatID = thisChatID;
     },
     sendMessage: () => {
-      socket.emit("clientSendingNewMessage", this.newMessageText);
+      socket.emit("clientSendingNewMessage", this.currentChatID, this.newMessageText);
     },
 
   }

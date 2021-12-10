@@ -84,7 +84,11 @@ io.on('connection', function (socket) {
     dataManagement.getUsersInChat(chatID).forEach(chatMemberID => {
       // if the clients userID is found among the connectedClients, emit this, to add this new message to his history
       const thisMembersSocketID = connectedClients.find(client => client.userID === chatMemberID);
-      io.to(thisMembersSocketID).emit("");// TODO...
+      io.to(thisMembersSocketID).emit("serverSendingNewMessage", chatID, {
+        // create the message Object, that will be used on client side (maybe create on clientside in future)
+        senderID: clientID,
+        content: messageContent
+      });
     });
   });
 });

@@ -74,8 +74,20 @@ io.on('connection', function (socket) {
 
   //listen for a new Message and add it to the specific chats history
   socket.on("clientSendingNewMessage", (chatID, messageContent) => {
-    // determine the sender via the socketID
-    // create a new Message and add it to the related chat
-    // send an update to all 
+    // 1. determine the sender via the socketID
+    let clientID = connectedClients.find(client => client.socketID === socket.id).clientsUserID;
+
+    // 2. create a new Message and add it to the related chat
+    dataManagement.addMessage(chatID, messageID, clientID);
+
+    // 3. send an update to all online chatMembers
+    dataManagement.getUsersInChat(chatID).forEach(chatMemberID => {
+      // if the clients userID is found among the connectedClients, emit this, to add this new message to his history
+      const thisMembersSocketID = connectedClients.find(client => client.userID === chatMemberID);
+      io.to(thisMembersSocketID).emit("");// TODO...
+    });
   });
 });
+
+
+//* Probably its intelligent to just store the currently used Chats(with online users) in the servers Memory and leave the rest on the drive?

@@ -28,6 +28,8 @@ socket.on(`requestedChatsForUser`, (incomingChats) => {
   ));
 });
 
+// receive a new Message and add it to the related Chat
+socket.on("serverSendingNewMessage", (chatID, message) => chatApp.addMessageToChat(chatID, message));
 
 // request functions
 

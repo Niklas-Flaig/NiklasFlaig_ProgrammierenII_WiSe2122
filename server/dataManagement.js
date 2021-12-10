@@ -279,18 +279,18 @@ dataStructure_Chats = [
   new GroupChat(03, [01, 02, 03], "PizzaGroup"),
 ];
 
-dataStructure_Chats[0].addToHistory(new TextMessage(01, "Pizza?"));
-dataStructure_Chats[0].addToHistory(new TextMessage(02, "Ok"));
-dataStructure_Chats[0].addToHistory(new TextMessage(01, "C u 10!"));
+dataStructure_Chats[0].addMessageToHistory(new TextMessage(01, "Pizza?"));
+dataStructure_Chats[0].addMessageToHistory(new TextMessage(02, "Ok"));
+dataStructure_Chats[0].addMessageToHistory(new TextMessage(01, "C u 10!"));
 
 
-dataStructure_Chats[1].addToHistory(new TextMessage(03, "Hello?"));
-dataStructure_Chats[1].addToHistory(new TextMessage(01, "New Phone hu dis?"));
+dataStructure_Chats[1].addMessageToHistory(new TextMessage(03, "Hello?"));
+dataStructure_Chats[1].addMessageToHistory(new TextMessage(01, "New Phone hu dis?"));
 
 
-dataStructure_Chats[2].addToHistory(new TextMessage(03, "Hi!"));
-dataStructure_Chats[2].addToHistory(new TextMessage(01, "Nice Group!"));
-dataStructure_Chats[2].addToHistory(new TextMessage(02, "Why spam?"));
+dataStructure_Chats[2].addMessageToHistory(new TextMessage(03, "Hi!"));
+dataStructure_Chats[2].addMessageToHistory(new TextMessage(01, "Nice Group!"));
+dataStructure_Chats[2].addMessageToHistory(new TextMessage(02, "Why spam?"));
 
 
 // add chats to Profiles 

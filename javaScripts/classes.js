@@ -7,6 +7,19 @@ class Chat {
     this.chatName = chatName;
     this.image = image;
   }
+  addMessage(message) {
+    this.history.push(() => {
+      switch (message.messageType) {
+        case "textMessage":
+          return new TextMessage(
+            message.senderID,
+            message.content,
+            // message.time
+          );
+      }
+    });
+  }
+
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
   getHistory() {return this.history;}

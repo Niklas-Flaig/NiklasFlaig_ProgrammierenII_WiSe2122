@@ -49,12 +49,11 @@ module.exports = {
     let newMessage;
     switch (message.messageType) {
       case "textMessage":
-        newMessage = new TextMessage(message.senderID, message.content);
+        newMessage = new TextMessage(message.clientID, message.content);
         break;
     }
     // 2. add this new Message to the chat with the given chatID
     dataStructure_Chats.find(chat => chat.getChatID() === message.chatID).addMessageToHistory(newMessage);
-    console.log(dataStructure_Chats[1].history);
   },
   // will return an array of all users in the Chat with the specific chatID
   getUsersInChat: (chatID) => {

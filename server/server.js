@@ -8,6 +8,9 @@ var fs = require('fs');
 // to interact with the required data
 var dataManagement = require("./dataManagement");
 
+// a variable, the server can store a data pair for all the currently connected clients in
+let connectedClients = [];
+
 // Make the http-server listen on port 80
 app.listen(80);
 console.log( "Webserver is listening on Port 80" );
@@ -56,6 +59,11 @@ io.on('connection', function (socket) {
   socket.on("clientRequestingOwnProfile", (clientsUserID) => {
     // get and emit the requested profile
     socket.emit(`serverReturningClientsProfile`, dataManagement.getProfile(clientsUserID));
+    // now, that the client has his profile, we can make a new note in this Server
+    connectedClients.push({
+      socketID: socket.id,
+      userID: clientsUserID
+    });
   });
   
   // listen for a request of all chats a user participates in

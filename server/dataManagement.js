@@ -43,6 +43,18 @@ module.exports = {
       //TODO profilePic:,
     };
   },
+  // will create a new Message and add it to a specific chat
+  addMessageToChat: (chatID, messageContent, senderID, messageType) => {
+    // 1. create a new Message
+    let newMessage;
+    switch (messageType) {
+      case "textMessage":
+        newMessage = new TextMessage(senderID, messageContent);
+        break;
+    }
+    // 2. add this new Message to the chat with the given chatID
+    dataStructure_Chats.find(chat => getChatID() === chatID).addMessageToHistory(newMessage);
+  },
 };
 
 
@@ -123,8 +135,8 @@ class Chat {
     this.chatType = "chat";
   }
 
-  addToHistory(message) {
-    this.history.push(message);
+  addMessageToHistory(newMessage) {
+    this.history.push(newMessage);
   }
   // getters
   getChatID() {return this.chatID;}

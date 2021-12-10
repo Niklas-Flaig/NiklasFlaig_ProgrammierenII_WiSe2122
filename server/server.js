@@ -78,7 +78,7 @@ io.on('connection', function (socket) {
     let clientID = connectedClients.find(client => client.socketID === socket.id).clientsUserID;
 
     // 2. create a new Message and add it to the related chat
-    dataManagement.addMessage(chatID, messageContent, clientID);
+    dataManagement.addMessageToChat(chatID, messageContent, clientID, messageType);
 
     // 3. send an update to all online chatMembers
     dataManagement.getUsersInChat(chatID).forEach(chatMemberID => {

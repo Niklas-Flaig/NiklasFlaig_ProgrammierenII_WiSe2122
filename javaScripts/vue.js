@@ -19,9 +19,9 @@ let chatApp = new Vue({
       this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();
       this.currentChatID = thisChatID;
     },
-    addMessageToHistory: function () {
-      this.clientChats.find(chat => chat.chatID === this.currentChatID).addToHistory(new TextMessage(loggedInProfileID, this.newMessageText));
-      this.newMessageText = "";
-    }
+    sendMessage: () => {
+      socket.emit("clientSendingNewMessage", this.newMessageText);
+    },
+
   }
 });

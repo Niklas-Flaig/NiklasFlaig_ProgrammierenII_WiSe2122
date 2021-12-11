@@ -8,16 +8,16 @@ class Chat {
     this.image = image;
   }
   addMessage(message) {
-    this.history.push(() => {
-      switch (message.messageType) {
-        case "textMessage":
-          return new TextMessage(
-            message.senderID,
-            message.content,
-            // message.time
-          );
-      }
-    });
+    let newMessage;
+    switch (message.messageType) {
+      case "textMessage":
+        newMessage = new TextMessage(
+          message.clientID,
+          message.content,
+          // message.time
+        );
+    }
+    this.history.push(newMessage);
   }
 
   getChatID() {return this.chatID;}

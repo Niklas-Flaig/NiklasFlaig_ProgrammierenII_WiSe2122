@@ -27,7 +27,7 @@ let chatApp = new Vue({
       });
       chatApp.newMessageText = "";
     },
-    addMessageToChat: (message) => {
+    addMessageToChat: function (message) {
       // addMessage to the chat wich chatID matches the message.chatID
       this.clientChats.find(chat => chat.getChatID() === message.chatID).addMessage(message);
     }

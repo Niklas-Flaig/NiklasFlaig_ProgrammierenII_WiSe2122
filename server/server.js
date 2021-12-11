@@ -84,8 +84,12 @@ io.on('connection', function (socket) {
     // 3. send an update to all online chatMembers
     dataManagement.getUsersInChat(message.chatID).forEach(chatMemberID => {
       // if the clients userID is found among the connectedClients, emit this, to add this new message to his history
-      const thisMembersSocketID = connectedClients.find(client => client.userID === chatMemberID);
-      io.to(thisMembersSocketID).emit("serverSendingNewMessage", message);
+      for (let x = 0; x < connectedClients.length; x++) {
+        if (connectedClients[x].userID === chatMemberID) {
+          io.to(connectedClients[x].socketID).emit("serverSendingNewMessage", message);
+          break;
+        }
+      }
     });
   });
 });

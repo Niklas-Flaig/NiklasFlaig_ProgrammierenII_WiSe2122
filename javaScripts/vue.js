@@ -1,8 +1,13 @@
 let chatApp = new Vue({
   el: "#chat",
   data: {
+    // LOGIN STUFF
+    userName: "",
+    password: "",
+
+
     // the clients userID
-    clientUserID: 01,
+    clientUserID: false,
     // the own Profile of the client
     clientProfile: {},
     // the chats this user participates in
@@ -12,9 +17,16 @@ let chatApp = new Vue({
     currentChatID: 0,
     newMessageText: "",
 
-    chatHistory: "",
+    chatHistory: [],
   },
   methods: {
+    submitLogin: function () {
+      // emit an object with the userName and password
+      socket.emit("clientTrysToLogIn", {
+        userName: logiInApp.userName,
+        password: logiInApp.password,
+      });
+    },
     switchChat: function (thisChatID) {
       this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();
       this.currentChatID = thisChatID;

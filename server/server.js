@@ -54,18 +54,30 @@ function handler (req, res) {
 
 // listens for a new connection
 io.on('connection', function (socket) {
+  // listen for the client to send a logInTry
+  socket.on("clientTrysToLogIn", (clientData) => {
+    // 1. check if the data is correct
+    try {
+      // checks if the data is valid and returns a profile or an err
+      const clientProfile = dataManagement.checkLogin(clientData);
 
-  // listen for a request of a clients own userProfile
-  socket.on("clientRequestingOwnProfile", (clientsUserID) => {
-    // get and emit the requested profile
-    socket.emit(`serverReturningClientsProfile`, dataManagement.getProfile(clientsUserID));
-    // now, that the client has his profile, we can make a new note in this Server
-    connectedClients.push({
-      socketID: socket.id,
-      userID: clientsUserID
-    });
-  });
-  
+      // return this response to the client
+      socket.emit("serverResponsesToLogIn", {
+        error: false,
+        profile: clientProfile,
+      });
+
+      // now, that the client has his profile, we can make a new note in this Server
+      connectedClients.push({
+        socketID: socket.id,
+        userID: clientsUserID
+      });
+    } catch (err) {
+      // give the client an error
+      socket.emit("serverResponsesToLogIn", {error: err});
+    }
+});
+
   // listen for a request of all chats a user participates in
   socket.on("requestingChats", (userID) => {
     // get and emit the requested chats

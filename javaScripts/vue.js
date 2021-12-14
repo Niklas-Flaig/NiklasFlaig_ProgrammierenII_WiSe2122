@@ -1,5 +1,5 @@
 let chatApp = new Vue({
-  el: "#chat",
+  el: "#vue",
   data: {
     // LOGIN STUFF
     userName: "",

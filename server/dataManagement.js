@@ -1,5 +1,31 @@
 // makes the functions available in form of a module (https://stackoverflow.com/questions/5797852/in-node-js-how-do-i-include-functions-from-my-other-files)
 module.exports = {
+  checkLogin: (clientData) => {
+    // check if userName is part of a Profile in dataStructure_Profiles
+    if (dataStructure_Profiles.includes(profile => profile.getUserName() === clientData.userName)) {
+      // check if the given Password is correct
+      const profile = dataStructure_Profiles.find(profile => profile.getUserName() === clientData.userName);
+      if (profile.checkPassword(clientData.password)) {
+        // the password is correct
+        // return the clients Profile
+        return {
+          userID: profile.getUserID(),
+          userName: profile.getUserName(),
+          status: profile.getStatus(),
+          contacts: profile.getContacts(),
+          //TODO profilePic:,
+        };
+      } else {
+        err = 508; // invalid Password
+        throw err;
+      }
+
+    } else {
+      err = 509; // profile not found
+      throw err;
+    }
+
+  },
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (participantsUserID) {
     // filters the chats with the users ID (participantsUserID) as a participant
@@ -29,19 +55,6 @@ module.exports = {
       
       return chatObject;
     });
-  },
-  // will return the profile with the given userID
-  getProfile: function (profilesUserID) {
-    let usersProfile = dataStructure_Profiles.find(profile => profile.getUserID() === profilesUserID);
-
-    // the object, getting returned here, keeps just the Data, that is usefull for the client
-    return {
-      userID: usersProfile.getUserID(),
-      userName: usersProfile.getUserName(),
-      status: usersProfile.getStatus(),
-      contacts: usersProfile.getContacts(),
-      //TODO profilePic:,
-    };
   },
   // will create a new Message and add it to a specific chat
   addMessageToChat: (message) => {
@@ -227,6 +240,11 @@ class Profile {
   }
   setProfilePicFileName(newProfilePicFileName) {
     this.profilePicFileName = newProfilePicFileName;
+  }
+
+  // checks if the passwords match
+  checkPassword(passwordToCheck) {
+    return passwordToCheck === this.password;
   }
 }
 

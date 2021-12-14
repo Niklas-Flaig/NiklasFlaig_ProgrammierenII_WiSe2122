@@ -92,6 +92,18 @@ io.on('connection', function (socket) {
       }
     });
   });
+
+  // when a client disconnects
+  socket.on("disconnect", () => {
+    // 1. search for the disconnected socked.id in the currently connectedClients
+    for (let x = 0; x < connectedClients.length; x++) {
+      if (connectedClients[x].socketID === socket.id) {
+        // if the id is found remove its entry from the array
+        connectedClients.splice(x, 1);
+        break;
+      }
+    }
+  });
 });
 
 

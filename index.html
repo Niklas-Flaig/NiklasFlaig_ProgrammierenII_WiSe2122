@@ -7,10 +7,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   </head>
   <body>
-    <div id="loginScreen">
+    <div id="logInScreen">
       <h3>Log in!</h3>
-      <input type="text" id="logIn_userName" v-model="" placeholder="Enter Username..."/>
-      <input type="text" id="logIn_password" v-model="" placeholder="Enter Password..."/>
+      <input type="text" id="logIn_userName" v-model="userName" placeholder="Enter Username..."/>
+      <input type="text" id="logIn_password" v-model="password" placeholder="Enter Password..."/>
       <button id="submitLogin_Button" v-on:click="submitLogin()">Enter</button>
     </div>
     <div id="chat">

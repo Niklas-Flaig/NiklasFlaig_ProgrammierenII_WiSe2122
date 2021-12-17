@@ -2,9 +2,9 @@
 module.exports = {
   checkLogin: (clientData) => {
     // check if userName is part of a Profile in dataStructure_Profiles
-    if (dataStructure_Profiles.includes(profile => profile.getUserName() === clientData.userName)) {
+    const profile = dataStructure_Profiles.find(profile => profile.getUserName() === clientData.userName);
+    if (profile !== undefined) {
       // check if the given Password is correct
-      const profile = dataStructure_Profiles.find(profile => profile.getUserName() === clientData.userName);
       if (profile.checkPassword(clientData.password)) {
         // the password is correct
         // return the clients Profile

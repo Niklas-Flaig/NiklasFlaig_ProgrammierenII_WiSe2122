@@ -70,7 +70,7 @@ io.on('connection', function (socket) {
       // now, that the client has his profile, we can make a new note in this Server
       connectedClients.push({
         socketID: socket.id,
-        userID: clientsUserID
+        userID: clientProfile.userID
       });
     } catch (err) {
       // give the client an error

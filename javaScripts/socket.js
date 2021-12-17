@@ -5,6 +5,28 @@ let socket = io("http://127.0.0.1:80");
 socket.on(`serverReturningClientsProfile`, (profile) => {
   //? encapsulation?
   chatApp.clientProfile = profile;
+socket.on(`serverResponsesToLogIn`, (res) => {
+  // if thers no error
+  if (!res.error) {
+    chatApp.currentMode = "chat";
+
+
+    chatApp.clientProfile = res.profile;
+    // change the mode to chat
+    
+    // then get the Chats
+    chatApp.clientUserID = res.profile.userID;
+    requestChats();
+  } else {
+    switch (res.error) {
+      case 508:
+        console.log("error 508: invalid Password");
+        break;
+      case 509:
+        console.log("error 509: profile not found");
+        break;
+    }
+  }
 });
 
 // will write the incoming Chats into the clientChats array in the VUE

@@ -1,6 +1,9 @@
 let chatApp = new Vue({
   el: "#vue",
   data: {
+    // the Mode, were currently in
+    currentMode: "logIn",
+
     // LOGIN STUFF
     userName: "",
     password: "",
@@ -23,8 +26,8 @@ let chatApp = new Vue({
     submitLogin: function () {
       // emit an object with the userName and password
       socket.emit("clientTrysToLogIn", {
-        userName: logiInApp.userName,
-        password: logiInApp.password,
+        userName: this.userName,
+        password: this.password,
       });
     },
     switchChat: function (thisChatID) {

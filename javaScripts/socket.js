@@ -2,9 +2,6 @@
 let socket = io("http://127.0.0.1:80");
       
 // and listen for the incoming response
-socket.on(`serverReturningClientsProfile`, (profile) => {
-  //? encapsulation?
-  chatApp.clientProfile = profile;
 socket.on(`serverResponsesToLogIn`, (res) => {
   // if thers no error
   if (!res.error) {
@@ -55,17 +52,9 @@ socket.on("serverSendingNewMessage", (message) => chatApp.addMessageToChat(messa
 
 // request functions
 
-// will emit a request for the profile of the current client
-function requestOwnProfile() {
-  socket.emit("clientRequestingOwnProfile", chatApp.clientUserID);
-}
 // will send a request for all the chats the current user participates in
 function requestChats() {
   socket.emit("requestingChats", chatApp.clientUserID);
 }
 
-
-
-// setup the data
-requestOwnProfile();
 requestChats();

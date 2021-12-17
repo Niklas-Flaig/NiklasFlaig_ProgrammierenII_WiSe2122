@@ -278,9 +278,9 @@ let dataStructure_Chats = [];
 
 // create new Profiles
 dataStructure_Profiles = [
-  new Profile(01, "Niklas Flaig", 1234),
-  new Profile(02, "Peter Obama", 4321),
-  new Profile(03, "Katherine", 0000),
+  new Profile(01, "Niklas Flaig", "1234"),
+  new Profile(02, "Peter Obama", "4321"),
+  new Profile(03, "Katherine", "0000"),
 ];
 
 // add contacts to profiles

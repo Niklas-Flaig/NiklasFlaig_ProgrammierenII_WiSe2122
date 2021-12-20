@@ -49,12 +49,3 @@ socket.on(`requestedChatsForUser`, (incomingChats) => {
 
 // receive a new Message and add it to the related Chat
 socket.on("serverSendingNewMessage", (message) => chatApp.addMessageToChat(message));
-
-// request functions
-
-// will send a request for all the chats the current user participates in
-function requestChats() {
-  socket.emit("requestingChats", chatApp.clientUserID);
-}
-
-requestChats();

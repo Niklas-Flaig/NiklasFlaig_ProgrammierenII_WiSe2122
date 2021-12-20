@@ -24,7 +24,7 @@ socket.on(`serverResponsesToLogIn`, (res) => {
             return new TextMessage(
               message.senderID,
               message.content,
-              // message.time
+              message.time
             );
         }
       }),

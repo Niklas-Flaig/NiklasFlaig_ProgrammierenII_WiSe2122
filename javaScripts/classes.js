@@ -14,7 +14,7 @@ class Chat {
         newMessage = new TextMessage(
           message.clientID,
           message.content,
-          // message.time
+          message.time
         );
     }
     this.history.push(newMessage);
@@ -31,8 +31,9 @@ class Chat {
 }
 
 class Message {
-  constructor(senderID) {
+  constructor(senderID, time) {
     this.senderID = senderID;
+    this.time = time;
     this.senderName = this.constructSenderName(senderID);
     this.senderClass = this.constructSenderClass(senderID);
     this.textResponse = "";
@@ -61,8 +62,8 @@ class Message {
 }
 
 class TextMessage extends Message {
-  constructor(senderID, content) {
-    super(senderID);
+  constructor(senderID, content, time) {
+    super(senderID, time);
     this.content = content;
     this.textResponse = content;
   }

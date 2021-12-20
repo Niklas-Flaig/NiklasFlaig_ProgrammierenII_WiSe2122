@@ -98,11 +98,11 @@ class Message {
   constructTime() {
     let time = new Date();
     return {
-      year: time.getFullYear,
-      month: time.getMonth,
-      day: time.getDay,
-      hour: time.getHours,
-      minute: time.getMinutes
+      year: time.getFullYear(),
+      month: time.getMonth(),
+      day: time.getDay(),
+      hour: time.getHours(),
+      minute: time.getMinutes()
     };
   }
 

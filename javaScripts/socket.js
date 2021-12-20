@@ -5,14 +5,33 @@ let socket = io("http://127.0.0.1:80");
 socket.on(`serverResponsesToLogIn`, (res) => {
   // if thers no error
   if (!res.error) {
-    chatApp.currentMode = "chat";
-
-
-    chatApp.clientProfile = res.profile;
     // change the mode to chat
+    chatApp.currentMode = "chat";
+    
+    chatApp.clientProfile = res.profile;
+    
+    chatApp.clientUserID = res.profile.userID;
+    
     
     // then get the Chats
-    chatApp.clientUserID = res.profile.userID;
+    chatApp.clientChats = res.chats.map(chat => new Chat(
+      chat.chatID,
+      chat.users,
+      chat.history.map(message => { // create a new object of a Message-class child-class
+        // determine what type of message this is
+        switch (message.messageType) {
+          case "textMessage":
+            return new TextMessage(
+              message.senderID,
+              message.content,
+              // message.time
+            );
+        }
+      }),
+      chat.chatName,
+      chat.image
+    ));
+    
   } else {
     switch (res.error) {
       case 508:
@@ -23,25 +42,6 @@ socket.on(`serverResponsesToLogIn`, (res) => {
         break;
     }
   }
-
-  // work the chats in ...
-  chatApp.clientChats = res.chats.map(chat => new Chat(
-    chat.chatID,
-    chat.users,
-    chat.history.map(message => { // create a new object of a Message-class child-class
-      // determine what type of message this is
-      switch (message.messageType) {
-        case "textMessage":
-          return new TextMessage(
-            message.senderID,
-            message.content,
-            // message.time
-          );
-      }
-    }),
-    chat.chatName,
-    chat.image
-  ));
 });
 
 // receive a new Message and add it to the related Chat

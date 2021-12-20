@@ -77,7 +77,7 @@ io.on('connection', function (socket) {
       // give the client an error
       socket.emit("serverResponsesToLogIn", {error: err});
     }
-});
+  });
 
   //listen for a new Message and add it to the specific chats history
   socket.on("clientSendingNewMessage", (message) => {
@@ -98,6 +98,8 @@ io.on('connection', function (socket) {
         }
       }
     });
+
+    dataManagement.saveState();
   });
 
   // when a client disconnects

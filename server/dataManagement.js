@@ -326,5 +326,3 @@ dataStructure_Profiles[1].addChat(03);
 
 dataStructure_Profiles[2].addChat(02);
 dataStructure_Profiles[2].addChat(03);
-
-let loggedInProfileID = 01;

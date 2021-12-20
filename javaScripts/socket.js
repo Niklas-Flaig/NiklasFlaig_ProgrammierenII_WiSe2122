@@ -13,7 +13,6 @@ socket.on(`serverResponsesToLogIn`, (res) => {
     
     // then get the Chats
     chatApp.clientUserID = res.profile.userID;
-    requestChats();
   } else {
     switch (res.error) {
       case 508:
@@ -24,6 +23,25 @@ socket.on(`serverResponsesToLogIn`, (res) => {
         break;
     }
   }
+
+  // work the chats in ...
+  chatApp.clientChats = res.chats.map(chat => new Chat(
+    chat.chatID,
+    chat.users,
+    chat.history.map(message => { // create a new object of a Message-class child-class
+      // determine what type of message this is
+      switch (message.messageType) {
+        case "textMessage":
+          return new TextMessage(
+            message.senderID,
+            message.content,
+            // message.time
+          );
+      }
+    }),
+    chat.chatName,
+    chat.image
+  ));
 });
 
 // will write the incoming Chats into the clientChats array in the VUE

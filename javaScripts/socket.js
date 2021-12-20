@@ -44,26 +44,5 @@ socket.on(`serverResponsesToLogIn`, (res) => {
   ));
 });
 
-// will write the incoming Chats into the clientChats array in the VUE
-socket.on(`requestedChatsForUser`, (incomingChats) => {
-  chatApp.clientChats = incomingChats.map(chat => new Chat(
-    chat.chatID,
-    chat.users,
-    chat.history.map(message => { // create a new object of a Message-class child-class
-      // determine what type of message this is
-      switch (message.messageType) {
-        case "textMessage":
-          return new TextMessage(
-            message.senderID,
-            message.content,
-            // message.time
-          );
-      }
-    }),
-    chat.chatName,
-    chat.image
-  ));
-});
-
 // receive a new Message and add it to the related Chat
 socket.on("serverSendingNewMessage", (message) => chatApp.addMessageToChat(message));

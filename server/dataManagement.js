@@ -1,8 +1,8 @@
 // makes the functions available in form of a module (https://stackoverflow.com/questions/5797852/in-node-js-how-do-i-include-functions-from-my-other-files)
 module.exports = {
   checkLogin: (clientData) => {
-    // check if userName is part of a Profile in dataStructure_Profiles
-    const profile = dataStructure_Profiles.find(profile => profile.getUserName() === clientData.userName);
+    // check if userName is part of a Profile in dataStructure.profiles
+    const profile = dataStructure.profiles.find(profile => profile.getUserName() === clientData.userName);
     if (profile !== undefined) {
       // check if the given Password is correct
       if (profile.checkPassword(clientData.password)) {
@@ -29,7 +29,7 @@ module.exports = {
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (participantsUserID) {
     // filters the chats with the users ID (participantsUserID) as a participant
-    let relevantChats = dataStructure_Chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
+    let relevantChats = dataStructure.chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
     
     // create array of Objects that can be used on client side to create new Chat instances
     return relevantChats.map(chat => {
@@ -49,7 +49,7 @@ module.exports = {
         case "pToPchat":
           // take the other users name, saved to the profile of the requesters Profile
           let otherUsersID = chat.getUsers().find(userID => userID !== participantsUserID);
-          chatObject.chatName = dataStructure_Profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(otherUsersID);
+          chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(otherUsersID);
           break;
       }
       
@@ -66,12 +66,19 @@ module.exports = {
         break;
     }
     // 2. add this new Message to the chat with the given chatID
-    dataStructure_Chats.find(chat => chat.getChatID() === message.chatID).addMessageToHistory(newMessage);
+    dataStructure.chats.find(chat => chat.getChatID() === message.chatID).addMessageToHistory(newMessage);
   },
   // will return an array of all users in the Chat with the specific chatID
   getUsersInChat: (chatID) => {
-    return dataStructure_Chats.find(chat => chat.getChatID() === chatID).getUsers();
-  }
+    return dataStructure.chats.find(chat => chat.getChatID() === chatID).getUsers();
+  },
+  // save the chat-data to a file
+  saveState: () => {
+    fs.writeFile('data.json', {}, function (err) {
+      if (err) return console.log(err);
+      console.log('Hello World > helloworld.txt');
+    });
+  },
 };
 
 
@@ -271,13 +278,12 @@ class Contact {
 
 // temporarily test-data will be stored in this file, until I learn about a better way
 // the data structure to save all data, used in the Project
-let dataStructure_Profiles = [];
-let dataStructure_Chats = [];
+let dataStructure = {};
 
 // filling the structure with testData
 
 // create new Profiles
-dataStructure_Profiles = [
+dataStructure.profiles = [
   new Profile(01, "Niklas Flaig", "1234"),
   new Profile(02, "Peter Obama", "4321"),
   new Profile(03, "Katherine", "0000"),
@@ -285,44 +291,44 @@ dataStructure_Profiles = [
 
 // add contacts to profiles
 //? sinnvoller den Contact in der methode zu kreieren?
-dataStructure_Profiles[0].addContact(new Contact(02, "Pete"));
-dataStructure_Profiles[0].addContact(new Contact(03, "Kat"));
+dataStructure.profiles[0].addContact(new Contact(02, "Pete"));
+dataStructure.profiles[0].addContact(new Contact(03, "Kat"));
 
-dataStructure_Profiles[1].addContact(new Contact(01, "Nikl"));
-dataStructure_Profiles[1].addContact(new Contact(03, "Kat"));
+dataStructure.profiles[1].addContact(new Contact(01, "Nikl"));
+dataStructure.profiles[1].addContact(new Contact(03, "Kat"));
 
-dataStructure_Profiles[2].addContact(new Contact(01, "Niklas"));
-dataStructure_Profiles[2].addContact(new Contact(02, "Peter O."));
+dataStructure.profiles[2].addContact(new Contact(01, "Niklas"));
+dataStructure.profiles[2].addContact(new Contact(02, "Peter O."));
 
 // create new chats
-dataStructure_Chats = [
+dataStructure.chats = [
   new PToPChat(01, [01, 02]),
   new PToPChat(02, [01, 03]),
   new GroupChat(03, [01, 02, 03], "PizzaGroup"),
 ];
 
-dataStructure_Chats[0].addMessageToHistory(new TextMessage(01, "Pizza?"));
-dataStructure_Chats[0].addMessageToHistory(new TextMessage(02, "Ok"));
-dataStructure_Chats[0].addMessageToHistory(new TextMessage(01, "C u 10!"));
+dataStructure.chats[0].addMessageToHistory(new TextMessage(01, "Pizza?"));
+dataStructure.chats[0].addMessageToHistory(new TextMessage(02, "Ok"));
+dataStructure.chats[0].addMessageToHistory(new TextMessage(01, "C u 10!"));
 
 
-dataStructure_Chats[1].addMessageToHistory(new TextMessage(03, "Hello?"));
-dataStructure_Chats[1].addMessageToHistory(new TextMessage(01, "New Phone hu dis?"));
+dataStructure.chats[1].addMessageToHistory(new TextMessage(03, "Hello?"));
+dataStructure.chats[1].addMessageToHistory(new TextMessage(01, "New Phone hu dis?"));
 
 
-dataStructure_Chats[2].addMessageToHistory(new TextMessage(03, "Hi!"));
-dataStructure_Chats[2].addMessageToHistory(new TextMessage(01, "Nice Group!"));
-dataStructure_Chats[2].addMessageToHistory(new TextMessage(02, "Why spam?"));
+dataStructure.chats[2].addMessageToHistory(new TextMessage(03, "Hi!"));
+dataStructure.chats[2].addMessageToHistory(new TextMessage(01, "Nice Group!"));
+dataStructure.chats[2].addMessageToHistory(new TextMessage(02, "Why spam?"));
 
 
 // add chats to Profiles 
 // mainly so we don't have to search the chats with the userID in it
-dataStructure_Profiles[0].addChat(01);
-dataStructure_Profiles[0].addChat(02);
-dataStructure_Profiles[0].addChat(03);
+dataStructure.profiles[0].addChat(01);
+dataStructure.profiles[0].addChat(02);
+dataStructure.profiles[0].addChat(03);
 
-dataStructure_Profiles[1].addChat(01);
-dataStructure_Profiles[1].addChat(03);
+dataStructure.profiles[1].addChat(01);
+dataStructure.profiles[1].addChat(03);
 
-dataStructure_Profiles[2].addChat(02);
-dataStructure_Profiles[2].addChat(03);
+dataStructure.profiles[2].addChat(02);
+dataStructure.profiles[2].addChat(03);

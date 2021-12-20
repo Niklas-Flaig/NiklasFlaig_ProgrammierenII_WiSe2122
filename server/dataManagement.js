@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 // makes the functions available in form of a module (https://stackoverflow.com/questions/5797852/in-node-js-how-do-i-include-functions-from-my-other-files)
 module.exports = {
   checkLogin: (clientData) => {
@@ -74,9 +76,9 @@ module.exports = {
   },
   // save the chat-data to a file
   saveState: () => {
-    fs.writeFile('data.json', {}, function (err) {
+    fs.writeFile(`${__dirname}/data.json`, JSON.stringify(dataStructure), function (err) {
       if (err) return console.log(err);
-      console.log('Hello World > helloworld.txt');
+      console.log("saved Data!");
     });
   },
 };

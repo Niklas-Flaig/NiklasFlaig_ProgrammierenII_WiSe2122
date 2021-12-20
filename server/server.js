@@ -65,6 +65,7 @@ io.on('connection', function (socket) {
       socket.emit("serverResponsesToLogIn", {
         error: false,
         profile: clientProfile,
+        chats: dataManagement.getChatsWithUser(clientProfile.userID)
       });
 
       // now, that the client has his profile, we can make a new note in this Server
@@ -77,12 +78,6 @@ io.on('connection', function (socket) {
       socket.emit("serverResponsesToLogIn", {error: err});
     }
 });
-
-  // listen for a request of all chats a user participates in
-  socket.on("requestingChats", (userID) => {
-    // get and emit the requested chats
-    socket.emit(`requestedChatsForUser`, dataManagement.getChatsWithUser(userID));
-  });
 
   //listen for a new Message and add it to the specific chats history
   socket.on("clientSendingNewMessage", (message) => {

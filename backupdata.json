@@ -1,0 +1,118 @@
+{
+  "profiles": [
+    {
+      "userID": 1,
+      "userName": "Niklas Flaig",
+      "password": "1234",
+      "status": "",
+      "contacts": [
+        {
+          "userID": 2,
+          "savedName": "Pete"
+        }, {
+          "userID": 3,
+          "savedName": "Kat"
+        }
+      ],
+      "chatIDs": [1, 2, 3],
+      "profilePicFileName": ""
+    }, {
+      "userID": 2,
+      "userName": "Peter Obama",
+      "password": "4321",
+      "status": "",
+      "contacts": [
+        {
+          "userID": 1,
+          "savedName": "Nikl"
+        }, {
+          "userID": 3,
+          "savedName": "Kat"
+        }
+      ],
+      "chatIDs": [1, 3],
+      "profilePicFileName": ""
+    }, {
+      "userID": 3,
+      "userName": "Katherine",
+      "password": "0000",
+      "status": "",
+      "contacts": [
+        {
+          "userID": 1,
+          "savedName": "Niklas"
+        }, {
+          "userID": 2,
+          "savedName": "Peter O."
+        }
+      ],
+      "chatIDs": [2, 3],
+      "profilePicFileName": ""
+    }
+  ],
+  "chats": [
+    {
+      "chatID": 1,
+      "users": [1, 2],
+      "history": [
+        {
+          "senderID": 1,
+          "content": "Pizza?",
+          "time": {},
+          "messageType": "textMessage"
+        }, {
+          "senderID": 2,
+          "content": "Ok",
+          "time": {},
+          "messageType": "textMessage"
+        }, {
+          "senderID": 1,
+          "content": "C u 10!",
+          "time": {},
+          "messageType": "textMessage"
+        }
+      ],
+      "chatType": "pToPchat"
+    }, {
+      "chatID": 2,
+      "users": [1, 3],
+      "history": [
+        {
+          "senderID": 3,
+          "content": "Hello?",
+          "time": {},
+          "messageType": "textMessage"
+        }, {
+          "senderID": 1,
+          "content": "New Phone hu dis?",
+          "time": {},
+          "messageType": "textMessage"
+        }
+      ],
+      "chatType": "pToPchat"
+    }, {
+      "chatID": 3,
+      "users": [1, 2, 3],
+      "history": [
+        {
+          "senderID": 3,
+          "content": "Hi!",
+          "time": {},
+          "messageType": "textMessage"
+        }, {
+          "senderID": 1,
+          "content": "Nice Group!",
+          "time": {},
+          "messageType": "textMessage"
+        }, {
+          "senderID": 2,
+          "content": "Why spam?",
+          "time": {},
+          "messageType": "textMessage"
+        }
+      ],
+      "chatType": "groupChat",
+      "groupName": "PizzaGroup"
+    }
+  ]
+}

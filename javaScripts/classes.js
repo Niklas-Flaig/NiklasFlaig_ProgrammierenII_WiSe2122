@@ -54,6 +54,7 @@ class Message {
       return "sendtBy_NotYou";
     }
   }
+  getTimeToDisplay() {return `${this.time.hour}:${this.time.minute}`;}
 
   getSenderName() {return this.senderName;}
   getSenderClass() {return this.senderClass;}

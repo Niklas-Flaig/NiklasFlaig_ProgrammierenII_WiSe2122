@@ -37,6 +37,7 @@
             <div v-for="message in chatHistory" v-bind:class=message.getSenderClass()>
               <span class="sender">{{ message.getSenderName() }}</span>
               <span class="content">{{ message.getContent() }}</span>
+              <div class="time">{{ message.getTimeToDisplay() }}</div>
             </div>
           </div>
           <div id="chatInput">

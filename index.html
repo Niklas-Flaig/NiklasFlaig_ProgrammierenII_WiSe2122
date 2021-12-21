@@ -30,10 +30,10 @@
         </div>
 
 
-        <!-- single person Chat -->
-        <!-- will get filled with old messages, username etc. when a chat gets selected -->
+        <!-- the in Chat Surface with messages -->
         <div id="inChatSurface" class="surface">
           <div id="chatHistory">
+            <!-- creation of the messages -->
             <div v-for="message in chatHistory" v-bind:class=message.getSenderClass()>
               <span class="sender">{{ message.getSenderName() }}</span>
               <span class="content">{{ message.getContent() }}</span>

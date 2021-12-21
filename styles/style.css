@@ -16,7 +16,7 @@
 
 #chatSelectSurface {
  height: 100%;
- width: 14,44%;
+ width: 10%;
 }
 #chatSelectSurface .chatTo {
   border: solid 1px #E8E8E8;
@@ -32,22 +32,26 @@ h4.userName {
 
 
 
-#chatHistory .sendtBy_You {
+#chatHistory div {
   display: flex;
-  justify-content: right;
+  flex-direction: column;
+  padding-bottom: 10px;
 }
-#chatHistory .sendtBy_You span {
-  background-color: #363636;
+#chatHistory div div {
+  padding-bottom: 0px;
 }
-#chatHistory .sendtBy_NotYou {
-  display: flex;
-  justify-content: left;
+#chatHistory div .sender {
+  font-weight: bold;
 }
-#chatHistory .sendtBy_NotYou span {
-  background-color: #363636;
+#chatHistory div .content {
+  font-size: 17px;
 }
-
-
+#chatHistory div .time {
+  font-size: 10px;
+}
+#chatHistory .sendtBy_You div {
+  align-self: flex-end;
+}
 
 .textMessage {
   color: #E8E8E8;

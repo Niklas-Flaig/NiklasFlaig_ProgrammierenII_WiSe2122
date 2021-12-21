@@ -86,14 +86,15 @@ io.on('connection', function (socket) {
     message.clientID = connectedClients.find(client => client.socketID === socket.id).userID;
 
     // 2. create a new Message and add it to the related chat
-    dataManagement.addMessageToChat(message);
+    // 2. in the same step get the message back, but updated (with a timeStamp e.g.)
+    let resMessage = dataManagement.addMessageToChat(message);
 
     // 3. send an update to all online chatMembers
     dataManagement.getUsersInChat(message.chatID).forEach(chatMemberID => {
       // if the clients userID is found among the connectedClients, emit this, to add this new message to his history
       for (let x = 0; x < connectedClients.length; x++) {
         if (connectedClients[x].userID === chatMemberID) {
-          io.to(connectedClients[x].socketID).emit("serverSendingNewMessage", message);
+          io.to(connectedClients[x].socketID).emit("serverSendingNewMessage", resMessage);
           break;
         }
       }

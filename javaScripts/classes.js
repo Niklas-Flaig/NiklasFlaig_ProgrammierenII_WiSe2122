@@ -12,7 +12,7 @@ class Chat {
     switch (message.messageType) {
       case "textMessage":
         newMessage = new TextMessage(
-          message.clientID,
+          message.senderID,
           message.content,
           message.time
         );

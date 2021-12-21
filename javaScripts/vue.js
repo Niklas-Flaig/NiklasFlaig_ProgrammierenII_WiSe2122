@@ -45,6 +45,12 @@ let chatApp = new Vue({
     addMessageToChat: function (message) {
       // addMessage to the chat wich chatID matches the message.chatID
       this.clientChats.find(chat => chat.getChatID() === message.chatID).addMessage(message);
+    },
+    submitNiklasFlaigLogin: function () { //! temporary
+      socket.emit("clientTrysToLogIn", {
+        userName: "Niklas Flaig",
+        password: "1234",
+      });
     }
   }
 });

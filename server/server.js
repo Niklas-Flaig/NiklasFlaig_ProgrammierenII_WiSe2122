@@ -79,6 +79,28 @@ io.on('connection', function (socket) {
     }
   });
 
+  socket.on("clientTrysToRegister", (clientData) => {
+    try {
+      // try to create a new account
+      const clientProfile = dataManagement.createNewAccount(clientData);
+
+      socket.emit("serverResponsesToRegister", {
+        error: false,
+        profile: clientProfile,
+        chats: dataManagement.getChatsWithUser(clientProfile.userID)
+      });
+
+      // add this the new client connection to connectedClients
+      connectedClients.push({
+        socketID: socket.id,
+        userID: clientProfile.userID
+      });
+    } catch (err) {
+      // give the client an error
+      socket.emit("serverResponsesToRegister", {error: err});
+    }
+  });
+
   //listen for a new Message and add it to the specific chats history
   socket.on("clientSendingNewMessage", (message) => {
     // 1. determine the sender via the socketID

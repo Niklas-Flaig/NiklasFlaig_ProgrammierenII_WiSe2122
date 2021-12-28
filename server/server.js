@@ -101,6 +101,12 @@ io.on('connection', function (socket) {
     }
   });
 
+  // listen for a client creating a new chat
+  socket.on("clientCreatingNewChat", (newChat) => {
+    // add the senderClient to the chat
+    dataManagement.createNewChat(newChat);
+  });
+
   //listen for a new Message and add it to the specific chats history
   socket.on("clientSendingNewMessage", (message) => {
     // 1. determine the sender via the socketID

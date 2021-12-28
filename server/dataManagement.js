@@ -186,8 +186,8 @@ class ImageMessage extends FileMessage {
 
 // chat classes
 class Chat {
-  constructor(chatID, users) {
-    this.chatID = chatID;
+  constructor(users) {
+    this.chatID = crypto.randomUUID();
     this.users = users;
     this.history = [];
     this.image;
@@ -214,8 +214,8 @@ class Chat {
 }
 
 class GroupChat extends Chat {
-  constructor(chatID, users, groupName) {
-    super(chatID, users);
+  constructor(users, groupName) {
+    super(users);
     this.groupName = groupName;
     this.groupPicPath;
     this.chatType = "groupChat";
@@ -243,8 +243,8 @@ class GroupChat extends Chat {
 }
 
 class PToPChat extends Chat {
-  constructor(chatID, users) {
-    super(chatID, users);
+  constructor(users) {
+    super(users);
     this.chatType = "pToPchat";
   }
 }
@@ -337,9 +337,9 @@ dataStructure.profiles[2].addContact(new Contact(dataStructure.profiles[1].getUs
 
 // create new chats
 dataStructure.chats = [
-  new PToPChat(01, [dataStructure.profiles[0].getUserID(), dataStructure.profiles[1].getUserID()]),
-  new PToPChat(02, [dataStructure.profiles[0].getUserID(), dataStructure.profiles[2].getUserID()]),
-  new GroupChat(03, [dataStructure.profiles[0].getUserID(), dataStructure.profiles[1].getUserID(), dataStructure.profiles[2].getUserID()], "PizzaGroup"),
+  new PToPChat([dataStructure.profiles[0].getUserID(), dataStructure.profiles[1].getUserID()]),
+  new PToPChat([dataStructure.profiles[0].getUserID(), dataStructure.profiles[2].getUserID()]),
+  new GroupChat([dataStructure.profiles[0].getUserID(), dataStructure.profiles[1].getUserID(), dataStructure.profiles[2].getUserID()], "PizzaGroup"),
 ];
 
 dataStructure.chats[0].addMessageToHistory(new TextMessage(dataStructure.profiles[0].getUserID(), "Pizza?"));
@@ -358,12 +358,12 @@ dataStructure.chats[2].addMessageToHistory(new TextMessage(dataStructure.profile
 
 // add chats to Profiles 
 // mainly so we don't have to search the chats with the userID in it
-dataStructure.profiles[0].addChat(01);
-dataStructure.profiles[0].addChat(02);
-dataStructure.profiles[0].addChat(03);
+dataStructure.profiles[0].addChat(dataStructure.chats[0].getChatID());
+dataStructure.profiles[0].addChat(dataStructure.chats[1].getChatID());
+dataStructure.profiles[0].addChat(dataStructure.chats[2].getChatID());
 
-dataStructure.profiles[1].addChat(01);
-dataStructure.profiles[1].addChat(03);
+dataStructure.profiles[1].addChat(dataStructure.chats[0].getChatID());
+dataStructure.profiles[1].addChat(dataStructure.chats[2].getChatID());
 
-dataStructure.profiles[2].addChat(02);
-dataStructure.profiles[2].addChat(03);
+dataStructure.profiles[2].addChat(dataStructure.chats[1].getChatID());
+dataStructure.profiles[2].addChat(dataStructure.chats[2].getChatID());

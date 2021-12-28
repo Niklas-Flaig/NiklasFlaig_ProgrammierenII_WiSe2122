@@ -41,6 +41,37 @@ module.exports = {
       return createResponse.forProfile(profile);
     }
   },
+  createNewChat: (newChat, creatorID) => {
+    // 1. get the creators Profile (this is a refference)
+    const creatorProfile = dataStructure.profiles.find(profile => profile.getUserID() === creatorID);
+
+    switch (newChat.chatType) {
+      case "pToPChat":
+        // 2. search for the other Persons profile is already a contact
+        const otherPersonContact = creatorProfile.getContact(newChat.userName);
+        
+        // 3. check if the contact doesn't exist
+        if (otherPersonContact === undefined) {
+          // 3.1. search the other other persons profile in dataStructure.profiles (also refference)
+          const otherPersonsProfile = dataStructure.profiles.find(profile => profile.getUserName() === newChat.userName);
+
+          // 3.2. check if the otherPersonsProfile exists
+          if (otherPersonsProfile !== undefined) {
+            // 4. add a new Contact to the creators Profile
+            creatorProfile.addContact(otherPersonsProfile.getUserID(), otherPersonsProfile.getUserName());
+            // 5. create a new PToPChat
+            dataStructure.chats.push(new PToPChat([creatorID, otherPersonsProfile.getUserID()]));
+          } else {
+            err = 521; // the profile the client wants in the chat doesn't exist
+            throw err;
+          }
+        }
+        break;
+      case "groupChat":
+        //TODO
+        break;
+    }
+  },
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (participantsUserID) {
     // filters the chats with the users ID (participantsUserID) as a participant
@@ -268,7 +299,8 @@ class Profile {
   getUserID() {return this.userID;}
   getUserName() {return this.userName;}
   getStatus() {return this.status;}
-  getContacts() {return this.contacts;}
+  getContacts() {return this.contacts;}//TODO kapselung
+  getContact(contactName) {return this.contacts.find(contact => contact.getSavedName() === contactName);}
   getProfilePic() {return this.profilePicFileName;} //TODO find a way to implement a picture in here...
 
   setStatus(newStatus) {

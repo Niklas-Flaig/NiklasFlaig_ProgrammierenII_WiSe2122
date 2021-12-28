@@ -40,6 +40,9 @@ socket.on(`serverResponsesToLogIn`, (res) => {
       case 509:
         console.log("error 509: profile not found");
         break;
+      case 510:
+        console.log("error 5100: Profile already exists");
+        break;
     }
   }
 });

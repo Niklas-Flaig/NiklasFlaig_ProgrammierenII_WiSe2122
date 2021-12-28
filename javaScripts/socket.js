@@ -6,7 +6,7 @@ socket.on(`serverResponsesToLogIn`, (res) => {
   // if thers no error
   if (!res.error) {
     // change the mode to chat
-    chatApp.currentMode = "chat";
+    chatApp.changeMode("chat");
     
     chatApp.clientProfile = res.profile;
     

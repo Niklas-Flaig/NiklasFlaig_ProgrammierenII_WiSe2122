@@ -7,16 +7,9 @@ module.exports = {
     const profile = dataStructure.profiles.find(profile => profile.getUserName() === clientData.userName);
     if (profile !== undefined) {
       // check if the given Password is correct
-      if (profile.checkPassword(clientData.password)) {
-        // the password is correct
-        // return the clients Profile
-        return {
-          userID: profile.getUserID(),
-          userName: profile.getUserName(),
-          status: profile.getStatus(),
-          contacts: profile.getContacts(),
-          //TODO profilePic:,
-        };
+      if (profile.checkPassword(clientData.password)) { // the password is correct
+        // create a profile object for the client
+        return createResponse.forProfile(profile);
       } else {
         err = 508; // invalid Password
         throw err;
@@ -39,6 +32,9 @@ module.exports = {
         clientData.userName,
         clientData.password
       ));
+      
+      // 4. create a profile object for the client
+      return createProfileResponse(profile);
     }
   },
   // will return all Chats, in wich a User participates
@@ -106,6 +102,15 @@ module.exports = {
 };
 
 const createResponse = {
+  forProfile: (profile) => { // expects a instance of Profile
+    return {
+      userID: profile.getUserID(),
+      userName: profile.getUserName(),
+      status: profile.getStatus(),
+      contacts: profile.getContacts(),
+      //TODO profilePic:,
+    };
+  }
 };
 
 // also need the classes to be able to create instances of them 

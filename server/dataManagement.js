@@ -28,6 +28,19 @@ module.exports = {
     }
 
   },
+  createNewAccount: (clientData) => {
+    // 1. check if the name is already in use
+    if (dataStructure.profiles.includes(profile => profile.userName === clientData.userName)) {
+      err = 510; // profile already exists
+      throw err;
+    } else {
+      // 2. add a new Profile to the dataStructure.profiles array
+      dataStructure.profiles.push(new Profile(
+        clientData.userName,
+        clientData.password
+      ));
+    }
+  },
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (participantsUserID) {
     // filters the chats with the users ID (participantsUserID) as a participant

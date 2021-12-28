@@ -274,8 +274,8 @@ class Profile {
   setStatus(newStatus) {
     this.status = newStatus;
   }
-  addContact(newContact) {
-    this.contacts.push(newContact);
+  addContact(userID, contactName) {
+    this.contacts.push(new Contact(userID, contactName));
   }
   addChat(newChatID) {
     this.chatIDs.push(newChatID);
@@ -326,14 +326,14 @@ dataStructure.profiles = [
 
 // add contacts to profiles
 //? sinnvoller den Contact in der methode zu kreieren?
-dataStructure.profiles[0].addContact(new Contact(dataStructure.profiles[1].getUserID(), "Pete"));
-dataStructure.profiles[0].addContact(new Contact(dataStructure.profiles[2].getUserID(), "Kat"));
+dataStructure.profiles[0].addContact(dataStructure.profiles[1].getUserID(), "Pete");
+dataStructure.profiles[0].addContact(dataStructure.profiles[2].getUserID(), "Kat");
 
-dataStructure.profiles[1].addContact(new Contact(dataStructure.profiles[0].getUserID(), "Nikl"));
-dataStructure.profiles[1].addContact(new Contact(dataStructure.profiles[2].getUserID(), "Kat"));
+dataStructure.profiles[1].addContact(dataStructure.profiles[0].getUserID(), "Nikl");
+dataStructure.profiles[1].addContact(dataStructure.profiles[2].getUserID(), "Kat");
 
-dataStructure.profiles[2].addContact(new Contact(dataStructure.profiles[0].getUserID(), "Niklas"));
-dataStructure.profiles[2].addContact(new Contact(dataStructure.profiles[1].getUserID(), "Peter O."));
+dataStructure.profiles[2].addContact(dataStructure.profiles[0].getUserID(), "Niklas");
+dataStructure.profiles[2].addContact(dataStructure.profiles[1].getUserID(), "Peter O.");
 
 // create new chats
 dataStructure.chats = [

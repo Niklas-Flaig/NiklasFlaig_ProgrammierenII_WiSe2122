@@ -1,19 +1,16 @@
 // Connction to the WebSocket-Server:
 let socket = io("http://127.0.0.1:80");
       
-// and listen for the incoming response
-socket.on(`serverResponsesToLogIn`, (res) => {
+// and listen for the incoming responses
+socket.on(`serverReturningProfile`, (res) => {
   // if thers no error
   if (!res.error) {
     // change the mode to chat
     chatApp.changeMode("chat");
     
     chatApp.clientProfile = res.profile;
-    
     chatApp.clientUserID = res.profile.userID;
-    
-    
-    // then get the Chats
+    // create the Chat-Objects
     chatApp.clientChats = res.chats.map(chat => new Chat(
       chat.chatID,
       chat.users,

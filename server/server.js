@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
       const clientProfile = dataManagement.checkLogin(clientData);
 
       // return this response to the client
-      socket.emit("serverResponsesToLogIn", {
+      socket.emit("serverReturningProfile", {
         error: false,
         profile: clientProfile,
         chats: dataManagement.getChatsWithUser(clientProfile.userID)
@@ -75,7 +75,7 @@ io.on('connection', function (socket) {
       });
     } catch (err) {
       // give the client an error
-      socket.emit("serverResponsesToLogIn", {error: err});
+      socket.emit("serverReturningProfile", {error: err});
     }
   });
 
@@ -84,7 +84,7 @@ io.on('connection', function (socket) {
       // try to create a new account
       const clientProfile = dataManagement.createNewAccount(clientData);
 
-      socket.emit("serverResponsesToRegister", {
+      socket.emit("serverReturningProfile", {
         error: false,
         profile: clientProfile,
         chats: dataManagement.getChatsWithUser(clientProfile.userID)
@@ -97,7 +97,7 @@ io.on('connection', function (socket) {
       });
     } catch (err) {
       // give the client an error
-      socket.emit("serverResponsesToRegister", {error: err});
+      socket.emit("serverReturningProfile", {error: err});
     }
   });
 

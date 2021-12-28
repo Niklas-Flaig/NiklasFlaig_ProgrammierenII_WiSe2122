@@ -4,9 +4,10 @@ let chatApp = new Vue({
     // the Mode, were currently in
     currentMode: "logIn",
 
-    // LOGIN STUFF
+    // LOGIN / Register STUFF
     userName: "",
     password: "",
+    repeatPassword: "",
 
 
     // the clients userID
@@ -46,6 +47,10 @@ let chatApp = new Vue({
       // addMessage to the chat wich chatID matches the message.chatID
       this.clientChats.find(chat => chat.getChatID() === message.chatID).addMessage(message);
     },
+    changeMode: function (newMode) {
+      this.currentMode = newMode;
+    },
+
     submitNiklasFlaigLogin: function () { //! temporary
       socket.emit("clientTrysToLogIn", {
         userName: "Niklas Flaig",

@@ -54,7 +54,7 @@
             </div>
           </div>
           <div id="chatInput">
-            <input type="text" id="textMessage_TextInput" v-model="newMessageText" placeholder="Enter message...">
+            <input type="text" id="textMessage_TextInput" v-model="newMessageText" v-on:keyup.enter="sendMessage" placeholder="Enter message...">
             <button id="sendMessage_Button" v-on:click="sendMessage()">send</button>
           </div>
         </div>

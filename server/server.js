@@ -106,18 +106,26 @@ io.on('connection', function (socket) {
     // 1. determine the creators ID
     const creatorID = connectedClients.find(client => client.socketID === socket.id).userID;
 
-    // 2. add the senderClient to the chat
-    // and get the chats chatID
-    const chat = dataManagement.createNewChat(newChat, creatorID);
+    try {
+      // 2. add the senderClient to the chat
+      // and get the chats chatID
+      const chat = dataManagement.createNewChat(newChat, creatorID);
 
-    // 3. create a response message with the newly created chat
-    dataManagement.getUsersInChat(chatID).forEach(chatMemberID => {
-      // determin the chatMembers socketID
-      const thisClientsSocketID = connectedClients.find(client => client.userID === chatMemberID).socketID;
+      // 3. create a response message with the newly created chat
+      dataManagement.getUsersInChat(chatID).forEach(chatMemberID => {
+        // determin the chatMembers socketID
+        const thisClientsSocketID = connectedClients.find(client => client.userID === chatMemberID).socketID;
 
-      // if the clients userID is found among the connectedClients, emit this, to add the new chat to his viewModel
-      if (thisClientsSocketID !== undefined) io.to(thisClientsSocketID).emit("serverSendingNewChat", chat);
-    });
+        // if the clients userID is found among the connectedClients, emit this, to add the new chat to his viewModel
+        if (thisClientsSocketID !== undefined) io.to(thisClientsSocketID).emit("serverSendingNewChat", {
+          error: false,
+          chat: chat
+        });
+      });
+    } catch (err) {
+      // give the creator-client an error
+      socket.emit("serverSendingNewChat", {error: err});
+    }
   });
 
   //listen for a new Message and add it to the specific chats history

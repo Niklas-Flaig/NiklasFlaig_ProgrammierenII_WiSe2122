@@ -50,7 +50,6 @@ let chatApp = new Vue({
     },
     createChat: function (chatType) {
       let newChat = {
-        creator: chatApp.clientProfile.userName,
         chatType: chatType,
         users: []
       };

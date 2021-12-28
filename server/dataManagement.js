@@ -37,7 +37,7 @@ module.exports = {
       const profile = dataStructure.profiles.find(profile => profile.getUserName() === clientData.userName);
       
       // 4. create a profile object for the client
-      return createProfileResponse(profile);
+      return createResponse.forProfile(profile);
     }
   },
   // will return all Chats, in wich a User participates

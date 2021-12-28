@@ -105,6 +105,8 @@ module.exports = {
   },
 };
 
+const createResponse = {
+};
 
 // also need the classes to be able to create instances of them 
 /* In this file all the classes used in the Project will be defined */

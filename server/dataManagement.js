@@ -41,36 +41,47 @@ module.exports = {
       return createResponse.forProfile(profile);
     }
   },
-  createNewChat: (newChat, creatorID) => {
+  createNewChat: (newChatData, creatorID) => {
     // 1. get the creators Profile (this is a refference)
     const creatorProfile = dataStructure.profiles.find(profile => profile.getUserID() === creatorID);
 
-    switch (newChat.chatType) {
+    switch (newChatData.chatType) {
       case "pToPChat":
         // 2. search for the other Persons profile is already a contact
-        const otherPersonContact = creatorProfile.getContact(newChat.userName);
+        let otherPersonContact = creatorProfile.getContact(newChatData.userName);
         
         // 3. check if the contact doesn't exist
         if (otherPersonContact === undefined) {
           // 3.1. search the other other persons profile in dataStructure.profiles (also refference)
-          const otherPersonsProfile = dataStructure.profiles.find(profile => profile.getUserName() === newChat.userName);
+          const otherPersonsProfile = dataStructure.profiles.find(profile => profile.getUserName() === newChatData.userName);
 
           // 3.2. check if the otherPersonsProfile exists
           if (otherPersonsProfile !== undefined) {
-            // 4. add a new Contact to the creators Profile
+            // 3.3. add a new Contact to the creators Profile
             creatorProfile.addContact(otherPersonsProfile.getUserID(), otherPersonsProfile.getUserName());
-            // 5. create a new PToPChat
+
+            // 3.4. update the otherPersonContact
+            otherPersonContact = creatorProfile.getContact(newChatData.userName);
             dataStructure.chats.push(new PToPChat([creatorID, otherPersonsProfile.getUserID()]));
           } else {
             err = 521; // the profile the client wants in the chat doesn't exist
             throw err;
           }
         }
+
+        // 4. create a new PToPChat
+        const newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
+        
         break;
       case "groupChat":
         //TODO
         break;
     }
+
+    // 5. add this chat to the dataStructure
+    dataStructure.chats.push(newChat);
+    // 6. return the chats chatID
+    return newChat;
   },
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (participantsUserID) {
@@ -78,29 +89,7 @@ module.exports = {
     let relevantChats = dataStructure.chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
     
     // create array of Objects that can be used on client side to create new Chat instances
-    return relevantChats.map(chat => {
-      // type-independent values
-      let chatObject = {
-        chatID: chat.getChatID(),
-        users: chat.getUsers(), //? needed?
-        history: chat.getHistory(),//TODO think about encapsulation!!!
-        image: chat.getImage(),
-      };
-      
-      // type-dependent values
-      switch (chat.chatType) {
-        case "groupChat":
-          chatObject.chatName = chat.getGroupName();
-          break;
-        case "pToPchat":
-          // take the other users name, saved to the profile of the requesters Profile
-          let otherUsersID = chat.getUsers().find(userID => userID !== participantsUserID);
-          chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(otherUsersID);
-          break;
-      }
-      
-      return chatObject;
-    });
+    return relevantChats.map(chat =>  createResponse.forChat(chat));
   },
   // will create a new Message and add it to a specific chat
   addMessageToChat: (message) => {
@@ -145,6 +134,29 @@ const createResponse = {
       contacts: profile.getContacts(),
       //TODO profilePic:,
     };
+  },
+  forChat: (chat) => { // expects an instance of a Child of Chat
+    // type-independent values
+    let chatObject = {
+      chatID: chat.getChatID(),
+      users: chat.getUsers(), //? needed?
+      history: chat.getHistory(),
+      image: chat.getImage(),
+    };
+
+    // type-dependent values
+    switch (chat.chatType) {
+      case "groupChat":
+        chatObject.chatName = chat.getGroupName();
+        break;
+      case "pToPchat":
+        // take the other users name, saved to the profile of the requesters Profile
+        let otherUsersID = chat.getUsers().find(userID => userID !== participantsUserID);
+        chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(otherUsersID);
+        break;
+    }
+
+    return chatObject;
   }
 };
 

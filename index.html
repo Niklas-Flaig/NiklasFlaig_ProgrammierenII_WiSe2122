@@ -70,8 +70,8 @@
       <!-- create a new PtoPChat -->
       <div class="surface" v-if="currentMode === 'createChat'">
         <h3>Create a new Chat!</h3>
-        <input type="text" v-model="newChat.userName" v-on:click="createChat('pToPChat')" placeholder="Enter UserName..."/>
-        <button v-on:click="createChat('pToPChat')">create chat</button>
+        <input type="text" v-model="newChat.userName" v-on:keyup.enter="createNewChat('pToPChat')" placeholder="Enter UserName..."/>
+        <button v-on:click="createNewChat('pToPChat')">create chat</button>
       </div>
       
     </div>

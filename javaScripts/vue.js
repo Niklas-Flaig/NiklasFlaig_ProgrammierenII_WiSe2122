@@ -48,7 +48,7 @@ let chatApp = new Vue({
         password: this.password,
       });
     },
-    createChat: function (chatType) {
+    createNewChat: function (chatType) {
       let newChat = {
         chatType: chatType,
       };

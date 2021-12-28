@@ -25,7 +25,7 @@
         <input type="text" v-model="userName" placeholder="Enter Username..."/>
         <input type="text" v-model="password" placeholder="Enter Password..."/>
         <input type="text" v-model="repeatPassword" placeholder="Repeat Password..."/>
-        <button>Enter</button>
+        <button v-on:click="submitRegister()">Enter</button>
         <a v-on:click="changeMode('logIn')">Already have an account?</a>
       </div>
       

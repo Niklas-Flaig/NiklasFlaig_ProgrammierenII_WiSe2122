@@ -31,6 +31,13 @@ let chatApp = new Vue({
         password: this.password,
       });
     },
+    submitRegister: function () {
+      // emit an object with the userName and password
+      socket.emit("clientTrysToRegister", {
+        userName: this.userName,
+        password: this.password,
+      });
+    },
     switchChat: function (thisChatID) {
       this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();
       this.currentChatID = thisChatID;

@@ -103,8 +103,13 @@ io.on('connection', function (socket) {
 
   // listen for a client creating a new chat
   socket.on("clientCreatingNewChat", (newChat) => {
-    // add the senderClient to the chat
-    dataManagement.createNewChat(newChat);
+    // 1. determine the creators ID
+    const creatorID = connectedClients.find(client => client.socketID === socket.id).userID;
+
+    // 2. add the senderClient to the chat
+    dataManagement.createNewChat(newChat, creatorID);
+    
+    socket.emit();
   });
 
   //listen for a new Message and add it to the specific chats history

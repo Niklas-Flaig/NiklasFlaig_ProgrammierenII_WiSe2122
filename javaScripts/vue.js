@@ -51,12 +51,12 @@ let chatApp = new Vue({
     createChat: function (chatType) {
       let newChat = {
         chatType: chatType,
-        users: []
       };
 
+      // in a pToPChat you may not have the other Person as a contact, so you have to acces the Person with it's unique userName
       if (chatType === "pToPChat") {
-        // the other users userName
-        newChat.users.push(chatApp.userName);
+        // the other users unique userName
+        newChat.userName = chatApp.newChat.userName;
       } else if (chatType === "groupChat") {
         // the other users userNames
         newChat.users = chatApp.newGroupChat.users;

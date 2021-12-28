@@ -1,4 +1,5 @@
 var fs = require('fs');
+var crypto = require('crypto');
 
 // makes the functions available in form of a module (https://stackoverflow.com/questions/5797852/in-node-js-how-do-i-include-functions-from-my-other-files)
 module.exports = {
@@ -251,10 +252,10 @@ class PToPChat extends Chat {
 
 // other classes
 class Profile {
-  constructor(userID, userName, password) {
-    this.userID = userID;
+  constructor(userName, password) {
     this.userName = userName;
     this.password = password;
+    this.userID = crypto.randomUUID();
     this.status = "";
     this.contacts = [];
     this.chatIDs = [];
@@ -318,9 +319,9 @@ let dataStructure = {};
 
 // create new Profiles
 dataStructure.profiles = [
-  new Profile(01, "Niklas Flaig", "1234"),
-  new Profile(02, "Peter Obama", "4321"),
-  new Profile(03, "Katherine", "0000"),
+  new Profile("Niklas Flaig", "1234"),
+  new Profile("Peter Obama", "4321"),
+  new Profile("Katherine", "0000"),
 ];
 
 // add contacts to profiles

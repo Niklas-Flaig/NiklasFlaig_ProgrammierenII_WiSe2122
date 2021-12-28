@@ -71,17 +71,15 @@ module.exports = {
 
         // 4. create a new PToPChat
         const newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
-        
-        break;
+        // 5. add this chat to the dataStructure
+        dataStructure.chats.push(newChat);
+        // 6. return the newChat Object
+        return newChat;
       case "groupChat":
         //TODO
         break;
     }
 
-    // 5. add this chat to the dataStructure
-    dataStructure.chats.push(newChat);
-    // 6. return the chats chatID
-    return newChat;
   },
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (participantsUserID) {

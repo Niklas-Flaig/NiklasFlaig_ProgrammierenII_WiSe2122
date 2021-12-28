@@ -40,6 +40,8 @@
               {{ chat.getLastMessageText() }}
             </div>
           </button>
+          <!-- add a new chat -->
+          <button v-on:click="changeMode('createChat')">add chat</button>
         </div>
 
 
@@ -65,6 +67,13 @@
 
       </div>
 
+      <!-- create a new PtoPChat -->
+      <div class="surface" v-if="currentMode === 'createChat'">
+        <h3>Create a new Chat!</h3>
+        <input type="text" v-model="newChat.userName" v-on:click="createChat('pToPChat')" placeholder="Enter UserName..."/>
+        <button v-on:click="createChat('pToPChat')">create chat</button>
+      </div>
+      
     </div>
     <script src=./javaScripts/classes.js></script>
     <script src="https://cdn.socket.io/4.3.0/socket.io.js"></script>

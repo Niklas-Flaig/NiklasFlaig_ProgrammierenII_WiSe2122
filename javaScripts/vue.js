@@ -9,6 +9,16 @@ let chatApp = new Vue({
     password: "",
     repeatPassword: "",
 
+    // newChat STUFF;
+    newChat: {
+      userName: "",
+    },
+    newGroupChat: {
+      Name: "",
+      newUser: "",
+      users: [],
+    },
+
 
     // the clients userID
     clientUserID: false,
@@ -37,6 +47,23 @@ let chatApp = new Vue({
         userName: this.userName,
         password: this.password,
       });
+    },
+    createChat: function (chatType) {
+      let newChat = {
+        chatType: chatType,
+        users: []
+      };
+
+      if (chatType === "pToPChat") {
+        // the other users userName
+        newChat.users.push(chatApp.userName);
+      } else if (chatType === "groupChat") {
+        // the other users userNames
+        newChat.users = chatApp.newGroupChat.users;
+        //TODO add groupPic, description etc...
+      }
+
+      socket.emit("clientCreatingNewChat", newChat);
     },
     switchChat: function (thisChatID) {
       this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();

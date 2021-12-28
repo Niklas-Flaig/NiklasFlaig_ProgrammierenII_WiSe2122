@@ -44,5 +44,47 @@ socket.on(`serverReturningProfile`, (res) => {
   }
 });
 
+socket.on("serverSendingNewChat", (res)=> {
+  if (!res.error) {
+    // change the mode to chat
+    chatApp.changeMode("chat");
+    // switch the chat
+    chatApp.switchChat(res.chat.chatID);
+
+    const chat = res.chat;
+    
+    /// add the new Chat to the vue
+    switch (chat.chatType) {
+      case "pToPChat":
+        chatApp.clientChats.push(new Chat(
+          chat.chatID,
+          chat.users,
+          chat.history.map(message => { // create a new object of a Message-class child-class
+            // determine what type of message this is
+            switch (message.messageType) {
+              case "textMessage":
+                return new TextMessage(
+                  message.senderID,
+                  message.content,
+                  message.time
+                );
+            }
+          }),
+          chat.chatName,
+          chat.image
+        ));
+        break;
+      case "groupChat":
+        //TODO
+        break;
+    }
+  } else {
+    switch (res.error) {
+      case 521:
+        console.log("error 521: Profile couldn't be found");
+        break;
+    }
+  }
+});
 // receive a new Message and add it to the related Chat
 socket.on("serverSendingNewMessage", (message) => chatApp.addMessageToChat(message));

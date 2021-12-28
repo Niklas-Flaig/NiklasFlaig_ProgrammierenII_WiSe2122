@@ -32,6 +32,9 @@ module.exports = {
         clientData.userName,
         clientData.password
       ));
+
+      // 3. get the newly created profile
+      const profile = dataStructure.profiles.find(profile => profile.getUserName() === clientData.userName);
       
       // 4. create a profile object for the client
       return createProfileResponse(profile);

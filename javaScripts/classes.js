@@ -22,16 +22,9 @@ class Chat {
 
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
+  getHistory() {return this.history;}
   getChatName() {return this.chatName;}
   getImage() {return this.image;}
-  getHistory() {
-    // when theres no history, display a sorry-message
-    if (this.history.length > 0) {
-      return this.history;
-    } else {
-      return "TODO";
-    }
-  }
   getLastMessageText() {
     // when theres no lastMessage, display a sorry-message
     if (this.history.length > 0) {

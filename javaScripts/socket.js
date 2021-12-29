@@ -36,11 +36,6 @@ socket.on(`serverReturningProfile`, (res) => {
 
 socket.on("serverSendingNewChat", (res)=> {
   if (!res.error) {
-    // change the mode to chat
-    chatApp.changeMode("chat");
-    // switch the chat
-    chatApp.switchChat(res.chat.chatID);
-
     const chat = res.chat;
     
     /// add the new Chat to the vue
@@ -68,6 +63,13 @@ socket.on("serverSendingNewChat", (res)=> {
         //TODO
         break;
     }
+    
+    // change the mode to chat
+    chatApp.changeMode("chat");
+    
+    // switch the chat
+    chatApp.switchChat(res.chat.chatID);
+
   } else {
     switch (res.error) {
       case 521:

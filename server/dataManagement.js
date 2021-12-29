@@ -73,8 +73,8 @@ module.exports = {
         const newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
         // 5. add this chat to the dataStructure
         dataStructure.chats.push(newChat);
-        // 6. return the newChat Object
-        return newChat;
+        // 6. return a newChat Object
+        return createResponse.forChat(newChat, creatorID);
       case "groupChat":
         //TODO
         break;
@@ -82,12 +82,12 @@ module.exports = {
 
   },
   // will return all Chats, in wich a User participates
-  getChatsWithUser: function (participantsUserID) {
-    // filters the chats with the users ID (participantsUserID) as a participant
-    let relevantChats = dataStructure.chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === participantsUserID) === participantsUserID);
+  getChatsWithUser: function (requesterID) {
+    // filters the chats with the users ID (requesterID) as a participant
+    let relevantChats = dataStructure.chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === requesterID) === requesterID);
     
     // create array of Objects that can be used on client side to create new Chat instances
-    return relevantChats.map(chat =>  createResponse.forChat(chat));
+    return relevantChats.map(chat =>  createResponse.forChat(chat, requesterID));
   },
   // will create a new Message and add it to a specific chat
   addMessageToChat: (message) => {
@@ -133,7 +133,7 @@ const createResponse = {
       //TODO profilePic:,
     };
   },
-  forChat: (chat) => { // expects an instance of a Child of Chat
+  forChat: (chat, requesterID) => { // expects an instance of a Child of Chat
     // type-independent values
     let chatObject = {
       chatID: chat.getChatID(),
@@ -149,8 +149,8 @@ const createResponse = {
         break;
       case "pToPchat":
         // take the other users name, saved to the profile of the requesters Profile
-        let otherUsersID = chat.getUsers().find(userID => userID !== participantsUserID);
-        chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === participantsUserID).getContactSavedName(otherUsersID);
+        let otherUsersID = chat.getUsers().find(userID => userID !== requesterID);
+        chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === requesterID).getContactSavedName(otherUsersID);
         break;
     }
 

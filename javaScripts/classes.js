@@ -30,7 +30,7 @@ class Chat {
       return this.history;
     } else {
       return [new TextMessage( // a placeholderMessage
-        clientProfile.getUserID(),
+        chatApp.clientProfile.userID,
         "",
         {
           "year": 0,

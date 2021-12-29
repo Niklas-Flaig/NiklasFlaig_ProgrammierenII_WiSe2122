@@ -152,7 +152,7 @@ const createResponse = {
       case "groupChat":
         chatObject.chatName = chat.getGroupName();
         break;
-      case "pToPchat":
+      case "pToPChat":
         // take the other users name, saved to the profile of the requesters Profile
         let otherUsersID = chat.getUsers().find(userID => userID !== requesterID);
         chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === requesterID).getContactSavedName(otherUsersID);

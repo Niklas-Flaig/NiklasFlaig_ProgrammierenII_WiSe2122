@@ -144,6 +144,7 @@ const createResponse = {
       users: chat.getUsers(), //? needed?
       history: chat.getHistory(),
       image: chat.getImage(),
+      chatType: chat.getChatType()
     };
 
     // type-dependent values
@@ -252,6 +253,7 @@ class Chat {
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
   getImage() {return this.image;}
+  getChatType() {return this.chatType;}
   getHistory() {
     return this.history.map(message => {
       return {
@@ -296,7 +298,7 @@ class GroupChat extends Chat {
 class PToPChat extends Chat {
   constructor(users) {
     super(users);
-    this.chatType = "pToPchat";
+    this.chatType = "pToPChat";
   }
 }
 

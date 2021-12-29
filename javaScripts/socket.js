@@ -44,17 +44,7 @@ socket.on("serverSendingNewChat", (res)=> {
         chatApp.clientChats.push(new Chat(
           chat.chatID,
           chat.users,
-          chat.history.map(message => { // create a new object of a Message-class child-class
-            // determine what type of message this is
-            switch (message.messageType) {
-              case "textMessage":
-                return new TextMessage(
-                  message.senderID,
-                  message.content,
-                  message.time
-                );
-            }
-          }),
+          chat.history,
           chat.chatName,
           chat.image
         ));

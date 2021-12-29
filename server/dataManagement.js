@@ -47,29 +47,10 @@ module.exports = {
 
     switch (newChatData.chatType) {
       case "pToPChat":
-        // 2. search for the other Persons profile is already a contact
-        let otherPersonContact = creatorProfile.getContact(newChatData.userName);
-        
-        // 3. check if the contact doesn't exist
-        if (otherPersonContact === undefined) {
-          // 3.1. search the other other persons profile in dataStructure.profiles (also refference)
-          const otherPersonsProfile = dataStructure.profiles.find(profile => profile.getUserName() === newChatData.userName);
+        // 2. search for the other Persons contact
+        const otherPersonContact = creatorProfile.getContact(newChatData.userName);
 
-          // 3.2. check if the otherPersonsProfile exists
-          if (otherPersonsProfile !== undefined) {
-            // 3.3. add a new Contact to the creators Profile
-            creatorProfile.addContact(otherPersonsProfile.getUserID(), otherPersonsProfile.getUserName());
-
-            // 3.4. update the otherPersonContact
-            otherPersonContact = creatorProfile.getContact(newChatData.userName);
-            dataStructure.chats.push(new PToPChat([creatorID, otherPersonsProfile.getUserID()]));
-          } else {
-            err = 521; // the profile the client wants in the chat doesn't exist
-            throw err;
-          }
-        }
-
-        // 4. create a new PToPChat
+        // 3. create a new PToPChat
         const newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
         // 5. add this chat to the dataStructure
         dataStructure.chats.push(newChat);

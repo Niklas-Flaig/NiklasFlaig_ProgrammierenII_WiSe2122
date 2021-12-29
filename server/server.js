@@ -107,19 +107,25 @@ io.on('connection', function (socket) {
     const creatorID = connectedClients.find(client => client.socketID === socket.id).userID;
 
     try {
-      // 2. add the senderClient to the chat
-      // and get the chats chatID
-      const chat = dataManagement.createNewChat(newChat, creatorID);
+      // 2. if this is a pToPChat, try to create a new contact for the other Person
+      if (newChat.chatType === "pToPChat") {
+        const contactObject = dataManagement.createNewContact(creatorID, newChat.userName);
+        // return the newContact to the client, so they can add the contact too
+        socket.emit("serverSendingNewContact", contactObject);
+      }
 
-      // 3. create a response message with the newly created chat
-      dataManagement.getUsersInChat(chatID).forEach(chatMemberID => {
+      // 3. add the chat to the dataStructure and get a chatObject in return
+      const chatObject = dataManagement.createNewChat(newChat, creatorID);
+
+      // 3. create a response message with the newly created chatObject
+      dataManagement.getUsersInChat(chatObject.chatID).forEach(chatMemberID => {
         // determin the chatMembers socketID
         const thisClientsSocketID = connectedClients.find(client => client.userID === chatMemberID).socketID;
 
-        // if the clients userID is found among the connectedClients, emit this, to add the new chat to his viewModel
+        // if the clients userID is found among the connectedClients, emit this, to add the new chatObject to his viewModel
         if (thisClientsSocketID !== undefined) io.to(thisClientsSocketID).emit("serverSendingNewChat", {
           error: false,
-          chat: chat
+          chat: chatObject
         });
       });
     } catch (err) {

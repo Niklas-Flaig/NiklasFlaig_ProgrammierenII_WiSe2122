@@ -45,22 +45,32 @@ module.exports = {
     // 1. get the creators Profile (this is a refference)
     const creatorProfile = dataStructure.profiles.find(profile => profile.getUserID() === creatorID);
 
+    // create the newChat
+    let newChat = {};
+
     switch (newChatData.chatType) {
       case "pToPChat":
         // 2. search for the other Persons contact
         const otherPersonContact = creatorProfile.getContact(newChatData.userName);
 
         // 3. create a new PToPChat
-        const newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
-        // 5. add this chat to the dataStructure
-        dataStructure.chats.push(newChat);
-        // 6. return a newChat Object
-        return createResponse.forChat(newChat, creatorID);
+        newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
+        break;
       case "groupChat":
         //TODO
         break;
     }
 
+    // 4. add this chat to the dataStructure
+    dataStructure.chats.push(newChat);
+
+    // 5. add the new chat ID to all members Profiles
+    newChat.getUsers().forEach(userID => {
+      dataStructure.profiles.find(profile => profile.getUserID() === userID).addChat(newChat.getChatID());
+    });
+    
+    // 6. return a newChat Object
+    return createResponse.forChat(newChat, creatorID);
   },
   // will try to create a new Contact, if thats not possible throw an error
   createNewContact: (creatorID, contactName) => {

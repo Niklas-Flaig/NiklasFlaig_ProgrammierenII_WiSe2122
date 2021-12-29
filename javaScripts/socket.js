@@ -38,7 +38,7 @@ socket.on(`serverReturningProfile`, (res) => {
         console.log("error 509: profile not found");
         break;
       case 510:
-        console.log("error 5100: Profile already exists");
+        console.log("error 510: Profile already exists");
         break;
     }
   }

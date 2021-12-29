@@ -81,6 +81,29 @@ module.exports = {
     }
 
   },
+  // will try to create a new Contact, if thats not possible throw an error
+  createNewContact: (creatorID, contactName) => {
+    // 1. get the Profiles
+    const creatorProfile = dataStructure.profiles.find(profile => profile.getUserID() === creatorID);
+    const otherPersonsProfile = dataStructure.profiles.find(profile => profile.getUserName() === contactName);
+
+    // 2. check if the otherPersonsProfile exists
+    if (otherPersonsProfile !== undefined) {
+      // 3. check if this profile doesn't exists
+      if (creatorProfile.getContact(contactName) === undefined) {
+        // 4. add a new Contact to the creators Profile
+        creatorProfile.addContact(otherPersonsProfile.getUserID(), otherPersonsProfile.getUserName());
+  
+        // 5. return a contactObject
+        return createResponse.forContact(creatorProfile.getContact(contactName));
+      } else {
+        //TODO if i want something to happen, when its tryed to create a Contact that already exists
+      }
+    } else {
+      err = 521; // the profile the creator wants in the chat doesn't exist
+      throw err;
+    }
+  },
   // will return all Chats, in wich a User participates
   getChatsWithUser: function (requesterID) {
     // filters the chats with the users ID (requesterID) as a participant
@@ -155,6 +178,12 @@ const createResponse = {
     }
 
     return chatObject;
+  },
+  forContact: (contact) => {
+    return {
+      userID: contact.getUserID(),
+      savedName: contact.getSavedName()
+    };
   }
 };
 

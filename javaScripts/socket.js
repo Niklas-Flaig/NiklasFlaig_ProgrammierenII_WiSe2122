@@ -9,7 +9,6 @@ socket.on(`serverReturningProfile`, (res) => {
     chatApp.changeMode("chat");
     
     chatApp.clientProfile = res.profile;
-    chatApp.clientUserID = res.profile.userID;
     // create the Chat-Objects
     chatApp.clientChats = res.chats.map(chat => new Chat(
       chat.chatID,

@@ -20,8 +20,6 @@ let chatApp = new Vue({
     },
 
 
-    // the clients userID
-    clientUserID: false,
     // the own Profile of the client
     clientProfile: {},
     // the chats this user participates in

@@ -25,7 +25,23 @@ class Chat {
 
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
-  getHistory() {return this.history;}
+  getHistory() {
+    if (this.history.length > 0) {
+      return this.history;
+    } else {
+      return [new TextMessage( // a placeholderMessage
+        clientProfile.getUserID(),
+        "",
+        {
+          "year": 0,
+          "month": 0,
+          "day": 0,
+          "hour": 0,
+          "minute": 0
+        }
+      )];
+    }
+  }
   getChatName() {return this.chatName;}
   getImage() {return this.image;}
   getLastMessageText() {

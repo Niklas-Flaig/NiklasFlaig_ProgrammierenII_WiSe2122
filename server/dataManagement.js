@@ -101,7 +101,7 @@ module.exports = {
     let relevantChats = dataStructure.chats.filter(chat => chat.getUsers().find(userIDInThisChat => userIDInThisChat === requesterID) === requesterID);
     
     // create array of Objects that can be used on client side to create new Chat instances
-    return relevantChats.map(chat =>  createResponse.forChat(chat, requesterID));
+    return relevantChats.map(chat => createResponse.forChat(chat, requesterID));
   },
   // will create a new Message and add it to a specific chat
   addMessageToChat: (message) => {
@@ -165,7 +165,7 @@ const createResponse = {
       case "pToPChat":
         // take the other users name, saved to the profile of the requesters Profile
         let otherUsersID = chat.getUsers().find(userID => userID !== requesterID);
-        chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === requesterID).getContactSavedName(otherUsersID);
+        chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === otherUsersID).getUserName();
         break;
     }
 

@@ -26,7 +26,12 @@ class Chat {
   getChatName() {return this.chatName;}
   getImage() {return this.image;}
   getLastMessageText() {
-    return this.history.at(-1).getTextResponse();
+    // when theres no lastMessage, display a sorry-message
+    if (this.history.length > 0) {
+      return this.history.at(-1).getTextResponse();
+    } else {
+      return "TODO";
+    }
   }
 }
 

@@ -3,12 +3,15 @@ class Chat {
   constructor(chatID, users, history, chatName, image) {
     this.chatID = chatID;
     this.users = users;
-    this.history = history;
+    this.history = [];
+    history.forEach(message => this.addMessage(message));
     this.chatName = chatName;
     this.image = image;
   }
   addMessage(message) {
+     // create a new object of a Message-class child-class
     let newMessage;
+    // determine what type of message this is
     switch (message.messageType) {
       case "textMessage":
         newMessage = new TextMessage(

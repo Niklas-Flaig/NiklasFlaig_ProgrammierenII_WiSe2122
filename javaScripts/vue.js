@@ -63,7 +63,7 @@ let chatApp = new Vue({
 
       socket.emit("clientCreatingNewChat", newChat);
     },
-    createNewChat: function (params) {
+    createNewChat: function (chat) {
       // add the new Chat to the vue
       switch (chat.chatType) {
         case "pToPChat":

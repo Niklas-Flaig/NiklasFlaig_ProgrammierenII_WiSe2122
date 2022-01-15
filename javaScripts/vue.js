@@ -75,7 +75,13 @@ let chatApp = new Vue({
           ));
           break;
         case "groupChat":
-          //TODO
+          this.clientChats.push(new GroupChat(
+            chat.chatID,
+            chat.users,
+            chat.history,
+            chat.chatName,
+            chat.image
+          ));
           break;
       }
     },

@@ -54,6 +54,13 @@ class Chat {
   }
 }
 
+class pToPChat extends Chat {
+  constructor(chatID, users, history, image) {
+    super(chatID, users, history, this.createchatName(), image);
+  }
+
+}
+
 class Message {
   constructor(senderID, time) {
     this.senderID = senderID;

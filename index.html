@@ -32,7 +32,7 @@
       <div id="chat" v-if="currentMode === 'chat'">
         <!-- chat/group selection -->
         <div id="chatSelectSurface" class="surface">
-          <button :id="chat.chatID" class="chatTo" v-for="chat in clientChats" v-on:click="switchChat(chat.chatID)">
+          <button :id="chat.getChatID()" class="chatTo" v-for="chat in clientChats" v-on:click="switchChat(chat.chatID)">
             <h4 class="chatName"> 
               {{ chat.getChatName() }}
             </h4>

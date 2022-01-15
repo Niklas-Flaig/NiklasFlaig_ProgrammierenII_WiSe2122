@@ -66,6 +66,12 @@ class PToPChat extends Chat {
   }
 }
 
+class GroupChat extends Chat {
+  constructor(chatID, users, history, chatName, image) {
+    super(chatID, users, history, chatName, image);
+  }
+}
+
 class Message {
   constructor(senderID, time) {
     this.senderID = senderID;

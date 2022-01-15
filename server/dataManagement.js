@@ -51,7 +51,7 @@ module.exports = {
     switch (newChatData.chatType) {
       case "pToPChat":
         // 2. search for the other Persons contact
-        const otherPersonContact = creatorProfile.getContact(newChatData.userName);
+        const otherPersonContact = creatorProfile.getContact(newChatData.users[1]);
 
         // 3. create a new PToPChat
         newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
@@ -84,10 +84,6 @@ module.exports = {
       if (creatorProfile.getContact(contactName) === undefined) {
         // 4. add a new Contact to the creators Profile
         creatorProfile.addContact(otherPersonsProfile.getUserID(), otherPersonsProfile.getUserName());
-
-        //! Temporary fix?
-        // and to the otherPersonsProfile
-        otherPersonsProfile.addContact(creatorProfile.getUserID(), creatorProfile.getUserName());
   
         // 5. return a contactObject
         return createResponse.forContact(creatorProfile.getContact(contactName));
@@ -131,6 +127,9 @@ module.exports = {
   // will return an array of all users in the Chat with the specific chatID
   getUsersInChat: (chatID) => {
     return dataStructure.chats.find(chat => chat.getChatID() === chatID).getUsers();
+  },
+  getUserID: (userName) => {
+    return dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID();
   },
   // save the chat-data to a file
   saveState: () => {

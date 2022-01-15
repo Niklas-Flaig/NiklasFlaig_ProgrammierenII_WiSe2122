@@ -109,9 +109,17 @@ io.on('connection', function (socket) {
     try {
       // 2. if this is a pToPChat, try to create a new contact for the other Person
       if (newChat.chatType === "pToPChat") {
-        const contactObject = dataManagement.createNewContact(creatorID, newChat.userName);
+        const contactObject = dataManagement.createNewContact(creatorID, newChat.users[1]);
         // return the newContact to the client, so they can add the contact too
         socket.emit("serverSendingNewContact", contactObject);
+
+        // if the other person is online too, they have to receive the new Contact too
+        const otherPersonsUserID = dataManagement.getUserID(newChat.users[1]);
+        // deteremine the otherPersons socketID
+        const otherPersonsSocketID = connectedClients.find(client => client.userID === otherPersonsUserID).socketID;
+        // create a contact for thisPerson too and emit it to the socket
+        const otherContactObject = dataManagement.createNewContact(otherPersonsUserID, newChat.users[0]);
+        io.to(otherPersonsSocketID).emit("serverSendingNewContact", otherContactObject);
       }
 
       // 3. add the chat to the dataStructure and get a chatObject in return

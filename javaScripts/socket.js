@@ -10,13 +10,7 @@ socket.on(`serverReturningProfile`, (res) => {
     
     chatApp.clientProfile = res.profile;
     // create the Chat-Objects
-    chatApp.clientChats = res.chats.map(chat => new Chat(
-      chat.chatID,
-      chat.users,
-      chat.history,
-      chat.chatName,
-      chat.image
-    ));
+    chatApp.clientChats = res.chats.map(chat => chatApp.createNewChat(chat));
     
   } else {
     switch (res.error) {
@@ -35,23 +29,9 @@ socket.on(`serverReturningProfile`, (res) => {
 
 socket.on("serverSendingNewChat", (res)=> {
   if (!res.error) {
-    const chat = res.chat;
+    chatApp.createNewChat(res.chat);
     
-    /// add the new Chat to the vue
-    switch (chat.chatType) {
-      case "pToPChat":
-        chatApp.clientChats.push(new PToPChat(
-          chat.chatID,
-          chat.users,
-          chat.history,
-          chat.image
-        ));
-        break;
-      case "groupChat":
-        //TODO
-        break;
-    }
-    
+    //! kann das nicht asyncron in die "requestChatGeneration" Funktion???
     // change the mode to chat
     chatApp.changeMode("chat");
     

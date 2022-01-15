@@ -46,7 +46,7 @@ let chatApp = new Vue({
         password: this.password,
       });
     },
-    createNewChat: function (chatType) {
+    requestChatGeneration: function (chatType) {
       let newChat = {
         chatType: chatType,
       };
@@ -62,6 +62,22 @@ let chatApp = new Vue({
       }
 
       socket.emit("clientCreatingNewChat", newChat);
+    },
+    createNewChat: function (params) {
+      // add the new Chat to the vue
+      switch (chat.chatType) {
+        case "pToPChat":
+          this.clientChats.push(new PToPChat(
+            chat.chatID,
+            chat.users,
+            chat.history,
+            chat.image
+          ));
+          break;
+        case "groupChat":
+          //TODO
+          break;
+      }
     },
     switchChat: function (thisChatID) {
       this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();
@@ -88,6 +104,6 @@ let chatApp = new Vue({
         userName: "Niklas Flaig",
         password: "1234",
       });
-    }
+    },
   }
 });

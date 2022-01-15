@@ -10,7 +10,7 @@ socket.on(`serverReturningProfile`, (res) => {
     
     chatApp.clientProfile = res.profile;
     // create the Chat-Objects
-    chatApp.clientChats = res.chats.map(chat => chatApp.createNewChat(chat));
+    res.chats.forEach(chat => chatApp.createNewChat(chat));
     
   } else {
     switch (res.error) {

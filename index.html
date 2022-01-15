@@ -71,7 +71,7 @@
       <div class="surface" v-if="currentMode === 'createChat'">
         <h3>Create a new Chat!</h3>
         <input type="text" v-model="newChat.userName" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter UserName..."/>
-        <button v-on:click="createNewChat('pToPChat')">create chat</button>
+        <button v-on:click="requestChatGeneration('pToPChat')">create chat</button>
       </div>
       
     </div>

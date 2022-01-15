@@ -84,6 +84,10 @@ module.exports = {
       if (creatorProfile.getContact(contactName) === undefined) {
         // 4. add a new Contact to the creators Profile
         creatorProfile.addContact(otherPersonsProfile.getUserID(), otherPersonsProfile.getUserName());
+
+        //! Temporary fix?
+        // and to the otherPersonsProfile
+        otherPersonsProfile.addContact(creatorProfile.getUserID(), creatorProfile.getUserName());
   
         // 5. return a contactObject
         return createResponse.forContact(creatorProfile.getContact(contactName));

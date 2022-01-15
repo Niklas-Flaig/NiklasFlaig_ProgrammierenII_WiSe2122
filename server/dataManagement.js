@@ -147,7 +147,8 @@ const createResponse = {
       userID: profile.getUserID(),
       userName: profile.getUserName(),
       status: profile.getStatus(),
-      contacts: profile.getContacts(),
+      // create the responses for the contacts to maintain encapsulation
+      contacts: profile.getContacts().map(contact => createResponse.forContact(contact)),
       //TODO profilePic:,
     };
   },

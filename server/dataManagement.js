@@ -167,9 +167,7 @@ const createResponse = {
         chatObject.chatName = chat.getGroupName();
         break;
       case "pToPChat":
-        // take the other users name, saved to the profile of the requesters Profile
-        let otherUsersID = chat.getUsers().find(userID => userID !== requesterID);
-        chatObject.chatName = dataStructure.profiles.find(profile => profile.getUserID() === otherUsersID).getUserName();
+        // the displayed ChatName will be generated on client-side
         break;
     }
 

@@ -44,7 +44,6 @@ socket.on("serverSendingNewChat", (res)=> {
           chat.chatID,
           chat.users,
           chat.history,
-          chat.chatName,
           chat.image
         ));
         break;

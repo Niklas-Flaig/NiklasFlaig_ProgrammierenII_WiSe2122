@@ -56,13 +56,13 @@ class Chat {
 
 class PToPChat extends Chat {
   constructor(chatID, users, history, image) {
-    super(chatID, users, history, this.createChatName(), image);
-  }
-  createChatName() {
+    //! darf man das so machen?
     // get the other Persons userId
     const otherPersonsUserID = users.find(userID => userID !== chatApp.clientProfile.userID);
     // get the name to this UserID from the currentProfiles contacts
-    return chatApp.contacts.find(contact => contact.userID === otherPersonsUserID).savedName;
+    const chatName = chatApp.clientProfile.contacts.find(contact => contact.userID === otherPersonsUserID).savedName;
+    
+    super(chatID, users, history, chatName, image);
   }
 }
 

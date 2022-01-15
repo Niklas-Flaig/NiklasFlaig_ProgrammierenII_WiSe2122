@@ -40,7 +40,7 @@ socket.on("serverSendingNewChat", (res)=> {
     /// add the new Chat to the vue
     switch (chat.chatType) {
       case "pToPChat":
-        chatApp.clientChats.push(new Chat(
+        chatApp.clientChats.push(new PToPChat(
           chat.chatID,
           chat.users,
           chat.history,

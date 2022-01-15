@@ -54,7 +54,7 @@ class Chat {
   }
 }
 
-class pToPChat extends Chat {
+class PToPChat extends Chat {
   constructor(chatID, users, history, image) {
     super(chatID, users, history, this.createChatName(), image);
   }

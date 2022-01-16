@@ -70,20 +70,25 @@
       <!-- create a new groupChat -->
       <div class="surface" v-if="currentMode === 'createGroupChat'">
         <h3>Create a new GroupChat!</h3>
-
+        <a v-on:click="changeMode('createChat')">pToPChat</a><span>groupChat</span>
         <input type="text" v-model="newGroupChat.name" placeholder="Enter ChatName..."/>
 
-        <input type="text" v-model="newGroupChat.newUser" placeholder="Enter NewUser..."/>
+        <input type="text" v-model="newGroupChat.newUser" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter NewUser..."/>
         <div id="newChatParticipants">
           <div v-for="user in newGroupChat.users">
             {{ user.userName }}
           </div>
         </div>
+        <button v-on:click="requestChatGeneration('groupChat')">create chat</button>
       </div>
 
       <!-- create a new PtoPChat -->
       <div class="surface" v-if="currentMode === 'createChat'">
         <h3>Create a new Chat!</h3>
+        <!-- Chat-Type selection -->
+        <div>
+          <span>pToPChat</span><a v-on:click="changeMode('createGroupChat')">groupChat</a>
+        </div>
         <input type="text" v-model="newChat.userName" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter UserName..."/>
         <button v-on:click="requestChatGeneration('pToPChat')">create chat</button>
       </div>

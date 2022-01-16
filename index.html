@@ -67,6 +67,20 @@
 
       </div>
 
+      <!-- create a new groupChat -->
+      <div class="surface" v-if="currentMode === 'createGroupChat'">
+        <h3>Create a new GroupChat!</h3>
+
+        <input type="text" v-model="newGroupChat.name" placeholder="Enter ChatName..."/>
+
+        <input type="text" v-model="newGroupChat.newUser" placeholder="Enter NewUser..."/>
+        <div id="newChatParticipants">
+          <div v-for="user in newGroupChat.users">
+            {{ user.userName }}
+          </div>
+        </div>
+      </div>
+
       <!-- create a new PtoPChat -->
       <div class="surface" v-if="currentMode === 'createChat'">
         <h3>Create a new Chat!</h3>

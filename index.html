@@ -9,27 +9,46 @@
   <body>
     <div id="vue">
       <!-- loginScreen -->
-      <div id="logInScreen" v-if="currentMode === 'logIn'">
+      <div id="logInScreen" class="screen" v-if="currentMode === 'logIn'">
         <div v-on:click="submitNiklasFlaigLogin()"> <!-- this button is temporary -->
-          <h3>Log in!</h3>
+          <h2 class="heading">Log in!</h2>
         </div>
-        <input type="text" v-model="userName" placeholder="Enter Username..."/>
-        <input type="text" v-model="password" placeholder="Enter Password..."/>
-        <button v-on:click="submitLogin()">Enter</button>
-        <a v-on:click="changeMode('register')">register</a>
+        <div class="inputs">
+          <label>
+            UserName:
+            <input type="text" v-model="userName" placeholder="Enter Username..."/>
+          </label>
+          <label>
+            PassWord:
+            <input type="text" v-model="userName" placeholder="Enter Username..."/>
+          </label>
+          <button v-on:click="submitLogin()">Enter</button>
+          <a v-on:click="changeMode('register')">register</a>
+        </div>
       </div>
 
       <!-- register screen -->
-      <div id="registerScreen" v-if="currentMode === 'register'">
-        <h3>Create a new account!</h3>
-        <input type="text" v-model="userName" placeholder="Enter Username..."/>
-        <input type="text" v-model="password" placeholder="Enter Password..."/>
-        <input type="text" v-model="repeatPassword" placeholder="Repeat Password..."/>
-        <button v-on:click="submitRegister()">Enter</button>
-        <a v-on:click="changeMode('logIn')">Already have an account?</a>
+      <div id="registerScreen" class="screen" v-if="currentMode === 'register'">
+        <h2 class="heading">Create a new account!</h2>
+        <div class="inputs">
+          <label>
+            UserName:
+            <input type="text" v-model="userName" placeholder="Enter Username..."/>
+          </label>
+          <label>
+            PassWord:
+            <input type="text" v-model="password" placeholder="Enter Password..."/>
+          </label>
+          <label>
+            PassWord (repeat):
+            <input type="text" v-model="repeatPassword" placeholder="Repeat Password..."/>
+          </label>
+          <button v-on:click="submitRegister()">Enter</button>
+          <a v-on:click="changeMode('logIn')">Already have an account?</a>
+        </div>
       </div>
       
-      <div id="chat" v-if="currentMode === 'chat'">
+      <div id="chat" class="screen" v-if="currentMode === 'chat'">
         <!-- chat/group selection -->
         <div id="chatSelectSurface" class="surface">
           <button :id="chat.getChatID()" class="chatTo" v-for="chat in clientChats" v-on:click="switchChat(chat.chatID)">
@@ -62,14 +81,14 @@
         </div>
 
         <div id="inChatSurfacePlaceholder" class="surface" v-if="currentMode === 0">
-            <h1>Enter a chat!!</h1>
+            <h2>Enter a chat!!</h2>
         </div>
 
       </div>
 
       <!-- create a new groupChat -->
-      <div class="surface" v-if="currentMode === 'createGroupChat'">
-        <h3>Create a new GroupChat!</h3>
+      <div class="screen surface" v-if="currentMode === 'createGroupChat'">
+        <h2 class="heading">Create a new GroupChat!</h2>
         <a v-on:click="changeMode('createChat')">pToPChat</a><span>groupChat</span>
         <input type="text" v-model="newGroupChat.name" placeholder="Enter ChatName..."/>
 
@@ -83,8 +102,8 @@
       </div>
 
       <!-- create a new PtoPChat -->
-      <div class="surface" v-if="currentMode === 'createChat'">
-        <h3>Create a new Chat!</h3>
+      <div class="screen surface" v-if="currentMode === 'createChat'">
+        <h2 class="heading">Create a new Chat!</h2>
         <!-- Chat-Type selection -->
         <div>
           <span>pToPChat</span><a v-on:click="changeMode('createGroupChat')">groupChat</a>

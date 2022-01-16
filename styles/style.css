@@ -8,9 +8,34 @@
   display: flex;
 }
 
+.screen {
+  margin: 60px 5% 0% 5%;
+}
+
+.screen .heading {
+  text-align: center;
+}
+
+.screen .inputs {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.screen .inputs input {
+  width: 200px;
+  margin: 10px 0 10px 0;
+  left: 100px
+}
+.screen .inputs label {
+  margin: 25px 0;
+}
+
+
 .surface {
   border: solid 1px #E8E8E8;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -59,4 +84,11 @@ h4.userName {
   padding-left: 7px;
   padding-right: 7px;
   border-radius: 5px;
+}
+
+
+
+button {
+  min-width: 100px;
+  width: auto;
 }

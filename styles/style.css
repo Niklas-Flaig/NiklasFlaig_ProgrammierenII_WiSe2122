@@ -92,3 +92,15 @@ button {
   min-width: 100px;
   width: auto;
 }
+
+.tabMenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.tabMenu div {
+  margin: 8px auto;
+  border-bottom: solid 1px #E8E8E8;
+  width: auto;
+  text-align: center;
+}

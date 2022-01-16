@@ -20,7 +20,7 @@
           </label>
           <label>
             PassWord:
-            <input type="text" v-model="userName" placeholder="Enter Username..."/>
+            <input type="text" v-model="password" placeholder="Enter PassWord..."/>
           </label>
           <button v-on:click="submitLogin()">Enter</button>
           <a v-on:click="changeMode('register')">register</a>
@@ -87,29 +87,45 @@
       </div>
 
       <!-- create a new groupChat -->
-      <div class="screen surface" v-if="currentMode === 'createGroupChat'">
+      <div class="screen" v-if="currentMode === 'createGroupChat'">
         <h2 class="heading">Create a new GroupChat!</h2>
-        <a v-on:click="changeMode('createChat')">pToPChat</a><span>groupChat</span>
-        <input type="text" v-model="newGroupChat.name" placeholder="Enter ChatName..."/>
-
-        <input type="text" v-model="newGroupChat.newUser" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter NewUser..."/>
-        <div id="newChatParticipants">
-          <div v-for="user in newGroupChat.users">
-            {{ user.userName }}
+        <div class="inputs">
+          <div class="tabMenu">
+            <div v-on:click="changeMode('createChat')">pToPChat</div>
+            <div>groupChat</div>
           </div>
+          <label>
+            GroupName:
+            <input type="text" v-model="newGroupChat.name" placeholder="Enter ChatName..."/>
+          </label>
+          <label>
+            UserNames:
+            <input type="text" v-model="newGroupChat.newUser" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter NewUser..."/>
+          </label>
+          <div id="newChatParticipants">
+            <div v-for="user in newGroupChat.users">
+              {{ user.userName }}
+            </div>
+          </div>
+          <button v-on:click="requestChatGeneration('groupChat')">create chat</button>
         </div>
-        <button v-on:click="requestChatGeneration('groupChat')">create chat</button>
       </div>
 
       <!-- create a new PtoPChat -->
-      <div class="screen surface" v-if="currentMode === 'createChat'">
+      <div class="screen" v-if="currentMode === 'createChat'">
         <h2 class="heading">Create a new Chat!</h2>
         <!-- Chat-Type selection -->
-        <div>
-          <span>pToPChat</span><a v-on:click="changeMode('createGroupChat')">groupChat</a>
+        <div class="inputs">
+          <div class="tabMenu">
+            <div>pToPChat</div>
+            <div v-on:click="changeMode('createGroupChat')">groupChat</div>
+          </div>
+          <label>
+            UserName:
+            <input type="text" v-model="newChat.userName" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter UserName..."/>
+          </label>
+          <button v-on:click="requestChatGeneration('pToPChat')">create chat</button>
         </div>
-        <input type="text" v-model="newChat.userName" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter UserName..."/>
-        <button v-on:click="requestChatGeneration('pToPChat')">create chat</button>
       </div>
       
     </div>

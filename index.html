@@ -100,7 +100,7 @@
           </label>
           <label>
             UserNames:
-            <input type="text" v-model="newGroupChat.newUser" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter NewUser..."/>
+            <input type="text" v-model="newGroupChat.userNames" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="User1, User2, ..."/>
           </label>
           <div id="newChatParticipants">
             <div v-for="user in newGroupChat.users">

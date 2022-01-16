@@ -57,7 +57,11 @@ module.exports = {
         newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
         break;
       case "groupChat":
-        //TODO
+        console.log(newChatData);
+        const userIDs = newChatData.users.map(userName => dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID());
+        console.log(userIDs);
+        newChat = new GroupChat(userIDs, newChatData.groupName);
+
         break;
     }
 

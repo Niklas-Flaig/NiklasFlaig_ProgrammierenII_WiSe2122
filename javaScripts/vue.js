@@ -14,9 +14,8 @@ let chatApp = new Vue({
       userName: "",
     },
     newGroupChat: {
-      Name: "",
-      newUser: "",
-      users: [],
+      name: "",
+      userNames: ""
     },
 
 
@@ -58,10 +57,12 @@ let chatApp = new Vue({
         console.log(newChat.users);
       } else if (chatType === "groupChat") {
         // the other users userNames
-        newChat.users = chatApp.newGroupChat.users;
-        //TODO add groupPic, description etc...
+        newChat.users = [chatApp.clientProfile.userName];
+        newChat.users.concat(chatApp.newGroupChat.userNames.split(", "));
+        newChat.groupName = chatApp.newGroupChat.name;
       }
 
+      console.log(newChat);
       socket.emit("clientCreatingNewChat", newChat);
     },
     createNewChat: function (chat) {

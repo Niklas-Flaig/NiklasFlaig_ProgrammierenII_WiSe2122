@@ -5,8 +5,6 @@
 }
 
 #chat {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -15,55 +13,44 @@
   padding: 24px;
 }
 
-#chatSelectSurface {
-  height: 100%;
-  width: 10%;
-}
 
+#chatSelectSurface {
+ height: 100%;
+ width: 10%;
+}
 #chatSelectSurface .chatTo {
   border: solid 1px #E8E8E8;
   display: block;
 }
-
 h4.userName {
   margin-bottom: 0px;
 }
-
 #inChatSurface {
   width: 62%;
   height: 100%;
 }
 
+
+
 #chatHistory div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   padding-bottom: 10px;
 }
-
 #chatHistory div div {
   padding-bottom: 0px;
 }
-
 #chatHistory div .sender {
   font-weight: bold;
 }
-
 #chatHistory div .content {
   font-size: 17px;
 }
-
 #chatHistory div .time {
   font-size: 10px;
 }
-
 #chatHistory .sendtBy_You div {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
+  align-self: flex-end;
 }
 
 .textMessage {
@@ -73,4 +60,3 @@ h4.userName {
   padding-right: 7px;
   border-radius: 5px;
 }
-/*# sourceMappingURL=style.css.map */

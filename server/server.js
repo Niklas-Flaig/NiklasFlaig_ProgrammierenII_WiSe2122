@@ -124,7 +124,7 @@ io.on('connection', function (socket) {
       console.log(allNewContacts);
       allNewContacts.forEach(user => {
         const socketID = connectedClients.find(client => client.userID === user.userID);
-        io.to(socket).emit("serverSendingNewContact", user.contacts);
+        io.to(socketID).emit("serverSendingNewContact", user.contacts);
       });
 
       // 3. add the chat to the dataStructure and get a chatObject in return

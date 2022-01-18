@@ -77,13 +77,13 @@ module.exports = {
     return createResponse.forChat(newChat, creatorID);
   },
   // will try to create a new Contact, if thats not possible throw an error
-  createNewContact: (creatorID, contactName) => {
+  createNewContact: (userName, contactName) => {
     // 1. get the Profiles
-    const creatorProfile = dataStructure.profiles.find(profile => profile.getUserID() === creatorID);
+    const creatorProfile = dataStructure.profiles.find(profile => profile.getUserName() === userName);
     const otherPersonsProfile = dataStructure.profiles.find(profile => profile.getUserName() === contactName);
 
     // 2. check if the otherPersonsProfile exists
-    if (otherPersonsProfile !== undefined) {
+    if (creatorProfile !== undefined && otherPersonsProfile !== undefined) {
       // 3. check if this profile doesn't exists
       if (creatorProfile.getContact(contactName) === undefined) {
         // 4. add a new Contact to the creators Profile
@@ -95,7 +95,8 @@ module.exports = {
         //TODO if i want something to happen, when its tryed to create a Contact that already exists
       }
     } else {
-      err = 521; // the profile the creator wants in the chat doesn't exist
+      console.log("?");
+      err = 521; // a requested Profile doesn't exist
       throw err;
     }
   },

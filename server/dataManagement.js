@@ -134,7 +134,17 @@ module.exports = {
     return dataStructure.chats.find(chat => chat.getChatID() === chatID).getUsers();
   },
   getUserID: (userName) => {
-    return dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID();
+    const userID = dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID();
+
+    if (userID !== undefined) {
+      return userID;
+    } else {
+      err = { // the specific Profile doesn't exist
+        errorCode: 522,
+        missingProfile: userName
+      };
+      throw err;
+    }
   },
   // save the chat-data to a file
   saveState: () => {

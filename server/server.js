@@ -110,7 +110,7 @@ io.on('connection', function (socket) {
       // create the contacts to connect all participants together
       // Contacts don't really serve a purpose at this point
       const allNewContacts = newChat.users.map(userName => {
-        let contactObjects;
+        const contactObjects = [];
         newChat.users.forEach(otherUserName => {
           if (userName !== otherUserName) contactObjects.push(dataManagement.createNewContact(userName, otherUserName));
         });
@@ -123,7 +123,7 @@ io.on('connection', function (socket) {
       // 2.1 if successfull emit the new Contacts
       console.log(allNewContacts);
       allNewContacts.forEach(user => {
-        const socketID = connectedClients.find(client => client.userID === user.userID);
+        const socketID = connectedClients.find(client => client.userID === user.userID).socketID;
         io.to(socketID).emit("serverSendingNewContact", user.contacts);
       });
 

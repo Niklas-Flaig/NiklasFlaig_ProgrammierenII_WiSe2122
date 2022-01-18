@@ -30,8 +30,8 @@ socket.on(`serverReturningProfile`, (res) => {
 socket.on("serverSendingNewChat", (res) => {
   if (!res.error) {
     chatApp.createNewChat(res.chat);
-    
-    //! kann das nicht asyncron in die "requestChatGeneration" Funktion???
+
+
     // change the mode to chat
     chatApp.changeMode("chat");
     
@@ -47,8 +47,7 @@ socket.on("serverSendingNewChat", (res) => {
   }
 });
 
-socket.on("serverSendingNewContact", (contacts) => {
-  chatApp.clientProfile.contacts.concat(contacts);
-});
+socket.on("serverSendingNewContact", (contacts) => chatApp.clientProfile.contacts.concat(contacts));
+
 // receive a new Message and add it to the related Chat
 socket.on("serverSendingNewMessage", (message) => chatApp.addMessageToChat(message));

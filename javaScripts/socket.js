@@ -27,7 +27,7 @@ socket.on(`serverReturningProfile`, (res) => {
   }
 });
 
-socket.on("serverSendingNewChat", (res)=> {
+socket.on("serverSendingNewChat", (res) => {
   if (!res.error) {
     chatApp.createNewChat(res.chat);
     

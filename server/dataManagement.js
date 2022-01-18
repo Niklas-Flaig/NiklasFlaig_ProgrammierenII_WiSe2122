@@ -146,10 +146,7 @@ module.exports = {
     if (userID !== undefined) {
       return userID;
     } else {
-      err = { // the specific Profile doesn't exist
-        errorCode: 522,
-        missingProfile: userName
-      };
+      err = 521; // a requested Profile doesn't exist
       throw err;
     }
   },

@@ -78,6 +78,13 @@ module.exports = {
   },
   // will try to create a new Contact, if thats not possible throw an error
   createNewContact: (userName, contactName) => {
+
+    // check if the names are the same, if so throw an error to exit this function
+    if (userName === contactName) {
+      err = 522; // tried to create a contact of a person to their own profile
+      throw err;
+    }
+
     // 1. get the Profiles
     const creatorProfile = dataStructure.profiles.find(profile => profile.getUserName() === userName);
     const otherPersonsProfile = dataStructure.profiles.find(profile => profile.getUserName() === contactName);

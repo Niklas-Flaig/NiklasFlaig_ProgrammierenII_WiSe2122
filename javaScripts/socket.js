@@ -47,8 +47,8 @@ socket.on("serverSendingNewChat", (res) => {
   }
 });
 
-socket.on("serverSendingNewContact", (contact) => {
-  chatApp.clientProfile.contacts.push(contact);
+socket.on("serverSendingNewContact", (contacts) => {
+  chatApp.clientProfile.contacts.concat(contacts);
 });
 // receive a new Message and add it to the related Chat
 socket.on("serverSendingNewMessage", (message) => chatApp.addMessageToChat(message));

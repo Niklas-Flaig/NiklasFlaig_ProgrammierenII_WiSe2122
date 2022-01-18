@@ -106,10 +106,9 @@ io.on('connection', function (socket) {
     // const creatorID = connectedClients.find(client => client.socketID === socket.id).userID;
     
     try {
-      // 1. determine the usersIDs
-      const userIDs = newChat.users.map(userName => dataManagement.getUserID(userName));
-
-      // 2. create contacts
+      console.log(newChat);
+      // create the contacts to connect all participants together
+      // Contacts don't really serve a purpose at this point
       const allNewContacts = newChat.users.map(userName => {
         let contactObjects;
         newChat.users.forEach(otherUserName => {

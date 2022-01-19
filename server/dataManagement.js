@@ -41,27 +41,21 @@ module.exports = {
       return createResponse.forProfile(profile);
     }
   },
-  createNewChat: (newChatData, creatorID) => {
-    // 1. get the creators Profile (this is a refference)
-    const creatorProfile = dataStructure.profiles.find(profile => profile.getUserID() === creatorID);
+  createNewChat: (newChatData) => {
 
+    const userIDs = newChatData.users.map(userName => dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID());
+    
     // create the newChat
     let newChat = {};
 
     switch (newChatData.chatType) {
       case "pToPChat":
-        // 2. search for the other Persons contact
-        const otherPersonContact = creatorProfile.getContact(newChatData.users[1]);
 
-        // 3. create a new PToPChat
-        newChat = new PToPChat([creatorID, otherPersonContact.getUserID()]);
+        newChat = new PToPChat(userIDs);
         break;
       case "groupChat":
-        console.log(newChatData);
-        const userIDs = newChatData.users.map(userName => dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID());
-        console.log(userIDs);
-        newChat = new GroupChat(userIDs, newChatData.groupName);
 
+        newChat = new GroupChat(userIDs, newChatData.groupName);
         break;
     }
 
@@ -74,7 +68,7 @@ module.exports = {
     });
     
     // 6. return a newChat Object
-    return createResponse.forChat(newChat, creatorID);
+    return createResponse.forChat(newChat);
   },
   // will try to create a new Contact, if thats not possible throw an error
   createNewContact: (userName, contactName) => {
@@ -170,7 +164,7 @@ const createResponse = {
       //TODO profilePic:,
     };
   },
-  forChat: (chat, requesterID) => { // expects an instance of a Child of Chat
+  forChat: (chat) => { // expects an instance of a Child of Chat
     // type-independent values
     let chatObject = {
       chatID: chat.getChatID(),

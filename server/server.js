@@ -128,7 +128,7 @@ io.on('connection', function (socket) {
       });
 
       // 3. add the chat to the dataStructure and get a chatObject in return
-      const chatObject = dataManagement.createNewChat(newChat, creatorID);
+      const chatObject = dataManagement.createNewChat(newChat);
 
       // 3. create a response message with the newly created chatObject
       dataManagement.getUsersInChat(chatObject.chatID).forEach(chatMemberID => {

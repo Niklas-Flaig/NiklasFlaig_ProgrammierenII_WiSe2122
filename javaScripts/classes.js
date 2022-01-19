@@ -25,23 +25,7 @@ class Chat {
 
   getChatID() {return this.chatID;}
   getUsers() {return this.users;}
-  getHistory() {
-    if (this.history.length > 0) {
-      return this.history;
-    } else {
-      return [new TextMessage( // a placeholderMessage
-        chatApp.clientProfile.userID,
-        "",
-        {
-          "year": 0,
-          "month": 0,
-          "day": 0,
-          "hour": 0,
-          "minute": 0
-        }
-      )];
-    }
-  }
+  getHistory() {return this.history;}
   getChatName() {return this.chatName;}
   getImage() {return this.image;}
   getLastMessageText() {

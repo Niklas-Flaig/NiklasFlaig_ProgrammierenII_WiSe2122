@@ -1,12 +1,13 @@
 // classes
 class Chat {
-  constructor(chatID, users, history, chatName, image) {
+  constructor(chatID, users, history, chatName, image, chatType) {
     this.chatID = chatID;
     this.users = users;
     this.history = [];
     history.forEach(message => this.addMessage(message));
     this.chatName = chatName;
     this.image = image;
+    this.chatType = "";
   }
   addMessage(message) {
      // create a new object of a Message-class child-class
@@ -46,13 +47,13 @@ class PToPChat extends Chat {
     // get the name to this UserID from the currentProfiles contacts
     const chatName = chatApp.clientProfile.contacts.find(contact => contact.userID === otherPersonsUserID).savedName;
     
-    super(chatID, users, history, chatName, image);
+    super(chatID, users, history, chatName, image, "pToPChat");
   }
 }
 
 class GroupChat extends Chat {
   constructor(chatID, users, history, chatName, image) {
-    super(chatID, users, history, chatName, image);
+    super(chatID, users, history, chatName, image, "groupChat");
   }
 }
 

@@ -65,11 +65,11 @@
 
 
         <!-- the in Chat Surface with messages -->
-        <div id="inChatSurface" class="surface" v-if="currentMode !== 0">
-          <div id="chatHistory" v-if="chatHistory.length > 0">
+        <div id="inChatSurface" class="surface">
+          <div id="chatHistory" v-if="currentChat.history.length > 0">
             <!-- creation of the messages -->
-            <div v-for="message in chatHistory" v-bind:class=message.getSenderClass()>
-              <div class="sender">{{ message.getSenderName() }}</div>
+            <div v-for="message in currentChat.history" v-bind:class=message.getSenderClass()>
+              <div class="sender" v-if="">{{ message.getSenderName() }}</div>
               <div class="content">{{ message.getContent() }}</div>
               <div class="time">{{ message.getTimeToDisplay() }}</div>
             </div>

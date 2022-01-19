@@ -25,10 +25,14 @@ let chatApp = new Vue({
     clientChats: [],
 
 
-    currentChatID: 0,
+    currentChat: {
+      chatID: 0,
+      history: [],
+      chatType: "",
+    },
+
     newMessageText: "",
 
-    chatHistory: [],
   },
   methods: {
     submitLogin: function () {
@@ -88,12 +92,14 @@ let chatApp = new Vue({
       }
     },
     switchChat: function (thisChatID) {
-      this.chatHistory = this.clientChats.find(chat => chat.chatID === thisChatID).getHistory();
-      this.currentChatID = thisChatID;
+      const thisChat = this.clientChats.find(chat => chat.chatID === thisChatID);
+      this.currentChat.chatID = thisChatID;
+      this.currentChat.history = thisChat.getHistory();
+      this.currentChat.chatType = thisChat.getChatType();
     },
     sendMessage: function () { // why not () => {}
       socket.emit("clientSendingNewMessage", {
-        chatID: this.currentChatID,
+        chatID: this.currentChat.chatID,
         content: this.newMessageText,
         messageType: "textMessage"
       });

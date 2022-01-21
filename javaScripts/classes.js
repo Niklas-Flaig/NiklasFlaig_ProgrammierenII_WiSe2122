@@ -7,7 +7,7 @@ class Chat {
     history.forEach(message => this.addMessage(message));
     this.chatName = chatName;
     this.image = image;
-    this.chatType = "";
+    this.chatType = chatType;
   }
   addMessage(message) {
      // create a new object of a Message-class child-class
@@ -28,6 +28,7 @@ class Chat {
   getUsers() {return this.users;}
   getHistory() {return this.history;}
   getChatName() {return this.chatName;}
+  getChatType() {return this.chatType;}
   getImage() {return this.image;}
   getLastMessageText() {
     // when theres no lastMessage, display a sorry-message

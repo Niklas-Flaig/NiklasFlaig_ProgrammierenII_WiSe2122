@@ -2,12 +2,19 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8">
-    <title>Chat</title>
+    <title>JHat</title>
     <link rel="stylesheet" href="./styles/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   </head>
   <body>
     <div id="vue">
+      <div id="header">
+        <div class="left"></div>
+        <div class="center">JHat</div>
+        <div class="right">
+          Profile.Name
+        </div>
+      </div>
       <!-- loginScreen -->
       <div id="logInScreen" class="screen" v-if="currentMode === 'logIn'">
         <div v-on:click="submitNiklasFlaigLogin()"> <!-- this button is temporary -->
@@ -37,7 +44,7 @@
           </label>
           <label>
             PassWord:
-            <input type="text" v-model="password" placeholder="Enter Password..."/>
+            <input type="text" v-model="password" placeholder="Enter PassWord..."/>
           </label>
           <label>
             PassWord (repeat):
@@ -48,15 +55,18 @@
         </div>
       </div>
       
-      <div id="chat" class="screen" v-if="currentMode === 'chat'">
+      <div id="chat" v-if="currentMode === 'chat'">
         <!-- chat/group selection -->
         <div id="chatSelectSurface" class="surface">
-          <button :id="chat.getChatID()" class="chatTo" v-for="chat in clientChats" v-on:click="switchChat(chat.chatID)">
-            <h4 class="chatName"> 
-              {{ chat.getChatName() }}
-            </h4>
-            <div class="lastMessage" class="sendtBy_You">
-              {{ chat.getLastMessageText() }}
+          <button class="chatTo" v-for="chat in clientChats" v-on:click="switchChat(chat.chatID)">
+            <div class="profilePicture"></div>
+            <div class="info">
+              <h4 class="chatName">
+                {{ chat.getChatName() }}
+              </h4>
+              <div class="lastMessage" class="sendtBy_You">
+                {{ chat.getLastMessageText() }}
+              </div>
             </div>
           </button>
           <!-- add a new chat -->
@@ -68,7 +78,7 @@
         <div id="inChatSurface" class="surface">
           <div id="chatHistory" v-if="currentChat.history.length > 0">
             <!-- creation of the messages -->
-            <div v-for="message in currentChat.history" v-bind:class=message.getSenderClass()>
+            <div class="message" v-for="message in currentChat.history" v-bind:class=message.getSenderClass()>
               <div class="sender" v-if="">{{ message.getSenderName() }}</div>
               <div class="content">{{ message.getContent() }}</div>
               <div class="time">{{ message.getTimeToDisplay() }}</div>

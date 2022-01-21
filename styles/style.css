@@ -1,7 +1,41 @@
+/* https://codepen.io/sdthornton/pen/wBZdXq */
 * {
   background-color: #262626;
   color: #E8E8E8;
   font-family: sans-serif;
+  height: 100%;
+}
+body {
+  margin: 0px;
+  height: 100%;
+}
+
+#header {
+  background: #181818;
+  margin: 0px;
+  height: 60px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#header div {
+  background: #181818;
+  display: flex;
+  align-items: center;
+}
+#header .left {
+  width: 200px;
+}
+#header .center {
+  font-size: 20px;
+  width: auto;
+}
+#header .right {
+  box-sizing: border-box;
+  width: 200px;
+  text-align: end;
+  padding: 20px
 }
 
 #chat {
@@ -10,10 +44,12 @@
 
 .screen {
   margin: 60px 5% 0% 5%;
+  height: fit-content;
 }
 
 .screen .heading {
   text-align: center;
+  height: fit-content;
 }
 
 .screen .inputs {
@@ -32,7 +68,6 @@
 
 
 .surface {
-  border: solid 1px #E8E8E8;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -40,19 +75,36 @@
 
 
 #chatSelectSurface {
- height: 100%;
- width: 10%;
+  background: #262626;
+  height: 100%;
+  width: auto;
+  padding: 0px;
 }
 #chatSelectSurface .chatTo {
-  border: solid 1px #E8E8E8;
-  display: block;
+  width: 300px;
+  height: 100px;
+  display: flex;
+  border: 0;
+}
+#chatSelectSurface .chatTo div {
+  height: fit-content;
+}
+#chatSelectSurface .profilePicture  {
+  width: 72px;
+}
+#chatSelectSurface .info {
+  text-align: start;
+}
+
+
+#inChatSurface {
+  width: 100%;
+}
+#inChatSurface .message {
+  height: fit-content;
 }
 h4.userName {
   margin-bottom: 0px;
-}
-#inChatSurface {
-  width: 62%;
-  height: 100%;
 }
 
 

@@ -24,10 +24,12 @@
           <label>
             UserName:
             <input type="text" v-model="userName" placeholder="Enter Username..."/>
+            <span class="errMsg" v-if="userNameErr !== ''">{{ userNameErr }}</span>
           </label>
           <label>
             PassWord:
             <input type="text" v-model="password" v-on:keyup.enter="submitLogin()" placeholder="Enter PassWord..."/>
+            <span class="errMsg" v-if="passwordErr !== ''">{{ passwordErr }}</span>
           </label>
           <button v-on:click="submitLogin()">Enter</button>
           <a v-on:click="changeMode('register')">register</a>
@@ -41,14 +43,17 @@
           <label>
             UserName:
             <input type="text" v-model="userName" placeholder="Enter Username..."/>
+            <span class="errMsg" v-if="userNameErr !== ''">{{ userNameErr }}</span>
           </label>
           <label>
             PassWord:
             <input type="text" v-model="password" placeholder="Enter PassWord..."/>
+            <span class="errMsg" v-if="passwordErr !== ''">{{ passwordErr }}</span>
           </label>
           <label>
             PassWord (repeat):
-            <input type="text" v-model="repeatPassword" v-on:keyup.enter="submitRegister() placeholder="Repeat Password..."/>
+            <input type="text" v-model="repeatPassword" v-on:keyup.enter="submitRegister()" placeholder="Repeat Password..."/>
+            <span class="errMsg" v-if="repeatPasswordErr !== ''">{{ repeatPasswordErr }}</span>
           </label>
           <button v-on:click="submitRegister()">Enter</button>
           <a v-on:click="changeMode('logIn')">Already have an account?</a>
@@ -59,7 +64,7 @@
         <!-- chat/group selection -->
         <div id="chatSelectSurface" class="surface">
           <button class="chatTo" v-for="chat in clientChats" v-on:click="switchChat(chat.chatID)">
-            <div class="profilePicture"></div>
+            <!-- <div class="profilePicture"></div> -->
             <div class="info">
               <h4 class="chatName">
                 {{ chat.getChatName() }}
@@ -70,7 +75,7 @@
             </div>
           </button>
           <!-- add a new chat -->
-          <button v-on:click="changeMode('createChat')">add chat</button>
+          <button class="button" v-on:click="changeMode('createChat')">add chat</button>
         </div>
 
 

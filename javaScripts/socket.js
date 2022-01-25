@@ -15,12 +15,15 @@ socket.on(`serverReturningProfile`, (res) => {
   } else {
     switch (res.error) {
       case 508:
+        chatApp.passwordErr = "Invalid Password!";
         console.log("error 508: invalid Password");
         break;
       case 509:
+        chatApp.userNameErr = "This Profile doesn't exist!";
         console.log("error 509: profile not found");
         break;
       case 510:
+        chatApp.userNameErr = "This Profile already exists!";
         console.log("error 510: Profile already exists");
         break;
     }

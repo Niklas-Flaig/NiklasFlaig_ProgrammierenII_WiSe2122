@@ -64,8 +64,30 @@ let chatApp = new Vue({
       });
     },
     submitRegister: function () {
+      let err = false;
+      
+      // errorChecks
+      if (chatApp.userName === "") { // check if the UserName is empty
+        err = true;
+        chatApp.userNameErr = "You have to enter a UserName!";
+      } else {
+        chatApp.userNameErr = "";
+      }
+      if (chatApp.password === "") { //check if the password is empty
+        err = true;
+        chatApp.passwordErr = "You have to enter a password!";
+      } else {
+        chatApp.passwordErr = "";
+      }
+      if (chatApp.password !== chatApp.repeatPassword) { // check if the password matches the repeat
+        err = true;
+        chatApp.repeatPasswordErr = "The passwords have to match!";
+      } else {
+        chatApp.repeatPasswordErr = "";
+      }
+
       // emit an object with the userName and password
-      socket.emit("clientTrysToRegister", {
+      if (err === false) socket.emit("clientTrysToRegister", {
         userName: this.userName,
         password: this.password,
       });

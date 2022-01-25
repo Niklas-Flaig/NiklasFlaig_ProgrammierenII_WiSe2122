@@ -12,7 +12,7 @@
         <div class="left"></div>
         <div class="center">JHat</div>
         <div class="right">
-          Profile.Name
+          <span v-if="clientProfile.userName !== undefined">{{ clientProfile.userName }}</span>
         </div>
       </div>
       <!-- loginScreen -->
@@ -21,6 +21,10 @@
           <h2 class="heading">Log in!</h2>
         </div>
         <div class="inputs">
+          <div class="tabMenu">
+            <div class="active">LogIn</div>
+            <div class="notActive" v-on:click="changeMode('register')">Register</div>
+          </div>
           <label>
             UserName:
             <input type="text" v-model="userName" placeholder="Enter Username..."/>
@@ -32,7 +36,6 @@
             <span class="errMsg" v-if="passwordErr !== ''">{{ passwordErr }}</span>
           </label>
           <button v-on:click="submitLogin()">Enter</button>
-          <a v-on:click="changeMode('register')">register</a>
         </div>
       </div>
 
@@ -40,6 +43,10 @@
       <div id="registerScreen" class="screen" v-if="currentMode === 'register'">
         <h2 class="heading">Create a new account!</h2>
         <div class="inputs">
+          <div class="tabMenu">
+            <div class="notActive" v-on:click="changeMode('logIn')">LogIn</div>
+            <div class="active">Register</div>
+          </div>
           <label>
             UserName:
             <input type="text" v-model="userName" placeholder="Enter Username..."/>
@@ -56,7 +63,6 @@
             <span class="errMsg" v-if="repeatPasswordErr !== ''">{{ repeatPasswordErr }}</span>
           </label>
           <button v-on:click="submitRegister()">Enter</button>
-          <a v-on:click="changeMode('logIn')">Already have an account?</a>
         </div>
       </div>
       
@@ -75,7 +81,7 @@
             </div>
           </button>
           <!-- add a new chat -->
-          <button class="button" v-on:click="changeMode('createChat')">add chat</button>
+          <button class="primary_button" v-on:click="changeMode('createChat')">add chat</button>
         </div>
 
 
@@ -109,8 +115,8 @@
         <h2 class="heading">Create a new GroupChat!</h2>
         <div class="inputs">
           <div class="tabMenu">
-            <div v-on:click="changeMode('createChat')">pToPChat</div>
-            <div>groupChat</div>
+            <div class="notActive" v-on:click="changeMode('createChat')">pToPChat</div>
+            <div class="active">groupChat</div>
           </div>
           <label>
             GroupName:
@@ -135,8 +141,8 @@
         <!-- Chat-Type selection -->
         <div class="inputs">
           <div class="tabMenu">
-            <div>pToPChat</div>
-            <div v-on:click="changeMode('createGroupChat')">groupChat</div>
+            <div class="active">pToPChat</div>
+            <div class="notActive" v-on:click="changeMode('createGroupChat')">groupChat</div>
           </div>
           <label>
             UserName:

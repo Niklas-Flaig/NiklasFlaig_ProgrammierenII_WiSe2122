@@ -55,6 +55,10 @@ body {
   padding: 20px;
 }
 
+#header .right span {
+  background: #181818;
+}
+
 #chat {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -97,7 +101,7 @@ body {
 }
 
 .screen .inputs .errMsg {
-  color: #881717;
+  color: #a11d1d;
 }
 
 .surface {
@@ -142,6 +146,10 @@ body {
 
 #chatSelectSurface .info {
   text-align: start;
+}
+
+#chatSelectSurface button {
+  height: 24px;
 }
 
 #inChatSurface {
@@ -203,6 +211,12 @@ button {
   width: auto;
 }
 
+button.primary_button {
+  background: #E8E8E8;
+  color: #181818;
+  border: 0;
+}
+
 .tabMenu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -215,8 +229,15 @@ button {
 
 .tabMenu div {
   margin: 8px auto;
-  border-bottom: solid 1px #E8E8E8;
   width: auto;
   text-align: center;
+}
+
+.tabMenu .active {
+  border-bottom: solid 1px #E8E8E8;
+}
+
+.tabMenu .notActive {
+  opacity: 50%;
 }
 /*# sourceMappingURL=style.css.map */

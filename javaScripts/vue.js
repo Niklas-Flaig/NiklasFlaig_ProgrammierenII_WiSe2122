@@ -6,8 +6,13 @@ let chatApp = new Vue({
 
     // LOGIN / Register STUFF
     userName: "",
+    userNameErr: "",
+
     password: "",
+    passwordErr: "",
+    
     repeatPassword: "",
+    repeatPasswordErr: "",
 
     // newChat STUFF;
     newChat: {
@@ -36,8 +41,24 @@ let chatApp = new Vue({
   },
   methods: {
     submitLogin: function () {
+      let err = false;
+      
+      // errorChecks
+      if (chatApp.userName === "") { // check if the UserName is empty
+        err = true;
+        chatApp.userNameErr = "You have to enter a UserName!";
+      } else {
+        chatApp.userNameErr = "";
+      }
+      if (chatApp.password === "") { //check if the password is empty
+        err = true;
+        chatApp.passwordErr = "You have to enter a password!";
+      } else {
+        chatApp.passwordErr = "";
+      }
+
       // emit an object with the userName and password
-      socket.emit("clientTrysToLogIn", {
+      if (err === false) socket.emit("clientTrysToLogIn", {
         userName: this.userName,
         password: this.password,
       });

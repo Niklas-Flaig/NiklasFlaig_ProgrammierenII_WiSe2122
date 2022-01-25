@@ -27,7 +27,7 @@
           </label>
           <label>
             PassWord:
-            <input type="text" v-model="password" placeholder="Enter PassWord..."/>
+            <input type="text" v-model="password" v-on:keyup.enter="submitLogin()" placeholder="Enter PassWord..."/>
           </label>
           <button v-on:click="submitLogin()">Enter</button>
           <a v-on:click="changeMode('register')">register</a>
@@ -48,7 +48,7 @@
           </label>
           <label>
             PassWord (repeat):
-            <input type="text" v-model="repeatPassword" placeholder="Repeat Password..."/>
+            <input type="text" v-model="repeatPassword" v-on:keyup.enter="submitRegister() placeholder="Repeat Password..."/>
           </label>
           <button v-on:click="submitRegister()">Enter</button>
           <a v-on:click="changeMode('logIn')">Already have an account?</a>

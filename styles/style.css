@@ -75,22 +75,25 @@ body {
 
 
 #chatSelectSurface {
-  background: #262626;
   height: 100%;
   width: auto;
   padding: 0px;
 }
 #chatSelectSurface .chatTo {
   width: 300px;
+  /* background: #383838; */
   height: 100px;
   display: flex;
   border: 0;
 }
 #chatSelectSurface .chatTo div {
   height: fit-content;
+  /* background: #383838; */
 }
-#chatSelectSurface .profilePicture  {
+#chatSelectSurface .profilePicture {
   width: 72px;
+  height: 10px;
+  background: #383838;
 }
 #chatSelectSurface .info {
   text-align: start;

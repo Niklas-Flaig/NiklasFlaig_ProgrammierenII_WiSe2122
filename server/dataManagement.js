@@ -96,7 +96,6 @@ module.exports = {
         //TODO if i want something to happen, when its tryed to create a Contact that already exists
       }
     } else {
-      console.log("?");
       err = 521; // a requested Profile doesn't exist
       throw err;
     }

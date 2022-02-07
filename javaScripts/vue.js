@@ -98,36 +98,55 @@ let chatApp = new Vue({
     requestChatGeneration: function (chatType) {
       let err = false;
 
+      
+      switch (chatType) {
+        case "pToPChat":
+          if (chatApp.newChat.userName === "") {
+            chatApp.newChat.userNameErr = "Enter a Name!";
+            err = true;
+          } else {
+            chatApp.newChat.userNameErr = "";
+          }
+          break;
+        case "groupChat":
+          if (chatApp.newGroupChat.name === "") {
+            chatApp.newGroupChat.nameErr = "Enter a Chatname!";
+            err = true;
+          } else {
+            chatApp.newGroupChat.nameErr = "";
+          }
+
+          if (chatApp.newGroupChat.userNames === "") {
+            chatApp.newGroupChat.userNamesErr = "Enter at least one Username!";
+            err = true;
+          } else {
+            chatApp.newGroupChat.userNamesErr = "";
+          }
+          break;
+      }
+
       let newChatElement = {
         chatType: chatType,
       };
 
-      // in a pToPChat you may not have the other Person as a contact, so you have to acces the Person with it's unique userName
-      if (chatType === "pToPChat") {
-        if (chatApp.newChat.userName !== "") {
-          // the other users unique userName
-          newChatElement.users = [chatApp.clientProfile.userName, chatApp.newChat.userName];
-          chatApp.newChat.userNameErr = "";
-        } else {
-          chatApp.newChat.userNameErr = "Enter a Name!";
-        }
-      } else if (chatType === "groupChat") {
-        if (chatApp.newGroupChat.users !== "") {
-          if (chatApp.newGroupChat.name !== "") {
-            // the other users userNames
-            newChatElement.users = [chatApp.clientProfile.userName];
-            newChatElement.users.concat(chatApp.newGroupChat.userNames.split(", "));
-            newChatElement.groupName = chatApp.newGroupChat.name;
-            newChat.userNamesErr = "";
-          } else {
-            chatApp.newGroupChat.nameErr = "";
-          }
-        } else {
-          chatApp.newGroupChat.userNamesErr = "";
-        }
-      }
-
       if (!err) {
+        switch (chatType) {
+          case "pToPChat":
+            // in a pToPChat you may not have the other Person as a contact, so you have to acces the Person with it's unique userName
+            // the other users unique userName
+            newChatElement.users = [chatApp.clientProfile.userName, chatApp.newChat.userName];
+            break;
+          case "groupChat":
+            // the other users userNames
+            newChatElement.users = chatApp.newGroupChat.userNames.split(", ");
+            newChatElement.users.push(chatApp.clientProfile.userName);
+            newChatElement.groupName = chatApp.newGroupChat.name;
+            chatApp.newGroupChat.nameErr = "";
+            chatApp.newGroupChat.userNamesErr = "";
+            console.log(newChatElement.users);
+            break;
+        }
+
         socket.emit("clientCreatingNewChat", newChatElement);
       }
     },

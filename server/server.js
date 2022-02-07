@@ -8,8 +8,58 @@ var fs = require('fs');
 // to interact with the required data
 var dataManagement = require("./dataManagement");
 
+
+const env = {
+  "thisClient": "Niklas",
+  "otherClient": "Michi",
+};
+// 2. import Mqtt: to communicate via the mqtt-server
+const mqtt = require("mqtt");
+// 2.1. connect to the server
+const mqttConnection = mqtt.connect("mqtt://mqtt.hfg.design:1883/");
+// 2.2. define the topic
+const mqttTopic = "iot2/";
+
+const sendingChannel = `${mqttTopic}${env.thisClient} sending to ${env.otherClient}`;
+const receivingChannel = `${mqttTopic}${env.otherClient} sending to ${env.thisClient}`;
+
 // a variable, the server can store a data pair for all the currently connected clients in
 let connectedClients = [];
+
+const emojis = [
+  "0",
+  "🏫",
+  "👨‍👩‍👧‍👦",
+  "📚",
+  "🏠",
+  "🔜",
+  "🚗",
+  "🏨",
+  "🕹",
+  "🍽",
+  "🙆‍♂️",
+  "😂",
+  "🏋️",
+  "🛠",
+  "❗️",
+  "🏁",
+  "💩",
+  "✔️",
+  "❌",
+  "👨‍💻",
+  "🚶",
+  "💏",
+  "❤️",
+  "🔥",
+  "🤬",
+  "😴",
+  "🥳",
+  "🤢",
+  "👈",
+  "🤝",
+  "👎",
+  "👍",
+];
 
 // Make the http-server listen on port 80
 app.listen(80);
@@ -36,6 +86,9 @@ function handler (req, res) {
         res.createResponse(404, "/index.html");
         break;
       case "/styles/style.css":
+        res.createResponse(406, req.url);
+        break;
+      case "/styles/style.css.map":
         res.createResponse(406, req.url);
         break;
       case "/javaScripts/classes.js":
@@ -147,6 +200,29 @@ io.on('connection', function (socket) {
 
   //listen for a new Message and add it to the specific chats history
   socket.on("clientSendingNewMessage", (message) => {
+    if (message.chatID === "mqttAble") {
+      let thisEmojis = Array.from(message.content.toString());
+      console.log(thisEmojis);
+      let positions = thisEmojis.map(thisEmoji => emojis.lastIndexOf(thisEmoji));
+      let areEmojis = true;
+      if (thisEmojis.length <= 1) {
+        if (positions[0] === undefined) areEmojis = false;
+      } else if (thisEmojis.length <= 2) {
+        if (positions[0] === undefined) areEmojis = false;
+        if (positions[1] === undefined) areEmojis = false;
+      } else if (thisEmojis.length <= 3) {
+        if (positions[0] === undefined) areEmojis = false;
+        if (positions[1] === undefined) areEmojis = false;
+        if (positions[2] === undefined) areEmojis = false;
+      } else {
+        areEmojis = false;
+      }
+
+      if (areEmojis) {
+        mqttConnection.publish(sendingChannel, `${positions[0]},${positions[1]},${positions[2]}`);
+        console.log(sendingChannel, `${positions[0]},${positions[1]},${positions[2]}`);
+      }
+    }
     // 1. determine the sender via the socketID
     // still usefull, because the client cant fake the userID
     message.clientID = connectedClients.find(client => client.socketID === socket.id).userID;
@@ -181,6 +257,41 @@ io.on('connection', function (socket) {
     }
   });
 });
+
+mqttConnection.on('connect', function () {
+  // add a listener for messages coming through the receiving Channel
+  mqttConnection.subscribe(receivingChannel);
+  console.log("connected to mqtt");
+});
+
+// when a message is coming in
+mqttConnection.on('message', (topic, message) => {
+  // 1. check the topic and then do Stuff
+  if (topic.includes(receivingChannel) || topic.includes(sendingChannel)) {
+    console.log("received: " + message);
+    let msgObject = {
+      chatID: "mqttAble",
+      content: message.toString().split(",").map(pos => emojis[pos]).toString(),
+      messageType: "textMessage",
+      clientID: dataManagement.getUserID("Michi"),
+    };
+    let resMessage = dataManagement.addMessageToChat(msgObject);
+    console.log("received: " + msgObject.content);
+
+    // 3. send an update to all online chatMembers
+    dataManagement.getUsersInChat(msgObject.chatID).forEach(chatMemberID => {
+      // if the clients userID is found among the connectedClients, emit this, to add this new message to his history
+      for (let x = 0; x < connectedClients.length; x++) {
+        if (connectedClients[x].userID === chatMemberID) {
+          io.to(connectedClients[x].socketID).emit("serverSendingNewMessage", resMessage);
+          break;
+        }
+      }
+    });
+  }
+
+});
+
 
 
 //* Probably its intelligent to just store the currently used Chats(with online users) in the servers Memory and leave the rest on the drive?

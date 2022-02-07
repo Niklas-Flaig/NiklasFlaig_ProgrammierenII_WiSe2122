@@ -401,12 +401,15 @@ dataStructure.profiles = [
   new Profile("Niklas Flaig", "1234"),
   new Profile("Peter Obama", "4321"),
   new Profile("Katherine", "0000"),
+  new Profile("Michi", "1234"),
 ];
 
 // add contacts to profiles
 //? sinnvoller den Contact in der methode zu kreieren?
 dataStructure.profiles[0].addContact(dataStructure.profiles[1].getUserID(), "Pete");
 dataStructure.profiles[0].addContact(dataStructure.profiles[2].getUserID(), "Kat");
+dataStructure.profiles[0].addContact(dataStructure.profiles[3].getUserID(), "Michi");
+
 
 dataStructure.profiles[1].addContact(dataStructure.profiles[0].getUserID(), "Nikl");
 dataStructure.profiles[1].addContact(dataStructure.profiles[2].getUserID(), "Kat");
@@ -414,12 +417,17 @@ dataStructure.profiles[1].addContact(dataStructure.profiles[2].getUserID(), "Kat
 dataStructure.profiles[2].addContact(dataStructure.profiles[0].getUserID(), "Niklas");
 dataStructure.profiles[2].addContact(dataStructure.profiles[1].getUserID(), "Peter O.");
 
+dataStructure.profiles[3].addContact(dataStructure.profiles[0].getUserID(), "Niklas");
+
 // create new chats
 dataStructure.chats = [
   new PToPChat([dataStructure.profiles[0].getUserID(), dataStructure.profiles[1].getUserID()]),
   new PToPChat([dataStructure.profiles[0].getUserID(), dataStructure.profiles[2].getUserID()]),
   new GroupChat([dataStructure.profiles[0].getUserID(), dataStructure.profiles[1].getUserID(), dataStructure.profiles[2].getUserID()], "PizzaGroup"),
+  new PToPChat([dataStructure.profiles[0].getUserID(), dataStructure.profiles[3].getUserID()]),
 ];
+
+dataStructure.chats[3].chatID = "mqttAble";
 
 dataStructure.chats[0].addMessageToHistory(new TextMessage(dataStructure.profiles[0].getUserID(), "Pizza?"));
 dataStructure.chats[0].addMessageToHistory(new TextMessage(dataStructure.profiles[1].getUserID(), "Ok"));
@@ -434,15 +442,21 @@ dataStructure.chats[2].addMessageToHistory(new TextMessage(dataStructure.profile
 dataStructure.chats[2].addMessageToHistory(new TextMessage(dataStructure.profiles[0].getUserID(), "Nice Group!"));
 dataStructure.chats[2].addMessageToHistory(new TextMessage(dataStructure.profiles[1].getUserID(), "Why spam?"));
 
+dataStructure.chats[3].addMessageToHistory(new TextMessage(dataStructure.profiles[0].getUserID(), "HI"));
+dataStructure.chats[3].addMessageToHistory(new TextMessage(dataStructure.profiles[3].getUserID(), "Auch hallo!"));
+
 
 // add chats to Profiles 
 // mainly so we don't have to search the chats with the userID in it
 dataStructure.profiles[0].addChat(dataStructure.chats[0].getChatID());
 dataStructure.profiles[0].addChat(dataStructure.chats[1].getChatID());
 dataStructure.profiles[0].addChat(dataStructure.chats[2].getChatID());
+dataStructure.profiles[0].addChat(dataStructure.chats[3].getChatID());
 
 dataStructure.profiles[1].addChat(dataStructure.chats[0].getChatID());
 dataStructure.profiles[1].addChat(dataStructure.chats[2].getChatID());
 
 dataStructure.profiles[2].addChat(dataStructure.chats[1].getChatID());
 dataStructure.profiles[2].addChat(dataStructure.chats[2].getChatID());
+
+dataStructure.profiles[3].addChat(dataStructure.chats[3].getChatID());

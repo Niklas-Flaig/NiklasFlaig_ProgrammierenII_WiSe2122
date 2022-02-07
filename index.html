@@ -123,10 +123,12 @@
           <label>
             GroupName:
             <input type="text" v-model="newGroupChat.name" placeholder="Enter ChatName..."/>
+            <span class="errMsg" v-if="newGroupChat.nameErr !== ''">{{ newGroupChat.nameErr }}</span>
           </label>
           <label>
             UserNames:
             <input type="text" v-model="newGroupChat.userNames" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="User1, User2, ..."/>
+            <span class="errMsg" v-if="newGroupChat.userNamesErr !== ''">{{ newGroupChat.userNamesErr }}</span>
           </label>
           <div id="newChatParticipants">
             <div v-for="user in newGroupChat.users">
@@ -149,6 +151,7 @@
           <label>
             UserName:
             <input type="text" v-model="newChat.userName" v-on:keyup.enter="requestChatGeneration('pToPChat')" placeholder="Enter UserName..."/>
+            <span class="errMsg" v-if="newChat.userNameErr !== ''">{{ newChat.userNameErr }}</span>
           </label>
           <button v-on:click="requestChatGeneration('pToPChat')">create chat</button>
         </div>

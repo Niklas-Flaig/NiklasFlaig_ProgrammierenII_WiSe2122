@@ -44,7 +44,13 @@ socket.on("serverSendingNewChat", (res) => {
   } else {
     switch (res.error) {
       case 521:
-        console.log("error 521: Profile couldn't be found");
+        chatApp.newGroupChat.userNamesErr = "A requested Profile doesn't exist!";
+        chatApp.newChat.userNameErr = "The requested Profile doesn't exist!";
+        console.log("error 521: Profile not found");
+        break;
+      case 522:
+        chatApp.newGroupChat.userNamesErr = "You can't create a group with yourself!";
+        console.log("error 522: No u!");
         break;
     }
   }

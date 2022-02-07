@@ -17,10 +17,13 @@ let chatApp = new Vue({
     // newChat STUFF;
     newChat: {
       userName: "",
+      userNameErr: "",
     },
     newGroupChat: {
       name: "",
-      userNames: ""
+      nameErr: "",
+      userNames: "",
+      userNamesErr: ""
     },
 
 
@@ -93,24 +96,40 @@ let chatApp = new Vue({
       });
     },
     requestChatGeneration: function (chatType) {
-      let newChat = {
+      let err = false;
+
+      let newChatElement = {
         chatType: chatType,
       };
 
       // in a pToPChat you may not have the other Person as a contact, so you have to acces the Person with it's unique userName
       if (chatType === "pToPChat") {
-        // the other users unique userName
-        newChat.users = [chatApp.clientProfile.userName, chatApp.newChat.userName];
-        console.log(newChat.users);
+        if (chatApp.newChat.userName !== "") {
+          // the other users unique userName
+          newChatElement.users = [chatApp.clientProfile.userName, chatApp.newChat.userName];
+          chatApp.newChat.userNameErr = "";
+        } else {
+          chatApp.newChat.userNameErr = "Enter a Name!";
+        }
       } else if (chatType === "groupChat") {
-        // the other users userNames
-        newChat.users = [chatApp.clientProfile.userName];
-        newChat.users.concat(chatApp.newGroupChat.userNames.split(", "));
-        newChat.groupName = chatApp.newGroupChat.name;
+        if (chatApp.newGroupChat.users !== "") {
+          if (chatApp.newGroupChat.name !== "") {
+            // the other users userNames
+            newChatElement.users = [chatApp.clientProfile.userName];
+            newChatElement.users.concat(chatApp.newGroupChat.userNames.split(", "));
+            newChatElement.groupName = chatApp.newGroupChat.name;
+            newChat.userNamesErr = "";
+          } else {
+            chatApp.newGroupChat.nameErr = "";
+          }
+        } else {
+          chatApp.newGroupChat.userNamesErr = "";
+        }
       }
 
-      console.log(newChat);
-      socket.emit("clientCreatingNewChat", newChat);
+      if (!err) {
+        socket.emit("clientCreatingNewChat", newChatElement);
+      }
     },
     createNewChat: function (chat) {
       // add the new Chat to the vue

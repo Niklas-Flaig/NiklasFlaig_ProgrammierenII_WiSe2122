@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Niklas-Flaig/NiklasFlaig_ProgrammierenII_WiSe2122#readme",
   "dependencies": {
+    "mqtt": "^4.3.4",
     "socket.io": "^4.4.0"
   }
 }

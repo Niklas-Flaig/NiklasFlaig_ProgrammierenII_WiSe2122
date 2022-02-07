@@ -35,7 +35,7 @@
             <input type="text" v-model="password" v-on:keyup.enter="submitLogin()" placeholder="Enter PassWord..."/>
             <span class="errMsg" v-if="passwordErr !== ''">{{ passwordErr }}</span>
           </label>
-          <button v-on:click="submitLogin()">Enter</button>
+          <button v-on:click="submitLogin()" class="primary_button">Enter</button>
         </div>
       </div>
 
@@ -62,7 +62,7 @@
             <input type="text" v-model="repeatPassword" v-on:keyup.enter="submitRegister()" placeholder="Repeat Password..."/>
             <span class="errMsg" v-if="repeatPasswordErr !== ''">{{ repeatPasswordErr }}</span>
           </label>
-          <button v-on:click="submitRegister()">Enter</button>
+          <button v-on:click="submitRegister()" class="primary_button">Enter</button>
         </div>
       </div>
       
@@ -100,7 +100,9 @@
           </div>
           <div id="chatInput" v-if="currentChat.chatType !== ''">
             <input type="text" id="textMessage_TextInput" v-model="newMessageText" v-on:keyup.enter="sendMessage" placeholder="Enter message...">
-            <button id="sendMessage_Button" v-on:click="sendMessage()">send</button>
+            <button id="sendMessage_Button" v-on:click="sendMessage()">
+              <svg height="24px" viewBox="0 0 24 24" width="24px" class="icons"><path d="M0 0h24v24H0z" fill="none"/><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
           </div>
         </div>
 

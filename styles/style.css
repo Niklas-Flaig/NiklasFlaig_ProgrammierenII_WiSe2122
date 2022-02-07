@@ -1,18 +1,34 @@
 /* https://codepen.io/sdthornton/pen/wBZdXq */
 * {
-  background-color: #262626;
-  color: #E8E8E8;
   font-family: sans-serif;
   height: 100%;
 }
 
 body {
+  background-color: #262626;
+  color: #E8E8E8;
   margin: 0px;
   height: 100%;
 }
 
+input {
+  padding: 4px;
+  background-color: #363636;
+  color: #E8E8E8;
+  border: none;
+}
+
+.primary_button {
+  min-width: 100px;
+  width: auto;
+  height: 24px;
+  background: #E8E8E8;
+  color: #181818;
+  border: 0;
+}
+
 #header {
-  background: #181818;
+  background: #383838;
   margin: 0px;
   height: 60px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -29,7 +45,6 @@ body {
 }
 
 #header div {
-  background: #181818;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -55,14 +70,162 @@ body {
   padding: 20px;
 }
 
-#header .right span {
-  background: #181818;
-}
-
 #chat {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: absolute;
+  top: 60px;
+  bottom: 0px;
+  height: auto;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#chat #chatSelectSurface {
+  z-index: 100;
+  border-right: solid 1px #E8E8E8;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 300px;
+  padding: 0px;
+}
+
+#chat #chatSelectSurface .chatTo {
+  width: 300px;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #262626;
+  color: #E8E8E8;
+  border: none;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+#chat #chatSelectSurface .chatTo:hover {
+  background-color: #383838;
+}
+
+#chat #chatSelectSurface .chatTo div {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+#chat #chatSelectSurface .profilePicture {
+  width: 72px;
+  height: 10px;
+  background: #383838;
+}
+
+#chat #chatSelectSurface .info {
+  text-align: start;
+}
+
+#chat #inChatSurface {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: auto;
+  height: 100%;
+}
+
+#chat #inChatSurface .message {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+#chat #inChatSurface #chatHistoryEmpty {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+#chat #inChatSurface #chatHistory {
+  padding: 24px;
+  position: absolute;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  top: 0;
+  right: 0;
+  left: 300px;
+  bottom: 61px;
+  height: auto;
+  width: auto;
+  overflow-y: auto;
+}
+
+#chat #inChatSurface #chatHistory div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-bottom: 10px;
+}
+
+#chat #inChatSurface #chatHistory div div {
+  padding-bottom: 0px;
+}
+
+#chat #inChatSurface #chatHistory div .sender {
+  font-weight: bold;
+}
+
+#chat #inChatSurface #chatHistory div .content {
+  font-size: 17px;
+}
+
+#chat #inChatSurface #chatHistory div .time {
+  font-size: 10px;
+}
+
+#chat #inChatSurface #chatHistory .sendtBy_You div {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+#chat #inChatSurface #chatInput {
+  padding: 16px 24px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 300px;
+  width: auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: #383838;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#chat #inChatSurface #chatInput #textMessage_TextInput {
+  margin-right: 16px;
+  font-size: large;
+  width: 100%;
+  background-color: #262626;
+  border-radius: 4px;
+}
+
+#chat #inChatSurface #chatInput #sendMessage_Button {
+  padding: 0;
+  border: 0;
+  width: 24px;
+  background-color: #383838;
+}
+
+#chat #inChatSurface #chatInput #sendMessage_Button .icons {
+  fill: #E8E8E8;
 }
 
 .screen {
@@ -74,9 +237,6 @@ body {
 
 .screen .heading {
   text-align: center;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 .screen .inputs {
@@ -94,6 +254,9 @@ body {
   width: 200px;
   margin: 10px 0 10px 0;
   left: 100px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .screen .inputs label {
@@ -105,7 +268,9 @@ body {
 }
 
 .surface {
-  padding: 24px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -113,108 +278,10 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-#chatSelectSurface {
-  height: 100%;
-  width: auto;
-  padding: 0px;
-}
-
-#chatSelectSurface .chatTo {
-  width: 300px;
-  /* background: #383838; */
-  height: 100px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  border: 1px solid #E8E8E8;
-}
-
-#chatSelectSurface .chatTo div {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  /* background: #383838; */
-}
-
-#chatSelectSurface .profilePicture {
-  width: 72px;
-  height: 10px;
-  background: #383838;
-}
-
-#chatSelectSurface .info {
-  text-align: start;
-}
-
-#chatSelectSurface button {
-  height: 24px;
-}
-
-#inChatSurface {
-  width: 100%;
-}
-
-#inChatSurface .message {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 h4.userName {
   margin-bottom: 0px;
-}
-
-#chatHistory div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding-bottom: 10px;
-}
-
-#chatHistory div div {
-  padding-bottom: 0px;
-}
-
-#chatHistory div .sender {
-  font-weight: bold;
-}
-
-#chatHistory div .content {
-  font-size: 17px;
-}
-
-#chatHistory div .time {
-  font-size: 10px;
-}
-
-#chatHistory .sendtBy_You div {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-}
-
-.textMessage {
-  color: #E8E8E8;
-  padding: 5px;
-  padding-left: 7px;
-  padding-right: 7px;
-  border-radius: 5px;
-}
-
-button {
-  min-width: 100px;
-  width: auto;
-}
-
-button.primary_button {
-  background: #E8E8E8;
-  color: #181818;
-  border: 0;
 }
 
 .tabMenu {

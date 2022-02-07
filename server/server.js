@@ -200,11 +200,14 @@ io.on('connection', function (socket) {
 
   //listen for a new Message and add it to the specific chats history
   socket.on("clientSendingNewMessage", (message) => {
+    // check if the chat is mqtt able
     if (message.chatID === "mqttAble") {
+      // check if the message contains 3 or less emojis
       let thisEmojis = Array.from(message.content.toString());
       console.log(thisEmojis);
       let positions = thisEmojis.map(thisEmoji => emojis.lastIndexOf(thisEmoji));
       let areEmojis = true;
+      // if so, emit the message to the broker
       if (thisEmojis.length <= 1) {
         if (positions[0] === undefined) areEmojis = false;
       } else if (thisEmojis.length <= 2) {
@@ -291,7 +294,3 @@ mqttConnection.on('message', (topic, message) => {
   }
 
 });
-
-
-
-//* Probably its intelligent to just store the currently used Chats(with online users) in the servers Memory and leave the rest on the drive?

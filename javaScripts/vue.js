@@ -141,12 +141,14 @@ let chatApp = new Vue({
       this.currentChat.chatType = thisChat.getChatType();
     },
     sendMessage: function () { // why not () => {}
-      socket.emit("clientSendingNewMessage", {
-        chatID: this.currentChat.chatID,
-        content: this.newMessageText,
-        messageType: "textMessage"
-      });
-      chatApp.newMessageText = "";
+      if (this.newMessageText !== "") {
+        socket.emit("clientSendingNewMessage", {
+          chatID: this.currentChat.chatID,
+          content: this.newMessageText,
+          messageType: "textMessage"
+        });
+        chatApp.newMessageText = "";
+      }
     },
     addMessageToChat: function (message) {
       // addMessage to the chat wich chatID matches the message.chatID

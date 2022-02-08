@@ -44,18 +44,20 @@ module.exports = {
   createNewChat: (newChatData) => {
 
     const userIDs = newChatData.users.map(userName => dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID());
-    
+    console.log(newChatData);
     // create the newChat
     let newChat = {};
 
     switch (newChatData.chatType) {
       case "pToPChat":
+        console.log(userIDs);
 
         newChat = new PToPChat(userIDs);
         break;
       case "groupChat":
-
+        console.log(userIDs);
         newChat = new GroupChat(userIDs, newChatData.groupName);
+        console.log(newChat);
         break;
     }
 
@@ -86,12 +88,12 @@ module.exports = {
     // 2. check if the otherPersonsProfile exists
     if (creatorProfile !== undefined && otherPersonsProfile !== undefined) {
       // 3. check if this profile doesn't exists
-      if (creatorProfile.getContact(contactName) === undefined) {
+      if (creatorProfile.getContact(otherPersonsProfile.getUserID()) === undefined) {
         // 4. add a new Contact to the creators Profile
         creatorProfile.addContact(otherPersonsProfile.getUserID(), otherPersonsProfile.getUserName());
   
         // 5. return a contactObject
-        return createResponse.forContact(creatorProfile.getContact(contactName));
+        return createResponse.forContact(creatorProfile.getContact(otherPersonsProfile.getUserID()));
       } else {
         //TODO if i want something to happen, when its tryed to create a Contact that already exists
       }
@@ -167,7 +169,7 @@ const createResponse = {
     // type-independent values
     let chatObject = {
       chatID: chat.getChatID(),
-      users: chat.getUsers(), //? needed?
+      users: chat.getUsers(),
       history: chat.getHistory(),
       image: chat.getImage(),
       chatType: chat.getChatType()
@@ -346,7 +348,7 @@ class Profile {
   getUserName() {return this.userName;}
   getStatus() {return this.status;}
   getContacts() {return this.contacts;}//TODO kapselung
-  getContact(contactName) {return this.contacts.find(contact => contact.getSavedName() === contactName);}
+  getContact(userID) {return this.contacts.find(contact => contact.getUserID() === userID);}
   getProfilePic() {return this.profilePicFileName;} //TODO find a way to implement a picture in here...
 
   setStatus(newStatus) {

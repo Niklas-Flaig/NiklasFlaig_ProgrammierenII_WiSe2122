@@ -161,21 +161,26 @@ io.on('connection', function (socket) {
     try {
       // create the contacts to connect all participants together
       // Contacts don't really serve a purpose at this point
-      const allNewContacts = newChat.users.map(userName => {
+      const allNewContacts = [];
+      newChat.users.map(userName => {
         const contactObjects = [];
         newChat.users.forEach(otherUserName => {
-          if (userName !== otherUserName) contactObjects.push(dataManagement.createNewContact(userName, otherUserName));
+          let newContact;
+          if (userName !== otherUserName) newContact = dataManagement.createNewContact(userName, otherUserName);
+          if (newContact !== undefined) contactObjects.push(newContact);
         });
-        return {
-          userID: dataManagement.getUserID(userName),
-          contacts: contactObjects
-        };
+        if (contactObjects.length > 0) {
+          allNewContacts.push({
+            userID: dataManagement.getUserID(userName),
+            contacts: contactObjects
+          });
+        }
       });
 
       // 2.1 if successfull emit the new Contacts
       allNewContacts.forEach(user => {
         const socketID = connectedClients.find(client => client.userID === user.userID).socketID;
-        io.to(socketID).emit("serverSendingNewContact", user.contacts);
+        if (socketID !== undefined) io.to(socketID).emit("serverSendingNewContact", user.contacts);
       });
 
       // 3. add the chat to the dataStructure and get a chatObject in return
@@ -183,16 +188,20 @@ io.on('connection', function (socket) {
 
       // 3. create a response message with the newly created chatObject
       dataManagement.getUsersInChat(chatObject.chatID).forEach(chatMemberID => {
+        console.log(chatMemberID);
         // determin the chatMembers socketID
-        const thisClientsSocketID = connectedClients.find(client => client.userID === chatMemberID).socketID;
+        const thisClient = connectedClients.find(client => client.userID === chatMemberID);
 
         // if the clients userID is found among the connectedClients, emit this, to add the new chatObject to his viewModel
-        if (thisClientsSocketID !== undefined) io.to(thisClientsSocketID).emit("serverSendingNewChat", {
-          error: false,
-          chat: chatObject
-        });
+        if (thisClient !== undefined) {
+          io.to(thisClient.socketID).emit("serverSendingNewChat", {
+            error: false,
+            chat: chatObject
+          });
+        }
       });
     } catch (err) {
+      console.log(err);
       // give the creator-client an error
       socket.emit("serverSendingNewChat", {error: err});
     }

@@ -227,12 +227,13 @@ input {
       left: 100px;
       height: fit-content;
       border-bottom: 1px solid #E8E8E8;
+      border-radius: 4px 4px 0 0;
     }
     label {
       margin: 25px 0;
     }
     .errMsg {
-      color: #a11d1d;
+      color: #b82626;
     }
   }
 }

@@ -290,6 +290,7 @@ input {
   height: -moz-fit-content;
   height: fit-content;
   border-bottom: 1px solid #E8E8E8;
+  border-radius: 4px 4px 0 0;
 }
 
 .screen .inputs label {
@@ -297,7 +298,7 @@ input {
 }
 
 .screen .inputs .errMsg {
-  color: #a11d1d;
+  color: #b82626;
 }
 
 .surface {

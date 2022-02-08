@@ -31,28 +31,34 @@ socket.on(`serverReturningProfile`, (res) => {
 });
 
 socket.on("serverSendingNewChat", (res) => {
-  if (!res.error) {
-    chatApp.createNewChat(res.chat);
-
-
-    // change the mode to chat
-    chatApp.changeMode("chat");
-    
-    // switch the chat
-    chatApp.switchChat(res.chat.chatID);
-
-  } else {
-    switch (res.error) {
-      case 521:
-        chatApp.newGroupChat.userNamesErr = "A requested Profile doesn't exist!";
-        chatApp.newChat.userNameErr = "The requested Profile doesn't exist!";
-        console.log("error 521: Profile not found");
-        break;
-      case 522:
-        chatApp.newGroupChat.userNamesErr = "You can't create a group with yourself!";
-        console.log("error 522: No u!");
-        break;
+  // if youre the person, trying to create this new Chat
+  if (res.creatorID === chatApp.clientProfile.userID) {
+    if (!res.error) {
+      chatApp.createNewChat(res.chat);
+  
+  
+      // change the mode to chat
+      chatApp.changeMode("chat");
+      
+      // switch the chat
+      chatApp.switchChat(res.chat.chatID);
+  
+    } else {
+      switch (res.error) {
+        case 521:
+          chatApp.newGroupChat.userNamesErr = "A requested Profile doesn't exist!";
+          chatApp.newChat.userNameErr = "The requested Profile doesn't exist!";
+          console.log("error 521: Profile not found");
+          break;
+        case 522:
+          chatApp.newGroupChat.userNamesErr = "You can't create a group with yourself!";
+          console.log("error 522: No u!");
+          break;
+      }
     }
+  } else {
+    // if youre not the client trying to create this new chat
+    if (!res.error) chatApp.createNewChat(res.chat);
   }
 });
 

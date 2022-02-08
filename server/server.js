@@ -195,7 +195,8 @@ io.on('connection', function (socket) {
         if (thisClient !== undefined) {
           io.to(thisClient.socketID).emit("serverSendingNewChat", {
             error: false,
-            chat: chatObject
+            chat: chatObject,
+            creatorID: connectedClients.find(client => client.socketID === socket.id).userID,// even works if the client disconnects, because undefined wouldn't match any clientProfiel.userID
           });
         }
       });

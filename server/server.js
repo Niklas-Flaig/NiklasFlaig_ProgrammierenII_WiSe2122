@@ -203,7 +203,10 @@ io.on('connection', function (socket) {
     } catch (err) {
       console.log(err);
       // give the creator-client an error
-      socket.emit("serverSendingNewChat", {error: err});
+      socket.emit("serverSendingNewChat", {
+        error: err,
+        creatorID: connectedClients.find(client => client.socketID === socket.id).userID
+      });
     }
   });
 

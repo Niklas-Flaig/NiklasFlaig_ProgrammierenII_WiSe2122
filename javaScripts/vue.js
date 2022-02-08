@@ -181,6 +181,7 @@ let chatApp = new Vue({
     },
     switchChat: function (thisChatID) {
       const thisChat = this.clientChats.find(chat => chat.chatID === thisChatID);
+      this.newMessageText = ""; // empty the message inputfield
       this.currentChat.chatID = thisChatID;
       this.currentChat.history = thisChat.getHistory();
       this.currentChat.chatType = thisChat.getChatType();

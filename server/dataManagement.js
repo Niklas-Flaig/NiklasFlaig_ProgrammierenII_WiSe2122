@@ -44,20 +44,16 @@ module.exports = {
   createNewChat: (newChatData) => {
 
     const userIDs = newChatData.users.map(userName => dataStructure.profiles.find(profile => profile.getUserName() === userName).getUserID());
-    console.log(newChatData);
     // create the newChat
     let newChat = {};
 
     switch (newChatData.chatType) {
       case "pToPChat":
-        console.log(userIDs);
 
         newChat = new PToPChat(userIDs);
         break;
       case "groupChat":
-        console.log(userIDs);
         newChat = new GroupChat(userIDs, newChatData.groupName);
-        console.log(newChat);
         break;
     }
 

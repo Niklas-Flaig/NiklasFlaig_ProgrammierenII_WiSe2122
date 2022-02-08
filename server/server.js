@@ -188,7 +188,6 @@ io.on('connection', function (socket) {
 
       // 3. create a response message with the newly created chatObject
       dataManagement.getUsersInChat(chatObject.chatID).forEach(chatMemberID => {
-        console.log(chatMemberID);
         // determin the chatMembers socketID
         const thisClient = connectedClients.find(client => client.userID === chatMemberID);
 

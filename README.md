@@ -17,13 +17,19 @@ in dem jeweiligen Chat die Nachrichten bekommen.
 
 ## Usage
 ### get the code
-Einfach das Repo hier ziehen und los gehts
+Einfach das Repo hier ziehen und los gehts!
 ### make it work
 1. Navigiere in der Shell deiner Wahl zu dem Repository-Ordner
 2. gib in die Shell folgendes ein: node server/server.js
 3. öffne den Browser deiner Wahl und öffne folgende url: http://127.0.0.1/
-4. öffne diese url nochmal, für jeden theoretischen Nutzer
-
+4. öffne diese url so oft, bis du genügend theoretische Nutzer hast
+5. Registriere ein neues Konto und erstelle deinen ersten Chat
+6. alternativ kannst du auch die test Konten benutzen um eine bestehende Struktur zu testen
+("Name","Password")<br>
+("Niklas Flaig", "1234"),<br>
+("Peter Obama", "4321"),<br>
+("Katherine", "0000"),<br>
+("Michi", "1234"),<br>
 ## tech-stack
 Der tech-stack besteht aus vue.js einem front.end view+viewModel binding framework<br>
 socket.io das es vereinfacht html protokolle zwischen server und client auszutauschen<br>

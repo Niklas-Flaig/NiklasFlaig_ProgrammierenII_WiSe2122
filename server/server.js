@@ -201,7 +201,6 @@ io.on('connection', function (socket) {
         }
       });
     } catch (err) {
-      console.log(err);
       // give the creator-client an error
       socket.emit("serverSendingNewChat", {
         error: err,

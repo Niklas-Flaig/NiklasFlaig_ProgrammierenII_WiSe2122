@@ -104,10 +104,14 @@ let chatApp = new Vue({
           if (chatApp.newChat.userName === "") {
             chatApp.newChat.userNameErr = "Enter a Name!";
             err = true;
+          } else if (chatApp.newChat.userName === chatApp.clientProfile.userName) { // you cant start a chat with yourself
+            chatApp.newChat.userNameErr = "You can't chat with yourself!";
+            err = true;
           } else {
             chatApp.newChat.userNameErr = "";
           }
           break;
+
         case "groupChat":
           if (chatApp.newGroupChat.name === "") {
             chatApp.newGroupChat.nameErr = "Enter a Chatname!";
@@ -118,6 +122,9 @@ let chatApp = new Vue({
 
           if (chatApp.newGroupChat.userNames === "") {
             chatApp.newGroupChat.userNamesErr = "Enter at least one Username!";
+            err = true;
+          } else if (chatApp.newGroupChat.userNames === chatApp.clientProfile.userName) {
+            chatApp.newGroupChat.userNamesErr = "You will be added to the group by default!";
             err = true;
           } else {
             chatApp.newGroupChat.userNamesErr = "";

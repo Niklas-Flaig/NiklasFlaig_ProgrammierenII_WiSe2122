@@ -139,9 +139,21 @@ input {
 }
 
 #chat #inChatSurface #chatHistoryEmpty {
+  padding: 24px;
+  position: absolute;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  top: 0;
+  right: 0;
+  left: 300px;
+  bottom: 61px;
+  height: auto;
+  width: auto;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  color: #787878;
+  text-align: center;
 }
 
 #chat #inChatSurface #chatHistory {
@@ -175,6 +187,7 @@ input {
 
 #chat #inChatSurface #chatHistory div .sender {
   font-weight: bold;
+  color: #787878;
 }
 
 #chat #inChatSurface #chatHistory div .content {
@@ -183,6 +196,7 @@ input {
 
 #chat #inChatSurface #chatHistory div .time {
   font-size: 10px;
+  color: #787878;
 }
 
 #chat #inChatSurface #chatHistory .sendtBy_You div {
@@ -226,6 +240,24 @@ input {
 
 #chat #inChatSurface #chatInput #sendMessage_Button .icons {
   fill: #E8E8E8;
+}
+
+#chat #inChatSurfacePlaceholder {
+  padding: 24px;
+  position: absolute;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  top: 0;
+  right: 0;
+  left: 300px;
+  bottom: 61px;
+  height: auto;
+  width: auto;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  color: #787878;
+  text-align: center;
 }
 
 .screen {

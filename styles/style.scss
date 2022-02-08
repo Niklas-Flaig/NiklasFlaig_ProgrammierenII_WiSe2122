@@ -110,7 +110,18 @@ input {
       height: fit-content;
     }
     #chatHistoryEmpty {
+      padding: 24px;
+      position: absolute;
+      box-sizing: border-box;
+      top: 0;
+      right: 0;
+      left: 300px;
+      bottom: 61px;
+      height: auto;
+      width: auto;
       height: max-content;
+      color: #787878;
+      text-align: center;
     }
     #chatHistory {
       padding: 24px;
@@ -134,12 +145,14 @@ input {
         }
         .sender {
           font-weight: bold;
+          color: #787878;
         }
         .content {
           font-size: 17px;
         }
         .time {
           font-size: 10px;
+          color: #787878;
         }
       }
       .sendtBy_You div {
@@ -179,6 +192,20 @@ input {
         }
       }
     }
+  }
+  #inChatSurfacePlaceholder {
+    padding: 24px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    right: 0;
+    left: 300px;
+    bottom: 61px;
+    height: auto;
+    width: auto;
+    height: max-content;
+    color: #787878;
+    text-align: center;
   }
 }
 

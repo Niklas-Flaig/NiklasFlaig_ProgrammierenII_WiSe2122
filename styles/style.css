@@ -102,7 +102,7 @@ input {
   background: #262626;
   color: #E8E8E8;
   border: none;
-  border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #181818;
 }
 
 #chat #chatSelectSurface .chatTo:hover {
@@ -257,6 +257,7 @@ input {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  border-bottom: 1px solid #E8E8E8;
 }
 
 .screen .inputs label {

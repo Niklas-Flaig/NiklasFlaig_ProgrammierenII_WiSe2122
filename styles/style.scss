@@ -83,7 +83,7 @@ input {
       background: #262626;
       color: #E8E8E8;
       border: none;
-      border-bottom: 1px solid #E8E8E8;
+      border-bottom: 1px solid #181818;
       &:hover {
         
         background-color: #383838;
@@ -199,6 +199,7 @@ input {
       margin: 10px 0 10px 0;
       left: 100px;
       height: fit-content;
+      border-bottom: 1px solid #E8E8E8;
     }
     label {
       margin: 25px 0;

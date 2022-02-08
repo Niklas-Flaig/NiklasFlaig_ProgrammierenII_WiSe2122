@@ -35,7 +35,7 @@ class Chat {
     if (this.history.length > 0) {
       return this.history.at(-1).getTextResponse();
     } else {
-      return "TODO";
+      return "Verschicke die erste Nachricht!";
     }
   }
 }

@@ -35,10 +35,8 @@ socket.on("serverSendingNewChat", (res) => {
   if (res.creatorID === chatApp.clientProfile.userID) {
     if (!res.error) {
       chatApp.createNewChat(res.chat);
-  
-  
-      // change the mode to chat
-      chatApp.changeMode("chat");
+      
+      chatApp.exitChatCreation();
       
       // switch the chat
       chatApp.switchChat(res.chat.chatID);

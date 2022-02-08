@@ -192,6 +192,22 @@ let chatApp = new Vue({
       // addMessage to the chat wich chatID matches the message.chatID
       this.clientChats.find(chat => chat.getChatID() === message.chatID).addMessage(message);
     },
+    exitChatCreation: function () {
+      // change the mode to chat
+      chatApp.changeMode("chat");
+
+      // empty the chatCreation inputs and errors
+      chatApp.newChat = {
+        userName: "",
+        userNameErr: "",
+      };
+      chatApp.newChat = {
+        name: "",
+        nameErr: "",
+        userNames: "",
+        userNamesErr: "",
+      };
+    },
     changeMode: function (newMode) {
       this.currentMode = newMode;
     },
@@ -202,5 +218,13 @@ let chatApp = new Vue({
         password: "1234",
       });
     },
+  }
+});
+
+
+// probably not the best place to put eventListeners
+window.addEventListener('keyup', function(ev) {
+  if (ev.key === "Escape"){
+    if (chatApp.currentMode === "createChat" || chatApp.currentMode === "createGroupChat") chatApp.exitChatCreation();
   }
 });
